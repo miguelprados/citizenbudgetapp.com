@@ -266,13 +266,14 @@ namespace :data do
         progressbar.increment
         difference = a.diff(b)
         intersection = a.intersection(b, difference)
+        count = difference.key?('answers') ? difference['answers'].size : 0
 
         # If all values are shared:
         if difference.size.zero?
           b.destroy
           responses.delete_at(i + j + 1)
           puts "Deleted #{b.id} (duplicates #{a.id})\n"
-        elsif intersection.size.nonzero? && difference['answers'].size < threshold # && difference.size <= 3 intersection != ['ip'] && intersection.include?('email')
+        elsif intersection.size.nonzero? && count < threshold # && difference.size <= 3 intersection != ['ip'] && intersection.include?('email')
           if ENV['MODE'] == 'interactive'
             puts
             puts puts_recursive_hash(difference, skip_numeric_children: true)
