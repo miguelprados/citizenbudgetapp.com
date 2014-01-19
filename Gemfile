@@ -11,6 +11,7 @@ group :production do
   # Error logging
   gem 'airbrake'
   gem 'heroku'
+  gem 'rails_12factor'
 
   # Performance
   gem 'memcachier'
