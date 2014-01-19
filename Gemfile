@@ -15,22 +15,21 @@ group :production do
   # Performance
   gem 'memcachier'
   gem 'dalli'
-  gem 'newrelic_rpm', '3.5.3.25'
+  gem 'newrelic_rpm'
 end
 
 # Background jobs
 gem 'girl_friday'
 
 # Database
-gem 'mongoid', '~> 3.0.12'
+gem 'mongoid', '~> 3.1.0' # 4.0 is backwards-incompatible
 
 # Admin
 gem 'formtastic', '~> 2.2.1'
 gem 'activeadmin', '0.6.2'
-# Waiting for 0.0.2
-gem 'activeadmin-mongoid', git: 'git://github.com/elia/activeadmin-mongoid.git', ref: '83183a6a9daa4e2d4a62bb010025a50c4a10049a'
+gem 'activeadmin-mongoid', '0.2.0'
 gem 'cancan'
-gem 'devise', '~> 2.1.3'
+gem 'devise', '~> 2.1.3' # 2.2 is backwards-incompatible
 gem 'devise-i18n'
 gem 'google-api-client', require: 'google/api_client'
 gem 'mustache'
@@ -38,7 +37,7 @@ gem 'mustache'
 # Image uploads
 gem 'fog'
 gem 'rmagick'
-gem 'carrierwave-mongoid', '~> 0.4.0'
+gem 'carrierwave-mongoid', '~> 0.6.3'
 
 # Views
 gem 'haml-rails'
