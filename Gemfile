@@ -25,9 +25,8 @@ gem 'girl_friday'
 gem 'mongoid', '~> 3.0.12'
 
 # Admin
-gem 'formtastic', '2.2.1'
-# Waiting for 0.6.1
-gem 'activeadmin', git: 'git://github.com/gregbell/active_admin.git', ref: '9d6656316929cab7954aed0be0dbe7e91f5d8462'
+gem 'formtastic', '~> 2.2.1'
+gem 'activeadmin', '0.6.2'
 # Waiting for 0.0.2
 gem 'activeadmin-mongoid', git: 'git://github.com/elia/activeadmin-mongoid.git', ref: '83183a6a9daa4e2d4a62bb010025a50c4a10049a'
 gem 'cancan'
@@ -48,8 +47,8 @@ gem 'unicode_utils'
 
 # Export
 gem 'spreadsheet'
-gem 'axlsx', '1.3.5'
-gem 'rubyzip',  '~> 0.9.9' # 1.0.0 has a new interface https://github.com/rubyzip/rubyzip#important-note
+gem 'axlsx', '2.0.0' # 2.0.1 uses rubyzip 1.0.0
+gem 'rubyzip',  '~> 0.9.9' # 1.0.0 has new interface, heroku gem uses old interface https://github.com/rubyzip/rubyzip#important-note
 
 # Heroku API
 gem 'oj'
