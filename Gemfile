@@ -49,6 +49,7 @@ gem 'unicode_utils'
 # Export
 gem 'spreadsheet'
 gem 'axlsx', '1.3.5'
+gem 'rubyzip',  '~> 0.9.9' # 1.0.0 has a new interface https://github.com/rubyzip/rubyzip#important-note
 
 # Heroku API
 gem 'oj'
