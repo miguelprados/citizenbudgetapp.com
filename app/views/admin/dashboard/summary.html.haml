@@ -36,58 +36,59 @@
 
 - i = 0
 - @questionnaire.sections.simulator.each do |section|
-  %h4= section.title
+  - if section.questions.any?{|q| q.budgetary? || q.options?}
+    %h4= section.title
 
-  - section.questions.each do |q|
-    - if q.budgetary?
-      -# @todo The proportion of participants who must be in favor of a change for
-      -#   it to be significant depends on the sample size.
-      %div(class="question #{@details[q.id.to_s][:percentage_of_population] >= 0.55 ? 'stress' : 'subdue'}")
-        %h5
-          %span= i += 1
-          = q.title
-        %p
-          - if q.widget == 'scaler'
-            %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
-            =t '.detail.widget.scaler', minimum_units: number_to_percentage(q.minimum_units * 100), maximum_units: number_to_percentage(q.maximum_units * 100), default_value: number_to_percentage(q.cast_default_value * 100)
-            =t('.detail.choice', choice: number_to_percentage(@details[q.id.to_s][:mean_choice] * 100)).html_safe
-          - elsif q.widget == 'slider' && q.options.size > 2
-            -# @todo Figure out where ActiveAdmin puts its helpers.
-            %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
-            =t '.detail.widget.slider', minimum_units: number_with_precision(q.minimum_units), minimum_amount: number_to_currency(q.minimum_amount), maximum_units: number_with_precision(q.maximum_units), maximum_amount: number_to_currency(q.maximum_amount), default_value: q.default_value
-            =t(".detail.choice_and_impact.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", choice: number_with_precision(@details[q.id.to_s][:mean_choice], precision: 1), impact: number_to_currency(@details[q.id.to_s][:mean_impact].abs)).html_safe
-            - unless [q.maximum_units, q.minimum_units].include?(q.cast_default_value)
-              =t '.detail.bidirectional', proportion_who_decrease: number_to_percentage(@details[q.id.to_s][:proportion_who_decrease] * 100, precision: 0), mean_decrease: number_with_precision(@details[q.id.to_s][:mean_decrease], precision: 1), proportion_who_increase: number_to_percentage(@details[q.id.to_s][:proportion_who_increase] * 100, precision: 0), mean_increase: number_with_precision(@details[q.id.to_s][:mean_increase], precision: 1)
-          - elsif q.widget == 'slider' && q.options.size == 2 || q.widget == 'onoff'
-            %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
-            =t(".detail.widget.onoff.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", minimum_amount: number_to_currency(q.minimum_amount.abs), maximum_amount: number_to_currency(q.maximum_amount.abs)).html_safe
-          - elsif q.widget == 'option'
-            %table
-              - @details[q.id.to_s][:counts].each do |option,count|
-                %tr
-                  %td= number_to_percentage count * 100, precision: 0
-                  %th
-                    :markdown
-                      #{q.labels[q.options.index(option)]}
-    - elsif q.options?
-      %div.question.stress
-        %h5
-          %span= i += 1
-          = q.title
-        - if q.description?
+    - section.questions.each do |q|
+      - if q.budgetary?
+        -# @todo The proportion of participants who must be in favor of a change for
+        -#   it to be significant depends on the sample size.
+        %div(class="question #{@details[q.id.to_s][:percentage_of_population] >= 0.55 ? 'stress' : 'subdue'}")
+          %h5
+            %span= i += 1
+            = q.title
           %p
-            %i
-              =t :left_quote
-              = strip_tags(RDiscount.new(q.description).to_html)
-              =t :right_quote
-        %p
-          %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
-          =t '.detail.widget.nonbudgetary'
-        %table
-          - @details[q.id.to_s][:counts].each do |answer,count| # .sort_by{|_,count| -count}
-            %tr
-              %td= number_to_percentage count * 100, precision: 0
-              %th= answer
+            - if q.widget == 'scaler'
+              %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
+              =t '.detail.widget.scaler', minimum_units: number_to_percentage(q.minimum_units * 100), maximum_units: number_to_percentage(q.maximum_units * 100), default_value: number_to_percentage(q.cast_default_value * 100)
+              =t('.detail.choice', choice: number_to_percentage(@details[q.id.to_s][:mean_choice] * 100)).html_safe
+            - elsif q.widget == 'slider' && q.options.size > 2
+              -# @todo Figure out where ActiveAdmin puts its helpers.
+              %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
+              =t '.detail.widget.slider', minimum_units: number_with_precision(q.minimum_units), minimum_amount: number_to_currency(q.minimum_amount), maximum_units: number_with_precision(q.maximum_units), maximum_amount: number_to_currency(q.maximum_amount), default_value: q.default_value
+              =t(".detail.choice_and_impact.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", choice: number_with_precision(@details[q.id.to_s][:mean_choice], precision: 1), impact: number_to_currency(@details[q.id.to_s][:mean_impact].abs)).html_safe
+              - unless [q.maximum_units, q.minimum_units].include?(q.cast_default_value)
+                =t '.detail.bidirectional', proportion_who_decrease: number_to_percentage(@details[q.id.to_s][:proportion_who_decrease] * 100, precision: 0), mean_decrease: number_with_precision(@details[q.id.to_s][:mean_decrease], precision: 1), proportion_who_increase: number_to_percentage(@details[q.id.to_s][:proportion_who_increase] * 100, precision: 0), mean_increase: number_with_precision(@details[q.id.to_s][:mean_increase], precision: 1)
+            - elsif q.widget == 'slider' && q.options.size == 2 || q.widget == 'onoff'
+              %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
+              =t(".detail.widget.onoff.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", minimum_amount: number_to_currency(q.minimum_amount.abs), maximum_amount: number_to_currency(q.maximum_amount.abs)).html_safe
+            - elsif q.widget == 'option'
+              %table
+                - @details[q.id.to_s][:counts].each do |option,count|
+                  %tr
+                    %td= number_to_percentage count * 100, precision: 0
+                    %th
+                      :markdown
+                        #{q.labels[q.options.index(option)]}
+      - elsif q.options?
+        %div.question.stress
+          %h5
+            %span= i += 1
+            = q.title
+          - if q.description?
+            %p
+              %i
+                =t :left_quote
+                = strip_tags(RDiscount.new(q.description).to_html)
+                =t :right_quote
+          %p
+            %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
+            =t '.detail.widget.nonbudgetary'
+          %table
+            - @details[q.id.to_s][:counts].each do |answer,count| # .sort_by{|_,count| -count}
+              %tr
+                %td= number_to_percentage count * 100, precision: 0
+                %th= answer
 
 / .bars.clearfix
 /   .bar
