@@ -48,6 +48,7 @@
           = f.inputs name: section.title do
             -# @todo It's not very flexible to add email and name like this, but it works for now.
             - if index.zero?
+              = f.input :comments, wrapper_html: {class: 'hide'}
               - if section.description?
                 .control-group
                   .controls

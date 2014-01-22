@@ -453,11 +453,12 @@ fr-CA:
       response:
         id: Identifiant
         ip: Adresse IP
+        assessment: L'évaluation foncière de votre propriété
+        created_at: Soumise
+        time_to_complete: Temps requis
+        comments: Honeypot anti-spam
         email: Courriel
         name: Nom
-        created_at: Soumise
-        assessment: L'évaluation foncière de votre propriété
-        time_to_complete: Temps requis
 
   # --- In-depth report --------------------------------------------------------
 

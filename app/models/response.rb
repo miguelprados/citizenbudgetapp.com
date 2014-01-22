@@ -5,6 +5,8 @@ class Response
   include Mongoid::Paranoia
   include Mongoid::Timestamps
 
+  default_scope where(deleted_at: nil, comments: {'$in' => ['', nil]})
+
   # Don't embed, as a popular questionnaire may be over 16MB in size.
   belongs_to :questionnaire
 
@@ -12,6 +14,9 @@ class Response
   field :answers, type: Hash
   field :ip, type: String
   field :assessment, type: Float
+
+  # This is a honeypot field.
+  field :comments, type: String
 
   # The social sharing feature requires email and name.
   field :email, type: String

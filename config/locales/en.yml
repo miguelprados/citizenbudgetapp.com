@@ -531,6 +531,7 @@ en:
         assessment: Property assessment
         created_at: Submitted
         time_to_complete: Time to complete
+        comments: Anti-spam honeypot
 
   # --- Application branding ---------------------------------------------------
   # Only change translations in this section if you are rebranding the app.
