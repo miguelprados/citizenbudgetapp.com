@@ -1,5 +1,33 @@
 # iPhone-style Checkboxes Coffee plugin
-# Copyright Thomas Reynolds, licensed GPL & MIT
+
+unless $.browser?
+  userAgent = navigator.userAgent || ""
+
+  jQuery.uaMatch = (ua) ->
+    ua = ua.toLowerCase()
+
+    match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+      /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+      /(opera)(?:.*version)?[ \/]([\w.]+)/.exec( ua ) ||
+      /(msie) ([\w.]+)/.exec( ua ) ||
+      ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+))?/.exec( ua ) ||
+      []
+
+    return {
+      browser: match[ 1 ] || "",
+      version: match[ 2 ] || "0"
+    }
+
+  matched = jQuery.uaMatch( userAgent )
+
+  jQuery.browser = {}
+
+  if matched.browser
+    jQuery.browser[ matched.browser ] = true
+    jQuery.browser.version = matched.version
+
+  if jQuery.browser.webkit
+    jQuery.browser.safari = true
 
 class iOSCheckbox
   constructor: (elem, options) ->
@@ -17,10 +45,12 @@ class iOSCheckbox
     @wrapCheckboxWithDivs()
     @attachEvents()
     @disableTextSelection()
-  
+
+    @calculateDimensions()
+
+  calculateDimensions: ->
     @optionallyResize('handle') if @resizeHandle
     @optionallyResize('container') if @resizeContainer
-  
     @initialPosition()
 
   isDisabled: -> @elem.is(':disabled')
@@ -63,9 +93,14 @@ class iOSCheckbox
       elem[dimension]()
       
   # Automatically resize the handle or container
-  optionallyResize: (mode) -> 
-    onLabelWidth  = @_getDimension(@onLabel, "width")
-    offLabelWidth = @_getDimension(@offLabel, "width")
+  optionallyResize: (mode) ->
+    onSpan = @onLabel.find('span')
+    onLabelWidth = @_getDimension(onSpan, "width")
+    onLabelWidth += parseInt(onSpan.css('padding-left'), 10)
+
+    offSpan = @offLabel.find('span')
+    offLabelWidth = @_getDimension(offSpan, "width")
+    offLabelWidth += parseInt(offSpan.css('padding-right'), 10)
 
     if mode == "container"
       newWidth = if (onLabelWidth > offLabelWidth)
