@@ -131,12 +131,12 @@
                         .tick.initial
                         .tick.highest
                     - if q.omit_amounts?
-                      .meta.maximum &nbsp;
-                      .meta.minimum &nbsp;
+                      .meta.maximum.maximum-amount &nbsp;
+                      .meta.minimum.minimum-amount &nbsp;
                     - else
-                      .meta.maximum
+                      .meta.maximum.maximum-amount
                         = currency q.maximum_amount
-                      .meta.minimum
+                      .meta.minimum.minimum-amount
                         = currency q.minimum_amount
                   - elsif q.widget == 'onoff'
                     .impact

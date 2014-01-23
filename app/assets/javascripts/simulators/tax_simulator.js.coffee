@@ -1,13 +1,22 @@
 class window.TaxSimulator extends window.Simulator
   constructor: (@options = {}) ->
     super
+    self = this
 
     # Override to not toggle tip at minimum value.
     window.updateTip = ($slider, value) ->
       content = self.tipSlider($slider, value)
       $slider.find('.tip-content').html(content) if content
 
-    self = this
+    # In order to set appropriate labels on slider widgets, we must multiply the
+    # personal tax impact by a to-be-determined multipler.
+    # this.scope.find('.widget-slider').each ->
+    #   $widget = $(this)
+    #   $slider = $widget.find('.slider')
+
+    #   $widget.find('.minimum-amount').html(SimulatorHelper.number_to_currency(($slider.data('minimum') - $slider.data('initial')) * $slider.data('value') * multiplier))
+    #   $widget.find('.maximum-amount').html(SimulatorHelper.number_to_currency(($slider.data('maximum') - $slider.data('initial')) * $slider.data('value') * multiplier))
+
     $('#assessment input').bind 'keydown keypress keyup', (event) ->
       if event.keyCode == 13
         event.preventDefault()
@@ -22,7 +31,7 @@ class window.TaxSimulator extends window.Simulator
       self.scope.find('input:first').each ->
         self.updateSection($(this))
 
-      # So far, only scalers have been implemented in "Taxes" mode.
+      # Not all widgets have been implemented in "Taxes" mode.
       self.scope.find('.widget-scaler').each ->
         $widget = $(this)
         $slider = $widget.find('.slider')
