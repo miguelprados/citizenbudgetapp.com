@@ -2,12 +2,24 @@
  * mustache.js - Logic-less {{mustache}} templates with JavaScript
  * http://github.com/janl/mustache.js
  */
-var Mustache = (typeof module !== "undefined" && module.exports) || {};
+
+/*global define: false*/
+
+var Mustache;
 
 (function (exports) {
+  if (typeof module !== "undefined") {
+    module.exports = exports; // CommonJS
+  } else if (typeof define === "function") {
+    define(exports); // AMD
+  } else {
+    Mustache = exports; // <script>
+  }
+}((function () {
+  var exports = {};
 
   exports.name = "mustache.js";
-  exports.version = "0.5.1-dev";
+  exports.version = "0.5.2";
   exports.tags = ["{{", "}}"];
 
   exports.parse = parse;
@@ -20,7 +32,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
   exports.Context = Context;
   exports.Renderer = Renderer;
 
-  // // This is here for backwards compatibility with 0.4.x.
+  // This is here for backwards compatibility with 0.4.x.
   exports.to_html = function (template, view, partials, send) {
     var result = render(template, view, partials);
 
@@ -38,20 +50,33 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
   var curlyRe = /\s*\}/;
   var tagRe = /#|\^|\/|>|\{|&|=|!/;
 
+  // Workaround for https://issues.apache.org/jira/browse/COUCHDB-577
+  // See https://github.com/janl/mustache.js/issues/189
+  function testRe(re, string) {
+    return RegExp.prototype.test.call(re, string);
+  }
+
   function isWhitespace(string) {
-    return !nonSpaceRe.test(string);
+    return !testRe(nonSpaceRe, string);
   }
 
   var isArray = Array.isArray || function (obj) {
     return Object.prototype.toString.call(obj) === "[object Array]";
   };
 
-  var quote = (typeof JSON !== "undefined" && JSON.stringify) || function (string) {
-    return '"' + String(string).replace(/(^|[^\\])"/g, '\\"') + '"';
-  };
+  // OSWASP Guidelines: escape all non alphanumeric characters in ASCII space.
+  var jsCharsRe = /[\x00-\x2F\x3A-\x40\x5B-\x60\x7B-\xFF\u2028\u2029]/gm;
+
+  function quote(text) {
+    var escaped = text.replace(jsCharsRe, function (c) {
+      return "\\u" + ('0000' + c.charCodeAt(0).toString(16)).slice(-4);
+    });
+
+    return '"' + escaped + '"';
+  }
 
   function escapeRe(string) {
-    return string.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    return string.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
   }
 
   var entityMap = {
@@ -59,11 +84,12 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
     "<": "&lt;",
     ">": "&gt;",
     '"': '&quot;',
-    "'": '&#39;'
+    "'": '&#39;',
+    "/": '&#x2F;'
   };
 
   function escapeHtml(string) {
-    return String(string).replace(/&(?!\w+;)|[<>"']/g, function (s) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
       return entityMap[s];
     });
   }
@@ -90,7 +116,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
 
   /**
    * Tries to match the given regular expression at the current position.
-   * Returns the matched text if it can match, `null` otherwise.
+   * Returns the matched text if it can match, the empty string otherwise.
    */
   Scanner.prototype.scan = function (re) {
     var match = this.tail.match(re);
@@ -101,13 +127,12 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
       return match[0];
     }
 
-    return null;
+    return "";
   };
 
   /**
    * Skips all text until the given regular expression can be matched. Returns
-   * the skipped string, which is the entire tail of this scanner if no match
-   * can be made.
+   * the skipped string, which is the entire tail if no match can be made.
    */
   Scanner.prototype.scanUntil = function (re) {
     var match, pos = this.tail.search(re);
@@ -119,7 +144,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
       this.tail = "";
       break;
     case 0:
-      match = null;
+      match = "";
       break;
     default:
       match = this.tail.substring(0, pos);
@@ -198,6 +223,10 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
   };
 
   Renderer.prototype.compile = function (tokens, tags) {
+    if (typeof tokens === "string") {
+      tokens = parse(tokens, tags);
+    }
+
     var fn = compileTokens(tokens),
         self = this;
 
@@ -229,21 +258,25 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
     case "object":
       if (isArray(value)) {
         var buffer = "";
+
         for (var i = 0, len = value.length; i < len; ++i) {
           buffer += callback(context.push(value[i]), this);
         }
+
         return buffer;
-      } else {
-        return callback(context.push(value), this);
       }
-      break;
+
+      return value ? callback(context.push(value), this) : "";
     case "function":
-      var sectionText = callback(context, this), self = this;
-      function scopedRender(template) {
+      // TODO: The text should be passed to the callback plain, not rendered.
+      var sectionText = callback(context, this),
+          self = this;
+
+      var scopedRender = function (template) {
         return self.render(template, context);
-      }
+      };
+
       return value.call(context.view, sectionText, scopedRender) || "";
-      break;
     default:
       if (value) {
         return callback(context, this);
@@ -270,7 +303,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
     var fn = this._partialCache[name];
 
     if (fn) {
-      return fn(context, this);
+      return fn(context);
     }
 
     return "";
@@ -299,10 +332,6 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
    * `returnBody` is true.
    */
   function compileTokens(tokens, returnBody) {
-    if (typeof tokens === "string") {
-      tokens = parse(tokens);
-    }
-
     var body = ['""'];
     var token, method, escape;
 
@@ -419,7 +448,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
     var lastToken;
 
     for (var i = 0; i < tokens.length; ++i) {
-      token = tokens[i];
+      var token = tokens[i];
 
       if (lastToken && lastToken.type === "text" && token.type === "text") {
         lastToken.value += token.value;
@@ -437,8 +466,9 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
    * course, the default is to use mustaches (i.e. Mustache.tags).
    */
   function parse(template, tags) {
-    tags = escapeTags(tags || exports.tags);
+    tags = tags || exports.tags;
 
+    var tagRes = escapeTags(tags);
     var scanner = new Scanner(template);
 
     var tokens = [],      // Buffer to hold the tokens
@@ -448,7 +478,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
 
     // Strips all whitespace tokens array for the current line
     // if there was a {{#tag}} on it and otherwise only space.
-    function stripSpace() {
+    var stripSpace = function () {
       if (hasTag && !nonSpace) {
         while (spaces.length) {
           tokens.splice(spaces.pop(), 1);
@@ -459,16 +489,16 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
 
       hasTag = false;
       nonSpace = false;
-    }
+    };
 
     var type, value, chr;
 
     while (!scanner.eos()) {
-      value = scanner.scanUntil(tags[0]);
+      value = scanner.scanUntil(tagRes[0]);
 
       if (value) {
         for (var i = 0, len = value.length; i < len; ++i) {
-          chr = value[i];
+          chr = value.charAt(i);
 
           if (isWhitespace(chr)) {
             spaces.push(tokens.length);
@@ -485,7 +515,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
       }
 
       // Match the opening tag.
-      if (!scanner.scan(tags[0])) {
+      if (!scanner.scan(tagRes[0])) {
         break;
       }
 
@@ -499,17 +529,18 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
       if (type === "=") {
         value = scanner.scanUntil(eqRe);
         scanner.scan(eqRe);
-        scanner.scanUntil(tags[1]);
+        scanner.scanUntil(tagRes[1]);
       } else if (type === "{") {
-        value = scanner.scanUntil(curlyRe);
+        var closeRe = new RegExp("\\s*" + escapeRe("}" + tags[1]));
+        value = scanner.scanUntil(closeRe);
         scanner.scan(curlyRe);
-        scanner.scanUntil(tags[1]);
+        scanner.scanUntil(tagRes[1]);
       } else {
-        value = scanner.scanUntil(tags[1]);
+        value = scanner.scanUntil(tagRes[1]);
       }
 
       // Match the closing tag.
-      if (!scanner.scan(tags[1])) {
+      if (!scanner.scan(tagRes[1])) {
         throw new Error("Unclosed tag at " + scanner.pos);
       }
 
@@ -521,7 +552,8 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
 
       // Set the tags for the next time around.
       if (type === "=") {
-        tags = escapeTags(value.split(spaceRe));
+        tags = value.split(spaceRe);
+        tagRes = escapeTags(tags);
       }
     }
 
@@ -532,7 +564,7 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
 
   // The high-level clearCache, compile, compilePartial, and render functions
   // use this default renderer.
-  var _renderer = new Renderer;
+  var _renderer = new Renderer();
 
   /**
    * Clears all cached templates and partials.
@@ -577,4 +609,5 @@ var Mustache = (typeof module !== "undefined" && module.exports) || {};
     return _renderer.render(template, view);
   }
 
-})(Mustache);
+  return exports;
+}())));
