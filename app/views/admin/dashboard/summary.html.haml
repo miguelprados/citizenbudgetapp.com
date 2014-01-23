@@ -30,6 +30,19 @@
     .subtitle
       &nbsp;
 
+- if @charts[:responses]
+  .columns.clearfix
+    .column.offset
+      %div(id="responses" style="width:600px;height:250px;")
+- if @charts[:visits]
+  .columns.clearfix
+    .column.offset
+      %div(id="visits" style="width:600px;height:250px;")
+- if @charts[:sources]
+  .columns.clearfix
+    .column.offset
+      %div(id="sources" style="width:600px;height:300px;")
+
 %h2=t '.summary'
 
 %h3=t '.detail.header'
@@ -102,3 +115,57 @@
 /         = number_to_currency @statistics[:mean_magnitude_of_changes]
 /       .title
 /         =t 'statistics.mean_magnitude_of_changes'
+
+-# Google Charts adds null values for missing dates in the time series.
+-# https://developers.google.com/chart/interactive/docs/gallery/linechart
+:javascript
+- if @charts[:responses]
+  draw('LineChart', 'responses', [
+    "#{t 'statistics.responses'}"
+  ], [#{@charts[:responses]}], {
+    chartArea: {
+      left: 30,
+      width: '85%'
+    },
+    gridlineColor: '#ffffff',
+    hAxis: {
+      baselineColor: '#ffffff',
+      format: '#{t :icu_date_format}'
+    },
+    legend: {
+      position: 'none'
+    },
+    title: "#{t 'statistics.responses_title'}"
+  });
+- if @charts[:visits]
+  draw('LineChart', 'visits', [
+    "#{t 'statistics.visitors'}",
+    "#{t 'statistics.visits'}",
+    "#{t 'statistics.pageviews'}"
+  ], [#{@charts[:visits]}], {
+    chartArea: {
+      left: 30,
+      width: '85%'
+    },
+    gridlineColor: '#ffffff',
+    hAxis: {
+      baselineColor: '#ffffff',
+      format: '#{t :icu_date_format}'
+    },
+    legend: {
+      position: 'bottom'
+    },
+    title: "#{t 'statistics.visits_title', name: @statistics[:name], property: @statistics[:property]}"
+  });
+- if @charts[:sources]
+  draw('PieChart', 'sources', [
+    "#{t 'statistics.visitors'}"
+  ], [#{@charts[:sources]}], {
+    chartArea: {
+      left: 0,
+      width: '100%'
+    },
+    gridlineColor: '#ffffff',
+    pieResidueSliceLabel: "#{t 'statistics.other'}",
+    sliceVisibilityThreshold: 1 / 180
+  });

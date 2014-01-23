@@ -264,7 +264,7 @@ en:
   admin:
     dashboard:
       summary:
-        header: Online Budget Consultation Summary Report
+        header: Online Budget Consultation Report
         period: "For the period %{starts_on} to %{ends_on}"
         by: "Prepared by %{author} for: %{organization}"
 
@@ -305,13 +305,7 @@ en:
         table:
           days_elapsed_header: Days elapsed
           days_left_header: Days left
-          responses_header: Number of submissions
-          time_to_complete_header: Median time to complete
-          participation_rate_header: Participation rate
-          visitors_header: Visitors
-          visits_header: Visits
-          pageviews_header: Pageviews
-          summary_report_header: Summary report
+          summary_report_header: Report
           download_raw_header: Download raw data
           view: View
           # If your language has more or fewer plural forms than English, you
@@ -319,9 +313,6 @@ en:
           days:
             one: "%{count} day"
             other: "%{count} days"
-          responses:
-            one: "%{count} submission"
-            other: "%{count} submissions"
     admin_users:
       form:
         automatic: Automatic

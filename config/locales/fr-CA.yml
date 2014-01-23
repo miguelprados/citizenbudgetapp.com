@@ -231,7 +231,7 @@ fr-CA:
   admin:
     dashboard:
       summary:
-        header: Rapport sommaire sur la consultation budgétaire en ligne
+        header: Rapport sur la consultation budgétaire en ligne
         period: "Pour la période du %{starts_on} au %{ends_on}"
         by: "Preparé par %{author} pour : %{organization}"
 
@@ -270,21 +270,12 @@ fr-CA:
         table:
           days_elapsed_header: Jours écoulés
           days_left_header: Jours restants
-          responses_header: Nombre de soumissions
-          time_to_complete_header: Temps médian requis
-          participation_rate_header: Taux de participation
-          visitors_header: Visiteurs
-          visits_header: Visites
-          pageviews_header: Pages vues
-          summary_report_header: Rapport sommaire
+          summary_report_header: Rapport
           download_raw_header: Télécharger données brutes
           view: Afficher
           days:
             one: "%{count} jour"
             other: "%{count} jours"
-          responses:
-            one: "%{count} soumission"
-            other: "%{count} soumissions"
     admin_users:
       form:
         automatic: Automatique

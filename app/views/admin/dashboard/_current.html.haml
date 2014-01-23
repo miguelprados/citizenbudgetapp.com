@@ -16,17 +16,6 @@
                 %th=t '.table.days_left_header'
                 %td=t '.table.days', count: questionnaire.days_left
               %tr
-                %th=t '.table.responses_header'
-                %td
-                  =t '.table.responses', count: @statistics[questionnaire.id.to_s][:responses]
-              %tr
-                %th=t '.table.time_to_complete_header'
-                %td= distance_of_time_in_words questionnaire.time_to_complete
-              - if @charts[questionnaire.id.to_s][:visits]
-                %tr
-                  %th=t '.table.participation_rate_header'
-                  %td= number_to_percentage @statistics[questionnaire.id.to_s][:responses] / @statistics[questionnaire.id.to_s][:visitors].to_f * 100
-              %tr
                 %th=t '.table.summary_report_header'
                 %td
                   = link_to t('.table.view'), admin_dashboard_summary_path(id: questionnaire)
@@ -35,71 +24,3 @@
                 %td
                   - %w(csv tsv xls xlsx).each do |format|
                     = link_to format, admin_dashboard_raw_path(id: questionnaire, format: format)
-      .column
-        %div(id="#{dom_id(questionnaire)}_responses" style="width:600px;height:250px;")
-    - if @charts[questionnaire.id.to_s][:visits]
-      .columns.clearfix
-        .column
-          .attributes_table.narrow
-            %table
-              %tbody
-                %tr
-                  %th=t '.table.visitors_header'
-                  %td= number_with_delimiter @statistics[questionnaire.id.to_s][:visitors]
-                %tr
-                  %th=t '.table.visits_header'
-                  %td= number_with_delimiter @statistics[questionnaire.id.to_s][:visits]
-                %tr
-                  %th=t '.table.pageviews_header'
-                  %td= number_with_delimiter @statistics[questionnaire.id.to_s][:pageviews]
-        .column
-          %div(id="#{dom_id(questionnaire)}_visits" style="width:600px;height:250px;")
-    - if @charts[questionnaire.id.to_s][:sources]
-      .columns.clearfix
-        .column.offset
-          %div(id="#{dom_id(questionnaire)}_sources" style="width:600px;height:300px;")
-
--# Google Charts adds null values for missing dates in the time series.
--# https://developers.google.com/chart/interactive/docs/gallery/linechart
-:javascript
-- if @charts[questionnaire.id.to_s][:responses]
-  draw('LineChart', '#{dom_id(questionnaire)}_responses', [
-    "#{t 'statistics.responses'}"
-  ], [#{@charts[questionnaire.id.to_s][:responses]}], {
-    backgroundColor: '#f4f4f4',
-    gridlineColor: '#f4f4f4',
-    hAxis: {
-      baselineColor: '#f4f4f4',
-      format: '#{t :icu_date_format}'
-    },
-    legend: {
-      position: 'none'
-    },
-    title: "#{t 'statistics.responses_title'}"
-  });
-- if @charts[questionnaire.id.to_s][:visits]
-  draw('LineChart', '#{dom_id(questionnaire)}_visits', [
-    "#{t 'statistics.visitors'}",
-    "#{t 'statistics.visits'}",
-    "#{t 'statistics.pageviews'}"
-  ], [#{@charts[questionnaire.id.to_s][:visits]}], {
-    backgroundColor: '#f4f4f4',
-    gridlineColor: '#f4f4f4',
-    hAxis: {
-      baselineColor: '#f4f4f4',
-      format: '#{t :icu_date_format}'
-    },
-    legend: {
-      position: 'bottom'
-    },
-    title: "#{t 'statistics.visits_title', name: @statistics[questionnaire.id.to_s][:name], property: @statistics[questionnaire.id.to_s][:property]}"
-  });
-- if @charts[questionnaire.id.to_s][:sources]
-  draw('PieChart', '#{dom_id(questionnaire)}_sources', [
-    "#{t 'statistics.visitors'}"
-  ], [#{@charts[questionnaire.id.to_s][:sources]}], {
-    backgroundColor: '#f4f4f4',
-    gridlineColor: '#f4f4f4',
-    pieResidueSliceLabel: "#{t 'statistics.other'}",
-    sliceVisibilityThreshold: 1 / 180
-  });
