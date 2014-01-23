@@ -4,6 +4,10 @@
     $.validationEngineLanguage = {
         newLang: function(){
             $.validationEngineLanguage.allRules = {
+                "postalCodeCA": {
+                  "regex": /^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/i,
+                  "alertText": "* Invalid postal code (ex. : H0H 0H0)"
+                },
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
                     "alertText": "* This field is required",

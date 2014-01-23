@@ -4,6 +4,10 @@
     $.validationEngineLanguage = {
         newLang: function(){
             $.validationEngineLanguage.allRules = {
+                "postalCodeCA": {
+                  "regex": /^[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]$/i,
+                  "alertText": "* Code postal invalide (ex. : H0H 0H0)"
+                },
                 "required": {
                     "regex": "none",
                     "alertText": "* Ce champ est requis",
