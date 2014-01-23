@@ -29,7 +29,7 @@
   <%= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css', 'application' %>
   <%= stylesheet_link_tag 'print', media: 'print' %>
   <%= yield :head %>
-  <%= javascript_include_tag 'individual/modernizr-2.5.3.min.js', 'https://www.google.com/jsapi' %>
+  <%= javascript_include_tag 'individual/modernizr.min.js', 'https://www.google.com/jsapi' %>
   <%= csrf_meta_tags %>
 </head>
 <body id="body-<%= controller.controller_name %>-<%= controller.action_name %>">
