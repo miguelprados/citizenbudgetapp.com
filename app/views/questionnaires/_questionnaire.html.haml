@@ -106,7 +106,7 @@
                       %span.value= number_to_currency 0
                     - if q.widget == 'scaler'
                       - if @questionnaire.mode == 'taxes'
-                        .note=t '.assessment_unit'
+                        .note=t @questionnaire.assessment_period, scope: :assessment_unit
                         .meta.maximum.taxes +
                         .meta.minimum.taxes -
                       - else

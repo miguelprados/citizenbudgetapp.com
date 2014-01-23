@@ -146,6 +146,9 @@ ActiveAdmin.register Questionnaire do
         row :default_assessment do |q|
           number_to_currency(q.default_assessment) if q.default_assessment?
         end
+        row :assessment_period do |q|
+          t(q.assessment_period, scope: :assessment_period) if q.assessment_period?
+        end
         row :tax_rate do |q|
           number_to_percentage(q.tax_rate * 100, precision: 6) if q.tax_rate?
         end

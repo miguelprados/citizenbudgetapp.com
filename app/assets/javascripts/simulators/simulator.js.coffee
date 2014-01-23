@@ -399,13 +399,13 @@ class window.Simulator
     # Keyboard input can be confusing if the slider is not visible.
     @scope.find('.ui-slider-handle').unbind('keydown')
 
-  # Slider widgets.
+  # Static widgets.
   initializeStaticWidgets: ->
     self = this
 
     @scope.find('.control-static').each ->
       $this = $(this)
-      content = t 'assessment_period', number: self.tipSlider($this, 1.0)
+      content = t 'assessment_unit', number: self.tipSlider($this, 1.0), assessment_period: t(self.options.assessment_period)
       $this.html(content)
 
   initializeMinMaxLabels: ->

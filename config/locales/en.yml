@@ -37,10 +37,13 @@ en:
     custom: Advanced customization
     other: Contact information
 
+  assessment_unit:
+    month: $/month
+    year: $/year
+
   questionnaires:
     questionnaire:
       your_choice: Your choice
-      assessment_unit: $/month
 
   responses:
     new:
@@ -217,6 +220,10 @@ en:
   mode:
     services: Services
     taxes: Taxes
+
+  assessment_period:
+    month: Monthly
+    year: Yearly
 
   # An administrator's role limits what actions they are authorized to perform.
   role:

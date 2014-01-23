@@ -7,6 +7,7 @@ class Questionnaire
   include Mongoid::MultiParameterAttributes
 
   MODES = %w(services taxes)
+  ASSESSMENT_PERIODS = %w(month year)
 
   belongs_to :organization, index: true
   embeds_many :sections
@@ -29,6 +30,7 @@ class Questionnaire
   field :starting_balance, type: Integer
   field :maximum_deviation, type: Integer
   field :default_assessment, type: Integer
+  field :assessment_period, type: String, default: 'month'
   field :tax_rate, type: Float
   field :tax_revenue, type: Integer
   field :change_required, type: Boolean, default: true

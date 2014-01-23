@@ -48,7 +48,7 @@ class window.TaxSimulator extends window.Simulator
 
       self.scope.find('.control-static').each ->
         $widget = $(this)
-        content = t 'assessment_period', number: self.tipSlider($widget, 1.0)
+        content = t 'assessment_unit', number: self.tipSlider($widget, 1.0), assessment_period: t(self.options.assessment_period)
         $widget.html(content)
 
   colorSetting: ->
@@ -97,24 +97,26 @@ class window.TaxSimulator extends window.Simulator
 
   messages: ->
     en_US:
-      surplus: 'You have decreased your tax dollars by {{number}}/month or {{percentage}}. This could result in a service level reduction.'
+      surplus: 'You have decreased your tax dollars by {{number}}/{{assessment_period}} or {{percentage}}. This could result in a service level reduction.'
       balanced: 'Your budget is balanced.'
-      deficit: 'You have increased your tax dollars by {{number}}/month or {{percentage}}. This could result in a service level enhancement.'
+      deficit: 'You have increased your tax dollars by {{number}}/{{assessment_period}} or {{percentage}}. This could result in a service level enhancement.'
     fr_CA:
-      surplus: 'Vos impôts diminueraient de {{number}} par mois, donc {{percentage}}. Il peut en résulter une réduction du niveau de service.'
+      surplus: 'Vos impôts diminueraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Il peut en résulter une réduction du niveau de service.'
       balanced: "Vous avez atteint l'équilibre."
-      deficit: 'Vos impôts augmenteraient de {{number}} par mois, donc {{percentage}}. Cette augmentation peut se traduire par un niveau de service amélioré.'
+      deficit: 'Vos impôts augmenteraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Cette augmentation peut se traduire par un niveau de service amélioré.'
 
   messageOptions: (net_balance) ->
     number: SimulatorHelper.number_to_currency(Math.abs(net_balance), strip_insignificant_zeros: true)
     percentage: SimulatorHelper.number_to_percentage(Math.abs(net_balance) / @options.tax_rate / @scale() * 100, strip_insignificant_zeros: true)
+    assessment_period: t(@options.assessment_period)
 
   setMessage: (net_balance) ->
     super
     $('#reminder').toggleClass('hide', not @isChanged())
 
   scale: ->
-    (@customAssessment() || @options.default_assessment) / 12.0 # monthly assessment period
+    denominator = if @options.assessment_period is 'year' then 1.0 else 12.0
+    (@customAssessment() || @options.default_assessment) / denominator
 
   # @return [Integer] the participant's custom property assessment
   # @todo Non-English participants may enter a comma as the decimal mark.
@@ -127,4 +129,7 @@ class window.TaxSimulator extends window.Simulator
 
   # @return [String] content for the tip on a scaler
   tipScaler: ($widget, number) ->
-    SimulatorHelper.number_to_currency(Math.abs(@taxAmount($widget, number)), strip_insignificant_zeros: true)
+    options = {}
+    options.strip_insignificant_zeros = true
+    options.precision = 0 if @options.assessment_period is 'year'
+    SimulatorHelper.number_to_currency(Math.abs(@taxAmount($widget, number)), options)

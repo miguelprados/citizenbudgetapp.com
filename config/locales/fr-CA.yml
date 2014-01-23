@@ -20,10 +20,13 @@ fr-CA:
     custom: Section sur mesure
     other: Coordonnées
 
+  assessment_unit:
+    month: $/mois
+    year: $/année
+
   questionnaires:
     questionnaire:
       your_choice: Votre choix
-      assessment_unit: $ par mois
 
   responses:
     new:
@@ -189,6 +192,10 @@ fr-CA:
   mode:
     services: Services
     taxes: Taxes
+
+  assessment_period:
+    month: Par mois
+    year: Par année
 
   role:
     superuser: Utilisateur root

@@ -16,6 +16,7 @@
     = f.input :starting_balance
     = f.input :maximum_deviation
     = f.input :default_assessment
+    = f.input :assessment_period, as: :radio, collection: Questionnaire::ASSESSMENT_PERIODS.map{|p| [t(p, scope: :assessment_period), p]}
     = f.input :tax_rate, min: 0, max: 1
     = f.input :tax_revenue
     = f.input :change_required
