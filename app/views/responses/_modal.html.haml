@@ -1,9 +1,0 @@
-.modal.invisible.fade(id="#{object.title.parameterize}_extra")
-  .modal-header
-    = link_to '×', '#', 'data-dismiss' => 'modal', 'class' => 'close'
-    %h3= object.title
-  .modal-body
-    :markdown
-      #{object.extra}
-  .modal-footer
-    = link_to t('.close'), '#', 'data-dismiss' => 'modal', 'class' => 'btn btn-primary'

@@ -22,21 +22,8 @@ $ ->
   # Initialize Bootstrap plugins.
   $('.dropdown-toggle').dropdown()
 
-  # Turn popovers into modals on touch devices.
-  if $.support.touch
-    $('.popover-toggle')
-      .removeClass('popover-toggle')
-      .removeAttr('data-content')
-      .removeAttr('data-placement')
-      .attr('data-toggle', 'modal')
-  else
-    $('.popover-toggle').popover(trigger: 'manual', delay: {show: 1, hide: 200}).each ->
-      that = $(this).data('popover')
-      that.$element.on('mouseenter', $.proxy(that.enter, that))
-      that.$element.on('mouseleave', $.proxy(that.leave, that))
-    .click (event) ->
-      event.preventDefault()
-    $('[rel="tooltip"]').tooltip()
+  $('.popover-toggle').popover(trigger: 'click').click (event) -> event.preventDefault()
+  $('[rel="tooltip"]').tooltip()
 
   # Bootstrap hacks.
   $('.modal').bind 'shown', ->
