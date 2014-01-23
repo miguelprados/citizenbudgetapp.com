@@ -10,7 +10,7 @@
  *
  *= require_self
  *= require bootstrap
- *= require validationEngine.jquery.css
+ *= require validationEngine.jquery
  *= require iphone-style-checkboxes
  *= require style
 */
