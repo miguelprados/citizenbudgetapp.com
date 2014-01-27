@@ -609,12 +609,12 @@ en:
       participation_rate: "%.1f%% of participants changed its budget."
       options: "Participants could select a value within the range of %d%{symbol} to %d%{symbol}, with a starting value of %d%{symbol}."
       unidirectional: "Of those who changed this %{name}'s budget, the average choice was %.1f%{symbol}, the median %.1f%{symbol} and the mode %s%{symbol}."
-      bidirectional: "Of those who changed this %{name}'s budget, %d%% decreased the budget, with an average choice of %.1f%{symbol}, median %d%{symbol} and mode %s%{symbol}; %d%% increased the budget, with an average choice of %d%{symbol}, median %d%{symbol} and mode %s%{symbol}."
+      bidirectional: "Of those who changed this %{name}'s budget, %d%%%% decreased the budget, with an average choice of %.1f%{symbol}, median %d%{symbol} and mode %s%{symbol}; %d%%%% increased the budget, with an average choice of %d%{symbol}, median %d%{symbol} and mode %s%{symbol}."
       impact: "The %s the average choice is $%s."
       savings: "savings for"
       cost: "cost of"
       central_tendencies: "The average choice of all participants was %.1f%{symbol}, median %d%{symbol} and mode %s%{symbol}."
-      confidence: "The default value of %d%{symbol} lies outside the 95%% confidence interval; therefore, with 95%% confidence, the population average is %s than the default value."
+      confidence: "The default value of %d%{symbol} lies outside the 95%%%% confidence interval; therefore, with 95%%%% confidence, the population average is %s than the default value."
       less: less
       greater: greater
     table:
