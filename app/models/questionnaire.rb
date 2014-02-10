@@ -33,7 +33,7 @@ class Questionnaire
   field :assessment_period, type: String, default: 'month'
   field :tax_rate, type: Float
   field :tax_revenue, type: Integer
-  field :change_required, type: Boolean, default: true
+  field :change_required, type: Boolean
 
   # Appearance
   field :logo, type: String
