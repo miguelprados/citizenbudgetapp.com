@@ -121,7 +121,7 @@ class window.TaxSimulator extends window.Simulator
   # @return [Integer] the participant's custom property assessment
   # @todo Non-English participants may enter a comma as the decimal mark.
   customAssessment: ->
-    parseFloat($('#assessment input').val().replace(/[^0-9.]/g, '')) if $('#assessment input').length
+    parseFloat($('#assessment input').val().replace(/[^0-9.-]/g, '')) if $('#assessment input').length
 
   # @return [Float] the impact of a single change to the budget
   taxAmount: ($widget, number) ->
