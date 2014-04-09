@@ -11,7 +11,7 @@ function addGraph(id) {
   // Width and height of the graph are exclusive of margins
   var MAX_WIDTH = 900;
   var HEIGHT = 240;
-  var MARGIN = {top: 10, right: 30, bottom: 35, left: 30};
+  var MARGIN = {top: 10, right: 30, bottom: 35, left: 40};
 
   var MAX_BAR_WIDTH = 85;
   // Set the maximum number of bars based on a desired minimum bar width:
@@ -55,13 +55,27 @@ function addGraph(id) {
     var bar_width = x(data[0].dx);
   }
 
+  var max_bin_value = d3.max(data, function(d) { return d.y; });
+  var max_bin_percentage = max_bin_value / statistics.responses;
+
+  var y_prescale = d3.scale.linear()
+      .domain([0, max_bin_value])
+      .range([0, max_bin_percentage]);
+
   var y = d3.scale.linear()
-      .domain([0, d3.max(data, function(d) { return d.y; })])
+      .domain([0, max_bin_percentage])
       .range([HEIGHT, 0]);
 
   var xAxis = d3.svg.axis()
       .scale(x)
       .orient("bottom");
+
+  function makeYAxis() {
+      return d3.svg.axis()
+          .scale(y)
+          .orient("left")
+          .tickFormat(d3.format(".0%"));
+  }
 
   var graph = d3.select("#graph_" + id);
   var svg = graph.append("svg")
@@ -75,13 +89,13 @@ function addGraph(id) {
     .enter().append("g")
       .attr("class", "bar")
       .attr("transform", function(d) {
-        return "translate(" + x(d.x) + "," + y(d.y) + ")";
+        return "translate(" + x(d.x) + "," + y(y_prescale(d.y)) + ")";
       });
 
   bar.append("rect")
       .attr("x", 1)
       .attr("width", bar_width - 1)
-      .attr("height", function(d) { return HEIGHT - y(d.y); });
+      .attr("height", function(d) { return HEIGHT - y(y_prescale(d.y)); });
 
   bar.append("text")
       .attr("dy", ".75em")
@@ -90,6 +104,18 @@ function addGraph(id) {
       .attr("text-anchor", "middle")
       .text(function(d) { return d3.format(",.0f")(d.y); });
 
+  svg.append("g")
+      .attr("class", "y axis")
+      .call(makeYAxis());
+
+  svg.append("g")
+      .attr("class", "grid")
+      .call(makeYAxis()
+          .ticks(5)
+          .tickSize(-width, 0)
+          .tickFormat(""));
+
+  // Draw the X axis _after_ the grid lines
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + HEIGHT + ")")

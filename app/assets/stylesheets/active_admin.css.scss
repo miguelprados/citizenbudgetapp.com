@@ -705,3 +705,12 @@ body.active_admin {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+.grid .tick {
+      stroke: white;
+}
+
+.grid .path {
+      stroke-width: 0;
+}
+
