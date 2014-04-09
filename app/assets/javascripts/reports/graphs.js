@@ -11,7 +11,7 @@ function addGraph(id) {
   // Width and height of the graph are exclusive of margins
   var MAX_WIDTH = 900;
   var HEIGHT = 240;
-  var MARGIN = {top: 10, right: 30, bottom: 30, left: 30};
+  var MARGIN = {top: 10, right: 30, bottom: 35, left: 30};
 
   var MAX_BAR_WIDTH = 85;
   // Set the maximum number of bars based on a desired minimum bar width:
@@ -94,4 +94,10 @@ function addGraph(id) {
       .attr("class", "x axis")
       .attr("transform", "translate(0," + HEIGHT + ")")
       .call(xAxis);
+
+  svg.append("text")
+      .attr("x", width / 2)
+      .attr("y", HEIGHT + 30)
+      .attr("text-anchor", "middle")
+      .text(details.unit_name);
 }

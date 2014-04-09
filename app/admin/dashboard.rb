@@ -60,6 +60,7 @@ ActiveAdmin.register_page 'Dashboard' do
         details[:minimum_units] = question.minimum_units
         details[:maximum_units] = question.maximum_units
         details[:step] = question.step
+        details[:unit_name] = question.unit_name
 
         # How large were the modifications?
         details[:mean_choice] = choices.sum / @statistics[:responses].to_f
