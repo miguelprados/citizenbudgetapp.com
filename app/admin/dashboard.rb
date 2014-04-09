@@ -56,6 +56,11 @@ ActiveAdmin.register_page 'Dashboard' do
           magnitude_of_changes += impact.abs
         end
 
+        details[:choices] = choices
+        details[:minimum_units] = question.minimum_units
+        details[:maximum_units] = question.maximum_units
+        details[:step] = question.step
+
         # How large were the modifications?
         details[:mean_choice] = choices.sum / @statistics[:responses].to_f
         details[:mean_impact] = impacts.sum / @statistics[:responses].to_f

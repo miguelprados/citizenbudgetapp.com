@@ -3,6 +3,8 @@
 //= require libs/swfobject
 //= require plugins/jquery.clippy
 //= require i18n
+//= require libs/d3
+//= require reports/graphs
 
 $ ->
   $.fn.default = (value) ->
