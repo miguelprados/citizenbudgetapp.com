@@ -7,24 +7,38 @@ $(function() {
   });
 });
 
-function addGraph(id) {
+var GRAPH_CONF = {
   // Width and height of the graph are exclusive of margins
-  var MAX_WIDTH = 900;
-  var HEIGHT = 240;
-  var MARGIN = {top: 10, right: 30, bottom: 35, left: 40};
+  max_width: 900,
+  height: 240,
+  margin: {top: 10, right: 30, bottom: 35, left: 40},
 
-  var MAX_BAR_WIDTH = 85;
-  // Set the maximum number of bars based on a desired minimum bar width:
-  var MAX_N_BARS = Math.floor(MAX_WIDTH / 25);
+  max_bar_width: 85
+};
+// Set the maximum number of bars based on a desired minimum bar width:
+GRAPH_CONF.max_n_bars = Math.floor(GRAPH_CONF.max_width / 25);
 
+function addGraph(id) {
   var details = all_details[id];
+  var graph = d3.select("#graph_" + id);
+
+  if (details.choices !== undefined) {
+      // slider
+      sliderGraph(graph, details);
+  } else {
+      // WIP: not implemented yet.
+      return;
+  }
+}
+
+function sliderGraph(graph, details) {
   var values = details.choices;
 
   var n_choices = ((details.maximum_units - details.minimum_units) /
                    details.step) + 1;
-  var n_bars = Math.min(n_choices, MAX_N_BARS);
-  var trial_bar_width = Math.floor(MAX_WIDTH / n_bars);
-  var width = n_bars * Math.min(trial_bar_width, MAX_BAR_WIDTH);
+  var n_bars = Math.min(n_choices, GRAPH_CONF.max_n_bars);
+  var trial_bar_width = Math.floor(GRAPH_CONF.max_width / n_bars);
+  var width = n_bars * Math.min(trial_bar_width, GRAPH_CONF.max_bar_width);
 
   var x_lin = d3.scale.linear()
       .domain([details.minimum_units, details.maximum_units])
@@ -47,11 +61,11 @@ function addGraph(id) {
 
     var bar_width = x.rangeBand();
   } else {
-    // Too many choices.  Use a linear scale and MAX_N_BARS bins.
+    // Too many choices.  Use a linear scale and max_n_bars bins.
     var x = x_lin;
 
     var data = d3.layout.histogram()
-        .bins(x.ticks(MAX_N_BARS))
+        .bins(x.ticks(GRAPH_CONF.max_n_bars))
         (values);
 
     var bar_width = x(data[0].dx);
@@ -67,7 +81,7 @@ function addGraph(id) {
 
   var y = d3.scale.linear()
       .domain([0, max_bin_percentage])
-      .range([HEIGHT, 0]);
+      .range([GRAPH_CONF.height, 0]);
 
   var xAxis = d3.svg.axis()
       .scale(x)
@@ -80,12 +94,13 @@ function addGraph(id) {
           .tickFormat(d3.format(".0%"));
   }
 
-  var graph = d3.select("#graph_" + id);
   var svg = graph.append("svg")
-      .attr("width", width + MARGIN.left + MARGIN.right)
-      .attr("height", HEIGHT + MARGIN.top + MARGIN.bottom)
+      .attr("width", width + GRAPH_CONF.margin.left + GRAPH_CONF.margin.right)
+      .attr("height", GRAPH_CONF.height + GRAPH_CONF.margin.top +
+            GRAPH_CONF.margin.bottom)
     .append("g")
-      .attr("transform", "translate(" + MARGIN.left + "," + MARGIN.top + ")");
+      .attr("transform", "translate(" + GRAPH_CONF.margin.left + "," +
+            GRAPH_CONF.margin.top + ")");
 
   var bar = svg.selectAll(".bar")
       .data(data)
@@ -108,7 +123,9 @@ function addGraph(id) {
       })
       .attr("x", 1)
       .attr("width", bar_width - 1)
-      .attr("height", function(d) { return HEIGHT - y(y_prescale(d.y)); });
+      .attr("height", function(d) {
+          return GRAPH_CONF.height - y(y_prescale(d.y));
+      });
 
   bar.append("text")
       .attr("dy", ".75em")
@@ -131,12 +148,12 @@ function addGraph(id) {
   // Draw the X axis _after_ the grid lines
   svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + HEIGHT + ")")
+      .attr("transform", "translate(0," + GRAPH_CONF.height + ")")
       .call(xAxis);
 
   svg.append("text")
       .attr("x", width / 2)
-      .attr("y", HEIGHT + 30)
+      .attr("y", GRAPH_CONF.height + 30)
       .attr("text-anchor", "middle")
       .text(details.unit_name);
 
@@ -144,7 +161,7 @@ function addGraph(id) {
       var mean_scaled = x_lin(parseFloat(details.mean_choice));
       svg.append("line")
           .attr("x1", mean_scaled)
-          .attr("y1", HEIGHT + 10)
+          .attr("y1", GRAPH_CONF.height + 10)
           .attr("x2", mean_scaled)
           .attr("y2", 0)
           .attr("stroke-width", 3)
