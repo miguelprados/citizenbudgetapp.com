@@ -696,6 +696,14 @@ body.active_admin {
   shape-rendering: crispEdges;
 }
 
+.bar rect.default {
+  fill: #f6c;
+}
+
+.bar rect.median {
+  fill: #f96;
+}
+
 .bar text {
   fill: #fff;
 }

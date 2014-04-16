@@ -57,6 +57,7 @@ function addGraph(id) {
 
   var max_bin_value = d3.max(data, function(d) { return d.y; });
   var max_bin_percentage = max_bin_value / statistics.responses;
+  var median = d3.median(values);
 
   var y_prescale = d3.scale.linear()
       .domain([0, max_bin_value])
@@ -92,7 +93,17 @@ function addGraph(id) {
         return "translate(" + x(d.x) + "," + y(y_prescale(d.y)) + ")";
       });
 
+  var default_value = parseInt(details.default_value);
   bar.append("rect")
+      .attr("class", function(d) {
+          if (default_value >= d.x && default_value < d.x + d.dx) {
+              return "default";
+          }
+          if (median >= d.x && median < d.x + d.dx) {
+              return "median";
+          }
+          return "standard";
+      })
       .attr("x", 1)
       .attr("width", bar_width - 1)
       .attr("height", function(d) { return HEIGHT - y(y_prescale(d.y)); });
