@@ -140,12 +140,14 @@ function addGraph(id) {
       .attr("text-anchor", "middle")
       .text(details.unit_name);
 
-  var mean_scaled = x_lin(parseFloat(details.mean_choice));
-  svg.append("line")
-      .attr("x1", mean_scaled)
-      .attr("y1", HEIGHT + 10)
-      .attr("x2", mean_scaled)
-      .attr("y2", 0)
-      .attr("stroke-width", 3)
-      .attr("stroke", "#777");
+  if (n_choices > 2) {
+      var mean_scaled = x_lin(parseFloat(details.mean_choice));
+      svg.append("line")
+          .attr("x1", mean_scaled)
+          .attr("y1", HEIGHT + 10)
+          .attr("x2", mean_scaled)
+          .attr("y2", 0)
+          .attr("stroke-width", 3)
+          .attr("stroke", "#777");
+  }
 }

@@ -76,6 +76,7 @@
             - elsif q.widget == 'slider' && q.options.size == 2 || q.widget == 'onoff'
               %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
               =t(".detail.widget.onoff.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", minimum_amount: number_to_currency(q.minimum_amount.abs), maximum_amount: number_to_currency(q.maximum_amount.abs)).html_safe
+              .graph{:id => "graph_" + q.id.to_s}
             - elsif q.widget == 'option'
               %table
                 - @details[q.id.to_s][:counts].each do |option,count|
