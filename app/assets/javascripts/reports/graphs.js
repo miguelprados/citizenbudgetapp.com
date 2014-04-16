@@ -26,6 +26,10 @@ function addGraph(id) {
   var trial_bar_width = Math.floor(MAX_WIDTH / n_bars);
   var width = n_bars * Math.min(trial_bar_width, MAX_BAR_WIDTH);
 
+  var x_lin = d3.scale.linear()
+      .domain([details.minimum_units, details.maximum_units])
+      .range([0, width]);
+
   if (n_bars === n_choices) {
     // There is enough room for 1 bar per choice.  Use an ordinal
     // scale and a 1:1 mapping between bins and choices.
@@ -44,9 +48,7 @@ function addGraph(id) {
     var bar_width = x.rangeBand();
   } else {
     // Too many choices.  Use a linear scale and MAX_N_BARS bins.
-    var x = d3.scale.linear()
-        .domain([details.minimum_units, details.maximum_units])
-        .range([0, width]);
+    var x = x_lin;
 
     var data = d3.layout.histogram()
         .bins(x.ticks(MAX_N_BARS))
@@ -137,4 +139,13 @@ function addGraph(id) {
       .attr("y", HEIGHT + 30)
       .attr("text-anchor", "middle")
       .text(details.unit_name);
+
+  var mean_scaled = x_lin(parseFloat(details.mean_choice));
+  svg.append("line")
+      .attr("x1", mean_scaled)
+      .attr("y1", HEIGHT + 10)
+      .attr("x2", mean_scaled)
+      .attr("y2", 0)
+      .attr("stroke-width", 3)
+      .attr("stroke", "#777");
 }
