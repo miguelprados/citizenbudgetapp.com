@@ -131,6 +131,9 @@ ActiveAdmin.register_page 'Dashboard' do
           end
         end
 
+        details[:raw_counts] = details[:counts].clone
+        details[:n_changes] = changes.size
+
         details[:counts].each do |answer,count|
           if changes.empty?
             details[:counts][answer] = 0

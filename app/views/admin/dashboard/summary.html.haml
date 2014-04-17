@@ -104,6 +104,7 @@
               %tr
                 %td= number_to_percentage count * 100, precision: 0
                 %th= answer
+          .graph{:id => "graph_" + q.id.to_s}
 
 :javascript
   all_details = #{JSON.pretty_generate(@details)}

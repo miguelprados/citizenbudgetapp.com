@@ -25,9 +25,11 @@ function addGraph(id) {
     if (details.choices !== undefined) {
         // slider
         sliderGraph(graph, details);
+    } else if (details.counts !== undefined) {
+        // checkboxes
+        checkboxesGraph(graph, details);
     } else {
-        // WIP: not implemented yet.
-        return;
+        console.log("Unsupported graph: ", id);
     }
 }
 
@@ -37,8 +39,7 @@ function sliderGraph(graph, details) {
     var n_choices = ((details.maximum_units - details.minimum_units) /
                      details.step) + 1;
     var n_bars = Math.min(n_choices, GRAPH_CONF.max_n_bars);
-    var trial_bar_width = Math.floor(GRAPH_CONF.max_width / n_bars);
-    var width = n_bars * Math.min(trial_bar_width, GRAPH_CONF.max_bar_width);
+    var width = graphWidth(n_bars);
 
     var x_lin = d3.scale.linear()
         .domain([details.minimum_units, details.maximum_units])
@@ -83,6 +84,79 @@ function sliderGraph(graph, details) {
         .domain([0, max_bin_percentage])
         .range([GRAPH_CONF.height, 0]);
 
+    var default_value = parseInt(details.default_value);
+    function bar_class(d) {
+        if (default_value >= d.x && default_value < d.x + d.dx) {
+            return "default";
+        }
+        if (median >= d.x && median < d.x + d.dx) {
+            return "median";
+        }
+        return "standard";
+    }
+
+    var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
+                        bar_class);
+
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", GRAPH_CONF.height + 30)
+        .attr("text-anchor", "middle")
+        .text(details.unit_name);
+
+    if (n_choices > 2) {
+        var mean_scaled = x_lin(parseFloat(details.mean_choice));
+        svg.append("line")
+            .attr("x1", mean_scaled)
+            .attr("y1", GRAPH_CONF.height + 10)
+            .attr("x2", mean_scaled)
+            .attr("y2", 0)
+            .attr("stroke-width", 3)
+            .attr("stroke", "#777");
+    }
+}
+
+function checkboxesGraph(graph, details) {
+    var raw_counts = d3.map(details.raw_counts);
+    var data = [];
+    raw_counts.forEach(function(key, value) {
+        data.push({ x: key, y: value });
+    });
+
+    var n_bars = data.length;
+    var width = graphWidth(n_bars);
+
+    var x = d3.scale.ordinal()
+        .domain(Object.keys(details.raw_counts))
+        .rangeBands([0, width]);
+
+    var bar_width = x.rangeBand();
+
+    var max_data_value = d3.max(data, function(d) { return d.y; });
+    var max_percentage = max_data_value / details.n_changes;
+
+    var y_prescale = d3.scale.linear()
+        .domain([0, max_data_value])
+        .range([0, max_percentage]);
+
+    var y = d3.scale.linear()
+        .domain([0, max_percentage])
+        .range([GRAPH_CONF.height, 0]);
+
+    var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
+                        "standard");
+}
+
+function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
+                   bar_class) {
+    // Actually draws the graph and returns its svg container.
+    // graph: d3.select-ed container in which to put the graph.
+    // data: data to graph
+    // x, y, y_prescale: axes
+    // width: width of graph
+    // bar_width: width of each bar
+    // bar_class: class to apply to each bar.  Can be a function.
+
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
@@ -95,7 +169,8 @@ function sliderGraph(graph, details) {
     }
 
     var svg = graph.append("svg")
-        .attr("width", width + GRAPH_CONF.margin.left + GRAPH_CONF.margin.right)
+        .attr("width", width + GRAPH_CONF.margin.left +
+              GRAPH_CONF.margin.right)
         .attr("height", GRAPH_CONF.height + GRAPH_CONF.margin.top +
               GRAPH_CONF.margin.bottom)
       .append("g")
@@ -110,17 +185,8 @@ function sliderGraph(graph, details) {
           return "translate(" + x(d.x) + "," + y(y_prescale(d.y)) + ")";
         });
 
-    var default_value = parseInt(details.default_value);
     bar.append("rect")
-        .attr("class", function(d) {
-            if (default_value >= d.x && default_value < d.x + d.dx) {
-                return "default";
-            }
-            if (median >= d.x && median < d.x + d.dx) {
-                return "median";
-            }
-            return "standard";
-        })
+        .attr("class", bar_class)
         .attr("x", 1)
         .attr("width", bar_width - 1)
         .attr("height", function(d) {
@@ -149,22 +215,50 @@ function sliderGraph(graph, details) {
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + GRAPH_CONF.height + ")")
-        .call(xAxis);
+        .call(xAxis)
+      .selectAll("text")
+        .call(wrap, x.rangeBand());
 
-    svg.append("text")
-        .attr("x", width / 2)
-        .attr("y", GRAPH_CONF.height + 30)
-        .attr("text-anchor", "middle")
-        .text(details.unit_name);
+    return svg;
+}
 
-    if (n_choices > 2) {
-        var mean_scaled = x_lin(parseFloat(details.mean_choice));
-        svg.append("line")
-            .attr("x1", mean_scaled)
-            .attr("y1", GRAPH_CONF.height + 10)
-            .attr("x2", mean_scaled)
-            .attr("y2", 0)
-            .attr("stroke-width", 3)
-            .attr("stroke", "#777");
-    }
+function graphWidth(n_bars) {
+    // Returns an appropriate graph width based on the number of bars.
+
+    var trial_bar_width = Math.floor(GRAPH_CONF.max_width / n_bars);
+    var width = n_bars * Math.min(trial_bar_width, GRAPH_CONF.max_bar_width);
+    return width;
+}
+
+// from: http://bl.ocks.org/mbostock/7555321
+function wrap(text, width) {
+    text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null)
+                .append("tspan")
+                .attr("x", 0)
+                .attr("y", y)
+                .attr("dy", dy + "em");
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan")
+                    .attr("x", 0)
+                    .attr("y", y)
+                    .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                    .text(word);
+            }
+        }
+    });
 }
