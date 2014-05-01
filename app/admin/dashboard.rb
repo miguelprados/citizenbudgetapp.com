@@ -98,6 +98,11 @@ ActiveAdmin.register_page 'Dashboard' do
             details[:counts][option] += 1
           end
 
+          details[:raw_counts] = details[:counts].clone
+          details[:n_changes] = changes.size
+          details[:options] = question.options
+          details[:labels] = question.labels
+
           details[:counts].each do |option,count|
             if changes.empty?
               details[:counts][option] = 0

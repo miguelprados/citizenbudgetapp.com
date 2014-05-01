@@ -85,6 +85,7 @@
                     %th
                       :markdown
                         #{q.labels[q.options.index(option)]}
+              .graph{:id => "graph_" + q.id.to_s}
       - elsif q.options?
         %div.question.stress
           %h5

@@ -13,7 +13,7 @@ var GRAPH_CONF = {
     height: 240,
     margin: {top: 10, right: 30, bottom: 35, left: 40},
 
-    max_bar_width: 85
+    max_bar_width: 100
 };
 // Set the maximum number of bars based on a desired minimum bar width:
 GRAPH_CONF.max_n_bars = Math.floor(GRAPH_CONF.max_width / 25);
@@ -22,12 +22,12 @@ function addGraph(id) {
     var details = all_details[id];
     var graph = d3.select("#graph_" + id);
 
-    if (details.choices !== undefined) {
+    if (details.counts !== undefined) {
+        // checkboxes or radio buttons
+        checkboxesGraph(graph, details);
+    } else if (details.choices !== undefined) {
         // slider
         sliderGraph(graph, details);
-    } else if (details.counts !== undefined) {
-        // checkboxes
-        checkboxesGraph(graph, details);
     } else {
         console.log("Unsupported graph: ", id);
     }
@@ -117,23 +117,43 @@ function sliderGraph(graph, details) {
 }
 
 function checkboxesGraph(graph, details) {
+    var labels = [];
+    var label_map = [];
+    if (details.options !== undefined) {
+        // radio buttons - we need to create a label map to translate
+        // options into labels.
+        for (var i = 0; i < details.options.length; i++) {
+            label_map[details.options[i]] = details.labels[i];
+            labels.push(details.labels[i]);
+        }
+    } else {
+        // checkboxes - raw_counts already uses labels directly.
+        labels = Object.keys(details.raw_counts);
+    }
+
     var raw_counts = d3.map(details.raw_counts);
     var data = [];
     raw_counts.forEach(function(key, value) {
-        data.push({ x: key, y: value });
+        if (label_map.length) {
+            // radio buttons
+            data.push({ x: label_map[key], y: value });
+        } else {
+            // checkboxes
+            data.push({ x: key, y: value });
+        }
     });
 
     var n_bars = data.length;
     var width = graphWidth(n_bars);
 
     var x = d3.scale.ordinal()
-        .domain(Object.keys(details.raw_counts))
+        .domain(labels)
         .rangeBands([0, width]);
 
     var bar_width = x.rangeBand();
 
     var max_data_value = d3.max(data, function(d) { return d.y; });
-    var max_percentage = max_data_value / details.n_changes;
+    var max_percentage = d3.max(d3.values(details.counts))
 
     var y_prescale = d3.scale.linear()
         .domain([0, max_data_value])
