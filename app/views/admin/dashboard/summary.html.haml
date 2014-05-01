@@ -72,11 +72,9 @@
               =t(".detail.choice_and_impact.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", choice: number_with_precision(@details[q.id.to_s][:mean_choice], precision: 1), impact: number_to_currency(@details[q.id.to_s][:mean_impact].abs)).html_safe
               - unless [q.maximum_units, q.minimum_units].include?(q.cast_default_value)
                 =t '.detail.bidirectional', proportion_who_decrease: number_to_percentage(@details[q.id.to_s][:proportion_who_decrease] * 100, precision: 0), mean_decrease: number_with_precision(@details[q.id.to_s][:mean_decrease], precision: 1), proportion_who_increase: number_to_percentage(@details[q.id.to_s][:proportion_who_increase] * 100, precision: 0), mean_increase: number_with_precision(@details[q.id.to_s][:mean_increase], precision: 1)
-              .graph{:id => "graph_" + q.id.to_s}
             - elsif q.widget == 'slider' && q.options.size == 2 || q.widget == 'onoff'
               %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
               =t(".detail.widget.onoff.#{q.revenue? ? 'revenue' : 'expense'}.#{@details[q.id.to_s][:mean_impact] >= 0 ? :positive : :negative}", minimum_amount: number_to_currency(q.minimum_amount.abs), maximum_amount: number_to_currency(q.maximum_amount.abs)).html_safe
-              .graph{:id => "graph_" + q.id.to_s}
             - elsif q.widget == 'option'
               %table
                 - @details[q.id.to_s][:counts].each do |option,count|
@@ -85,7 +83,7 @@
                     %th
                       :markdown
                         #{q.labels[q.options.index(option)]}
-              .graph{:id => "graph_" + q.id.to_s}
+            .graph{:id => "graph_" + q.id.to_s}
       - elsif q.options?
         %div.question.stress
           %h5

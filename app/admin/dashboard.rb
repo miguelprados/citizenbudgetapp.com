@@ -62,6 +62,7 @@ ActiveAdmin.register_page 'Dashboard' do
         details[:step] = question.step
         details[:unit_name] = question.unit_name
         details[:default_value] = question.default_value
+        details[:widget] = question.widget
 
         # How large were the modifications?
         details[:mean_choice] = choices.sum / @statistics[:responses].to_f

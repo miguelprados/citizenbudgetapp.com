@@ -26,7 +26,7 @@ function addGraph(id) {
         // checkboxes or radio buttons
         checkboxesGraph(graph, details);
     } else if (details.choices !== undefined) {
-        // slider
+        // slider or scaler
         sliderGraph(graph, details);
     } else {
         console.log("Unsupported graph: ", id);
@@ -95,8 +95,10 @@ function sliderGraph(graph, details) {
         return "standard";
     }
 
+    var x_percentage = (details.widget === 'scaler');
+
     var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-                        bar_class);
+                        bar_class, x_percentage);
 
     svg.append("text")
         .attr("x", width / 2)
@@ -164,28 +166,35 @@ function checkboxesGraph(graph, details) {
         .range([GRAPH_CONF.height, 0]);
 
     var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-                        "standard");
+                        "standard", false);
 }
 
 function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-                   bar_class) {
+                   bar_class, x_percentage) {
     // Actually draws the graph and returns its svg container.
     // graph: d3.select-ed container in which to put the graph.
     // data: data to graph
-    // x, y, y_prescale: axes
+    // x, y, y_prescale: scales
     // width: width of graph
     // bar_width: width of each bar
     // bar_class: class to apply to each bar.  Can be a function.
+    // x_percentage: format the x axis as a percentage
+
+    var formatPercent = d3.format(".0%");
 
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
 
+    if (x_percentage) {
+        xAxis = xAxis.tickFormat(formatPercent);
+    }
+
     function makeYAxis() {
         return d3.svg.axis()
             .scale(y)
             .orient("left")
-            .tickFormat(d3.format(".0%"));
+            .tickFormat(formatPercent);
     }
 
     var svg = graph.append("svg")
