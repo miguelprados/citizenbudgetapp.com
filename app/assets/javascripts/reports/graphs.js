@@ -237,7 +237,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
         .attr("transform", "translate(0," + GRAPH_CONF.height + ")")
         .call(xAxis)
       .selectAll("text")
-        .call(wrap, x.rangeBand());
+        .call(wrap, bar_width);
 
     return svg;
 }
