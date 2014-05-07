@@ -224,7 +224,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
 
     bar.append("text")
         .attr("dy", ".75em")
-        .attr("y", 6)
+        .attr("y", -10)
         .attr("x", bar_width / 2)
         .attr("text-anchor", "middle")
         .text(function(d) { return d3.format(",.0f")(d.y); });
