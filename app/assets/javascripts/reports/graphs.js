@@ -11,7 +11,7 @@ var GRAPH_CONF = {
     // Width and height of the graph are exclusive of margins
     max_width: 900,
     height: 240,
-    margin: {top: 10, right: 30, bottom: 35, left: 40},
+    margin: {top: 10, right: 30, bottom: 20, left: 40},
 
     max_bar_width: 100
 };
@@ -201,12 +201,14 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
         .attr("width", width + GRAPH_CONF.margin.left +
               GRAPH_CONF.margin.right)
         .attr("height", GRAPH_CONF.height + GRAPH_CONF.margin.top +
-              GRAPH_CONF.margin.bottom)
-      .append("g")
+              GRAPH_CONF.margin.bottom);
+    window.svg = svg;
+
+    var container = svg.append("g")
         .attr("transform", "translate(" + GRAPH_CONF.margin.left + "," +
               GRAPH_CONF.margin.top + ")");
 
-    var bar = svg.selectAll(".bar")
+    var bar = container.selectAll(".bar")
         .data(data)
       .enter().append("g")
         .attr("class", "bar")
@@ -229,11 +231,11 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
         .attr("text-anchor", "middle")
         .text(function(d) { return d3.format(",.0f")(d.y); });
 
-    svg.append("g")
+    container.append("g")
         .attr("class", "y axis")
         .call(makeYAxis());
 
-    svg.append("g")
+    container.append("g")
         .attr("class", "grid")
         .call(makeYAxis()
             .ticks(5)
@@ -241,14 +243,25 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
             .tickFormat(""));
 
     // Draw the X axis _after_ the grid lines
-    svg.append("g")
+    container.append("g")
         .attr("class", "x axis")
         .attr("transform", "translate(0," + GRAPH_CONF.height + ")")
         .call(xAxis)
       .selectAll("text")
         .call(wrap, bar_width);
 
-    return svg;
+    var max_label_height = 0;
+    container.selectAll('g.x.axis g.tick text')
+        .each(function() {
+            if (this.getBBox().height > max_label_height) {
+                max_label_height = this.getBBox().height;
+            }
+        });
+
+    var old_height = parseInt(svg.attr("height"));
+    svg.attr("height", old_height + max_label_height);
+
+    return container;
 }
 
 function graphWidth(n_bars) {
