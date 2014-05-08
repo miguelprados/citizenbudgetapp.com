@@ -69,7 +69,7 @@ function sliderGraph(graph, details) {
             .bins(x.ticks(GRAPH_CONF.max_n_bars))
             (values);
 
-        var bar_width = x(data[0].dx);
+        var bar_width = x(details.minimum_units + data[0].dx);
     }
 
     var max_bin_value = d3.max(data, function(d) { return d.y; });
