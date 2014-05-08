@@ -120,7 +120,7 @@ function sliderGraph(graph, details) {
 
 function checkboxesGraph(graph, details) {
     var labels = [];
-    var label_map = [];
+    var label_map = {};
     if (details.options !== undefined) {
         // radio buttons - we need to create a label map to translate
         // options into labels.
@@ -136,7 +136,7 @@ function checkboxesGraph(graph, details) {
     var raw_counts = d3.map(details.raw_counts);
     var data = [];
     raw_counts.forEach(function(key, value) {
-        if (label_map.length) {
+        if (details.options !== undefined) {
             // radio buttons
             data.push({ x: label_map[key], y: value });
         } else {
