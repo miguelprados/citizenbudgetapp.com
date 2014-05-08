@@ -29,7 +29,7 @@ function addGraph(id) {
         // slider or scaler
         sliderGraph(graph, details);
     } else {
-        console.log("Unsupported graph: ", id);
+        console && console.log && console.log('Unsupported graph: ' + id);
     }
 }
 
