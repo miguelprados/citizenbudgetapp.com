@@ -99,19 +99,21 @@ ActiveAdmin.register_page 'Dashboard' do
             details[:counts][option] += 1
           end
 
+          details[:counts].each do |option,count|
+            if changes.empty?
+              details[:counts][option] = 0
+            elsif option == question.default_value
+              details[:counts][option] = number_of_nonchanges
+            end
+          end
+
           details[:raw_counts] = details[:counts].clone
           details[:n_changes] = changes.size
           details[:options] = question.options
           details[:labels] = question.labels
 
           details[:counts].each do |option,count|
-            if changes.empty?
-              details[:counts][option] = 0
-            elsif option == question.default_value
-              details[:counts][option] = number_of_nonchanges / @statistics[:responses].to_f
-            else
-              details[:counts][option] /= @statistics[:responses].to_f
-            end
+            details[:counts][option] /= @statistics[:responses].to_f
           end
         end
       # Multiple choice survey questions.
@@ -137,15 +139,17 @@ ActiveAdmin.register_page 'Dashboard' do
           end
         end
 
+        details[:counts].each do |answer,count|
+          if changes.empty?
+            details[:counts][answer] = 0
+          end
+        end
+
         details[:raw_counts] = details[:counts].clone
         details[:n_changes] = changes.size
 
         details[:counts].each do |answer,count|
-          if changes.empty?
-            details[:counts][answer] = 0
-          else
-            details[:counts][answer] /= changes.size.to_f
-          end
+          details[:counts][answer] /= changes.size.to_f
         end
       end
       @details[question.id.to_s] = details
