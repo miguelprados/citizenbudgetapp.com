@@ -10,4 +10,4 @@
 
 This app's main repository is on GitHub: [http://github.com/opennorth/citizenbudgetapp.com](http://github.com/opennorth/citizenbudgetapp.com), where your contributions, forks, bug reports, feature requests, and feedback are greatly welcomed.
 
-Copyright (c) 2011-2013 Open North Inc., released under the GNU Affero General Public License, Version 3.
+Copyright (c) 2011-2014 Open North Inc., released under the GNU Affero General Public License, Version 3.
