@@ -155,7 +155,9 @@ ActiveAdmin.register_page 'Dashboard' do
       @details[question.id.to_s] = details
     end
 
-    @statistics[:mean_magnitude_of_changes] /= @statistics[:mean_number_of_changes].to_f # perform first
+    if @statistics[:mean_number_of_changes].to_f.nonzero?
+      @statistics[:mean_magnitude_of_changes] /= @statistics[:mean_number_of_changes].to_f # perform first
+    end
     @statistics[:mean_number_of_changes] /= @statistics[:responses].to_f
 
     # @see https://github.com/gregbell/active_admin/issues/1362
