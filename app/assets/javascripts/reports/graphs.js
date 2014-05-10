@@ -95,10 +95,16 @@ function sliderGraph(graph, details) {
         return "standard";
     }
 
-    var x_percentage = (details.widget === 'scaler');
+    var x_format = '';
+    if (details.widget === 'scaler') {
+        x_format = 'percentage';
+    } else if (details.unit_name === '' && details.minimum_units === 0 &&
+               details.maximum_units === 1 && details.step === 1) {
+        x_format = 'yesno';
+    }
 
     var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-                        bar_class, x_percentage);
+                        bar_class, x_format);
 
     svg.append("text")
         .attr("x", width / 2)
@@ -166,11 +172,11 @@ function checkboxesGraph(graph, details) {
         .range([GRAPH_CONF.height, 0]);
 
     var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-                        "standard", false);
+                        "standard", '');
 }
 
 function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-                   bar_class, x_percentage) {
+                   bar_class, x_format) {
     // Actually draws the graph and returns its svg container.
     // graph: d3.select-ed container in which to put the graph.
     // data: data to graph
@@ -178,7 +184,9 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     // width: width of graph
     // bar_width: width of each bar
     // bar_class: class to apply to each bar.  Can be a function.
-    // x_percentage: format the x axis as a percentage
+    // x_format: apply special formatting to the x-axis:
+    //     percentage: format as percentage
+    //     yesno: format 0 as "no" and others as "yes" (translated)
 
     var formatPercent = d3.format(".0%");
 
@@ -186,8 +194,14 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
         .scale(x)
         .orient("bottom");
 
-    if (x_percentage) {
+    if (x_format === 'percentage') {
         xAxis = xAxis.tickFormat(formatPercent);
+    } else if (x_format === 'yesno') {
+        xAxis = xAxis.tickFormat(
+            function(d) {
+                return (d === 0) ? t('no') : t('yes');
+            }
+        );
     } else if (!x.domain().every(function(n) {
         // Returns false for numbers with more than 4 digits after
         // the decimal place.

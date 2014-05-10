@@ -1,3 +1,5 @@
+//= require libs/mustache
+
 window.I18n =
   en_US:
     currency_delimiter: ','
@@ -12,6 +14,8 @@ window.I18n =
     copied_hint: 'copied!'
     month: 'month'
     year: 'year'
+    yes: 'Yes'
+    no: 'No'
   fr_CA:
     currency_delimiter: ' '
     currency_format: '{{number}} {{unit}}'
@@ -25,9 +29,11 @@ window.I18n =
     copied_hint: 'copié!'
     month: 'mois'
     year: 'année'
+    yes: 'Oui'
+    no: 'Non'
 
 window.t = (string, args = {}, dict = I18n) ->
-  current_locale = args.locale or window.locale or 'en'
+  current_locale = args.locale or window.locale or 'en_US'
   string = dict[current_locale][string] or string
   string = Mustache.render string, args
   string
