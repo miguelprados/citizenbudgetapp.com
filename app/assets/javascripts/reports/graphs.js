@@ -188,6 +188,13 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
 
     if (x_percentage) {
         xAxis = xAxis.tickFormat(formatPercent);
+    } else if (!x.domain().every(function(n) {
+        // Returns false for numbers with more than 4 digits after
+        // the decimal place.
+        if (!$.isNumeric(n)) return true;
+        return (n%1).toString().length <= 6;
+    })) {
+        xAxis = xAxis.tickFormat(d3.format(".4r"));
     }
 
     function makeYAxis() {
