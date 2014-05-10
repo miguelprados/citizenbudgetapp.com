@@ -98,8 +98,7 @@ function sliderGraph(graph, details) {
     var x_format = '';
     if (details.widget === 'scaler') {
         x_format = 'percentage';
-    } else if (details.unit_name === '' && details.minimum_units === 0 &&
-               details.maximum_units === 1 && details.step === 1) {
+    } else if (details.minimum_units === 0 && details.maximum_units === 1 && details.step === 1) {
         x_format = 'yesno';
     }
 
