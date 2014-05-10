@@ -273,10 +273,11 @@ function graphWidth(n_bars) {
 }
 
 // from: http://bl.ocks.org/mbostock/7555321
+// Also replaces HTML tags (such as <br>) with space.
 function wrap(text, width) {
     text.each(function() {
         var text = d3.select(this),
-            words = text.text().split(/\s+/).reverse(),
+            words = text.text().replace(/<[^>]+>/g, " ").split(/\s+/).reverse(),
             word,
             line = [],
             lineNumber = 0,
