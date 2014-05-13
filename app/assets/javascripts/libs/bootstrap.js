@@ -98,6 +98,7 @@
     if (!selector) {
       selector = $this.attr('href')
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+      if (selector == '#') selector = ''
     }
 
     $parent = $(selector)
@@ -754,6 +755,7 @@
     if (!selector) {
       selector = $this.attr('href')
       selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+      if (selector == '#') selector = ''
     }
 
     $parent = selector && $(selector)
@@ -1730,6 +1732,7 @@
       if (!selector) {
         selector = $this.attr('href')
         selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+        if (selector == '#') selector = ''
       }
 
       if ( $this.parent('li').hasClass('active') ) return
