@@ -34,8 +34,7 @@ class window.SimulatorHelper
           -     # Hyphen
         ]
       )///g, '\\$1')
-      # Only strip zeroes if all are insignificant. (Differs from Rails code.)
-      formatted_number.replace(///#{escaped_separator}0+$///, '')
+      formatted_number.replace(///(#{escaped_separator})([0-9]*[1-9])?0+$///, '$1$2').replace(///#{escaped_separator}$///, '')
     else
       formatted_number
 
