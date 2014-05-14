@@ -103,7 +103,7 @@
                 %td= number_to_percentage count * 100, precision: 0
                 %th= answer
       - unless q.widget == 'textarea'
-        .graph{:id => "graph_" + q.id.to_s}
+        .graph{:id => "graph_#{q.id}"}
 
 -# Google Charts adds null values for missing dates in the time series.
 -# https://developers.google.com/chart/interactive/docs/gallery/linechart

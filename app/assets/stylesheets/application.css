@@ -13,4 +13,5 @@
  *= require validationEngine.jquery
  *= require iphone-style-checkboxes
  *= require style
+ *= require d3
 */
