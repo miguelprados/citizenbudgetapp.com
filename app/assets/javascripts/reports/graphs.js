@@ -73,7 +73,7 @@ function sliderGraph(graph, details) {
     }
 
     var max_bin_value = d3.max(data, function(d) { return d.y; });
-    var max_bin_percentage = max_bin_value / statistics.responses;
+    var max_bin_percentage = max_bin_value / number_of_responses;
     var median = d3.median(values);
 
     var y_prescale = d3.scale.linear()

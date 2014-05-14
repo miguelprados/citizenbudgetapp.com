@@ -5,6 +5,7 @@ CitizenBudget::Application.routes.draw do
   resources :responses, only: [:new, :create, :show] do
     collection do
       get 'count'
+      get 'charts'
     end
   end
 

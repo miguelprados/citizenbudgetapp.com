@@ -19,18 +19,13 @@ ActiveAdmin.register_page 'Dashboard' do
     @starts_on = @questionnaire.starts_on
     @ends_on   = [@questionnaire.today, @questionnaire.ends_on].min
 
-    # Collections
-    @responses = @questionnaire.responses
-    @questions = @questionnaire.sections.simulator.map(&:questions).flatten
-    @fields    = @questionnaire.sections.nonbudgetary
-    @number_of_budgetary_questions = @questions.count(&:budgetary?)
-
     # Timeline and web traffic
     @charts, @statistics = charts @questionnaire
 
-    # Accumulate the totals before calculating the mean.
-    @statistics[:mean_number_of_changes] = 0
-    @statistics[:mean_magnitude_of_changes] = 0
+    # Collections
+    @responses = @questionnaire.responses
+    @questions = @questionnaire.sections.simulator.map(&:questions).flatten
+    @number_of_responses = @responses.count
 
     @details = {}
     @questions.each do |question|
@@ -38,36 +33,32 @@ ActiveAdmin.register_page 'Dashboard' do
       if question.budgetary?
         changes = @responses.where(:"answers.#{question.id}".ne => question.default_value)
         number_of_changes = changes.count
-        number_of_nonchanges = @statistics[:responses] - number_of_changes
-
-        # How many respondents modified this question?
-        details[:percentage_of_population] = number_of_changes / @statistics[:responses].to_f
-        @statistics[:mean_number_of_changes] += number_of_changes
+        number_of_nonchanges = @number_of_responses - number_of_changes
 
         # Start with all the respondents who did not change the value.
         choices = [question.cast_default_value] * number_of_nonchanges
         impacts = []
-        magnitude_of_changes = 0
 
         changes.each do |response|
-          impact = response.impact(question)
           choices << response.cast_answer(question)
-          impacts << impact
-          magnitude_of_changes += impact.abs
+          impacts << response.impact(question)
         end
 
-        details[:choices] = choices
-        details[:minimum_units] = question.minimum_units
-        details[:maximum_units] = question.maximum_units
-        details[:step] = question.step
-        details[:unit_name] = question.unit_name
-        details[:default_value] = question.default_value
-        details[:widget] = question.widget
-
-        # How large were the modifications?
-        details[:mean_choice] = choices.sum / @statistics[:responses].to_f
-        details[:mean_impact] = impacts.sum / @statistics[:responses].to_f
-        @statistics[:mean_magnitude_of_changes] += magnitude_of_changes
+        details.merge!({
+          :choices => choices,
+          # Question parameters.
+          :minimum_units => question.minimum_units,
+          :maximum_units => question.maximum_units,
+          :step          => question.step,
+          :unit_name     => question.unit_name,
+          :default_value => question.default_value,
+          :widget        => question.widget,
+          # How many respondents modified this question?
+          :percentage_of_population => number_of_changes / @number_of_responses.to_f,
+          # How large were the modifications?
+          :mean_choice => choices.sum / @number_of_responses.to_f,
+          :mean_impact => impacts.sum / @number_of_responses.to_f,
+        })
 
         increases = choices.select{|v| v > question.cast_default_value}
         if increases.empty?
@@ -88,46 +79,29 @@ ActiveAdmin.register_page 'Dashboard' do
         end
 
         if question.widget == 'option'
-          details[:counts] = {}
-
-          question.options.each do |option|
-            details[:counts][option] = 0
-          end
-
+          details[:counts] = Hash.new(0)
           changes.each do |response|
-            option = response.answer(question)
-            details[:counts][option] += 1
+            details[:counts][response.answer(question)] += 1
           end
-
-          details[:counts].each do |option,count|
-            if changes.empty?
-              details[:counts][option] = 0
-            elsif option == question.default_value
-              details[:counts][option] = number_of_nonchanges
-            end
-          end
+          details[:counts][question.default_value] = number_of_nonchanges
 
           details[:raw_counts] = details[:counts].clone
-          details[:n_changes] = changes.size
+          details[:counts].each do |option,count|
+            details[:counts][option] /= @number_of_responses.to_f
+          end
+
           details[:options] = question.options
           details[:labels] = question.labels
-
-          details[:counts].each do |option,count|
-            details[:counts][option] /= @statistics[:responses].to_f
-          end
         end
       # Multiple choice survey questions.
       elsif question.options?
         changes = @responses.where(:"answers.#{question.id}".ne => nil)
         number_of_changes = changes.count
-        details[:percentage_of_population] = number_of_changes / @statistics[:responses].to_f
 
-        details[:counts] = {}
+        # How many respondents modified this question?
+        details[:percentage_of_population] = number_of_changes / @number_of_responses.to_f
 
-        question.options.each do |option|
-          details[:counts][option] = 0
-        end
-
+        details[:counts] = Hash.new(0)
         changes.each do |response|
           answer = response.answer(question)
           if question.multiple?
@@ -139,26 +113,16 @@ ActiveAdmin.register_page 'Dashboard' do
           end
         end
 
-        details[:counts].each do |answer,count|
-          if changes.empty?
-            details[:counts][answer] = 0
+        details[:raw_counts] = details[:counts].clone
+        if number_of_changes.nonzero?
+          details[:counts].each do |answer,count|
+            details[:counts][answer] /= number_of_changes.to_f
           end
         end
-
-        details[:raw_counts] = details[:counts].clone
-        details[:n_changes] = changes.size
-
-        details[:counts].each do |answer,count|
-          details[:counts][answer] /= changes.size.to_f
-        end
       end
+
       @details[question.id.to_s] = details
     end
-
-    if @statistics[:mean_number_of_changes].to_f.nonzero?
-      @statistics[:mean_magnitude_of_changes] /= @statistics[:mean_number_of_changes].to_f # perform first
-    end
-    @statistics[:mean_number_of_changes] /= @statistics[:responses].to_f
 
     # @see https://github.com/gregbell/active_admin/issues/1362
     render 'summary', layout: 'active_admin'
@@ -254,8 +218,6 @@ ActiveAdmin.register_page 'Dashboard' do
       rescue Moped::Errors::OperationFailure
         # Do nothing. JS engine is off.
       end
-
-      statistics[:responses] = q.responses.count
 
       if q.google_analytics_profile? && q.google_api_authorization.authorized?
         begin

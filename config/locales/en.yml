@@ -254,8 +254,6 @@ en:
     # Traffic to example.com (UA-XXXXXXXXX-X)
     visits_title: "Traffic to %{name} (%{property})"
     responses: Responses
-    mean_number_of_changes: "Average number of services changed, out of %{count}"
-    mean_magnitude_of_changes: Average magnitude of a change
     visitors: Visitors
     visits: Visits
     pageviews: Pageviews

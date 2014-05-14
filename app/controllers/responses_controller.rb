@@ -38,6 +38,10 @@ class ResponsesController < ApplicationController
     render json: @questionnaire.responses.count
   end
 
+  def charts
+    @details = @questionnaire.chart_data
+  end
+
   def offline
   end
 

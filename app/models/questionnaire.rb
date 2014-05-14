@@ -357,6 +357,88 @@ class Questionnaire
     end
   end
 
+  def chart_data # @todo Significant duplication of dashboard.rb
+    number_of_responses = responses.count
+
+    details = {}
+    sections.simulator.map(&:questions).flatten.each do |question|
+      details = {}
+      if question.budgetary?
+        changes = responses.where(:"answers.#{question.id}".ne => question.default_value)
+        number_of_changes = changes.count
+        number_of_nonchanges = number_of_responses - number_of_changes
+
+        # Start with all the respondents who did not change the value.
+        choices = [question.cast_default_value] * number_of_nonchanges
+
+        changes.each do |response|
+          choices << response.cast_answer(question)
+        end
+
+        details.merge!({
+          :choices => choices,
+          # Question parameters.
+          :minimum_units => question.minimum_units,
+          :maximum_units => question.maximum_units,
+          :step          => question.step,
+          :unit_name     => question.unit_name,
+          :default_value => question.default_value,
+          :widget        => question.widget,
+          # How many respondents modified this question?
+          :percentage_of_population => number_of_changes / number_of_responses.to_f,
+          # How large were the modifications?
+          :mean_choice => choices.sum / number_of_responses.to_f,
+        })
+
+        if question.widget == 'option'
+          details[:counts] = Hash.new(0)
+          changes.each do |response|
+            details[:counts][response.answer(question)] += 1
+          end
+          details[:counts][question.default_value] = number_of_nonchanges
+
+          details[:raw_counts] = details[:counts].clone
+          details[:counts].each do |option,count|
+            details[:counts][option] /= number_of_responses.to_f
+          end
+
+          details[:options] = question.options
+          details[:labels] = question.labels
+        end
+      # Multiple choice survey questions.
+      elsif question.options?
+        changes = responses.where(:"answers.#{question.id}".ne => nil)
+        number_of_changes = changes.count
+
+        # How many respondents modified this question?
+        details[:percentage_of_population] = number_of_changes / number_of_responses.to_f
+
+        details[:counts] = Hash.new(0)
+        changes.each do |response|
+          answer = response.answer(question)
+          if question.multiple?
+            answer.each do |a|
+              details[:counts][a] += 1
+            end
+          else
+            details[:counts][answer] += 1
+          end
+        end
+
+        details[:raw_counts] = details[:counts].clone
+        if number_of_changes.nonzero?
+          details[:counts].each do |answer,count|
+            details[:counts][answer] /= number_of_changes.to_f
+          end
+        end
+      end
+
+      details[question.id.to_s] = details
+    end
+
+    details
+  end
+
 private
 
   # Removes the protocol, "www" and trailing slash, if present.

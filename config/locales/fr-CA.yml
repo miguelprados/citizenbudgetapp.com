@@ -221,8 +221,6 @@ fr-CA:
     responses_title: Nombre de soumissions par jour
     visits_title: "Fréquentation de %{name} (%{property})"
     responses: Soumissions
-    mean_number_of_changes: "Nombre moyenne de services changés, parmi %{count} services"
-    mean_magnitude_of_changes: Largeur moyenne d'un changement
     visitors: Visiteurs
     visits: Visites
     pageviews: Pages vues

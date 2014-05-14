@@ -16,11 +16,11 @@
 
   .block.block-small
     .number
-      = number_with_delimiter @statistics[:responses]
+      = number_with_delimiter @number_of_responses
     .title
       =t 'statistics.responses'
     .subtitle
-      =t 'statistics.participation_rate', percentage: number_to_percentage(@statistics[:responses] / @statistics[:visitors].to_f * 100)
+      =t 'statistics.participation_rate', percentage: number_to_percentage(@number_of_responses / @statistics[:visitors].to_f * 100)
 
   .block.block-large
     .number
@@ -106,21 +106,8 @@
         .graph{:id => "graph_" + q.id.to_s}
 
 :javascript
-  all_details = #{JSON.pretty_generate(@details)}
-  statistics = #{JSON.pretty_generate(@statistics)}
-
-/ .bars.clearfix
-/   .bar
-/     .number
-/       = @statistics[:mean_number_of_changes].round
-/     .title
-/       =t 'statistics.mean_number_of_changes', count: @number_of_budgetary_questions
-/   - unless @questionnaire.mode == 'taxes'
-/     .bar
-/       .number
-/         = number_to_currency @statistics[:mean_magnitude_of_changes]
-/       .title
-/         =t 'statistics.mean_magnitude_of_changes'
+  all_details = #{JSON.pretty_generate(@details)};
+  number_of_responses = #{@number_of_responses};
 
 -# Google Charts adds null values for missing dates in the time series.
 -# https://developers.google.com/chart/interactive/docs/gallery/linechart
