@@ -360,7 +360,7 @@ class Questionnaire
   def chart_data # @todo Significant duplication of dashboard.rb
     number_of_responses = responses.count
 
-    details = {}
+    all_details = {}
     sections.simulator.map(&:questions).flatten.each do |question|
       details = {}
       if question.budgetary?
@@ -384,8 +384,6 @@ class Questionnaire
           :unit_name     => question.unit_name,
           :default_value => question.default_value,
           :widget        => question.widget,
-          # How many respondents modified this question?
-          :percentage_of_population => number_of_changes / number_of_responses.to_f,
           # How large were the modifications?
           :mean_choice => choices.sum / number_of_responses.to_f,
         })
@@ -410,9 +408,6 @@ class Questionnaire
         changes = responses.where(:"answers.#{question.id}".ne => nil)
         number_of_changes = changes.count
 
-        # How many respondents modified this question?
-        details[:percentage_of_population] = number_of_changes / number_of_responses.to_f
-
         details[:counts] = Hash.new(0)
         changes.each do |response|
           answer = response.answer(question)
@@ -433,10 +428,10 @@ class Questionnaire
         end
       end
 
-      details[question.id.to_s] = details
+      all_details[question.id.to_s] = details
     end
 
-    details
+    all_details
   end
 
 private

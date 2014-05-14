@@ -105,10 +105,6 @@
       - unless q.widget == 'textarea'
         .graph{:id => "graph_" + q.id.to_s}
 
-:javascript
-  all_details = #{JSON.pretty_generate(@details)};
-  number_of_responses = #{@number_of_responses};
-
 -# Google Charts adds null values for missing dates in the time series.
 -# https://developers.google.com/chart/interactive/docs/gallery/linechart
 - if @charts[:responses]

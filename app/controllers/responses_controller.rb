@@ -39,7 +39,7 @@ class ResponsesController < ApplicationController
   end
 
   def charts
-    @details = @questionnaire.chart_data
+    render json: @questionnaire.chart_data
   end
 
   def offline
@@ -53,6 +53,7 @@ private
 
   def find_questionnaire
     @questionnaire = Questionnaire.where(authorization_token: params[:token]).first if params[:token]
+    @questionnaire ||= Questionnaire.find(params[:id]) if params[:id]
     @questionnaire ||= Questionnaire.find_by_domain(request.host)
 
     # In development, we generally work on the latest questionnaire.

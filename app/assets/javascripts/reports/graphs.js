@@ -1,10 +1,22 @@
 "use strict";
 
+var all_details = {};
+var number_of_responses = 0;
+
 $(function () {
-  $('.graph').each(function(index) {
-    var id = this.id.replace('graph_', '');
-    addGraph(id);
-  });
+  var $graph = $('.graph');
+  if ($graph.length) {
+    var query = location.href.match(/\?.+/) || '';
+    $.ajax({url: '/responses/count.json' + query}).done(function (data) {
+      number_of_responses = data;
+      $.ajax({url: '/responses/charts.json' + query}).done(function (data) {
+        all_details = data;
+        $graph.each(function () {
+          addGraph(this.id.replace('graph_', ''));
+        });
+      });
+    });
+  }
 });
 
 var GRAPH_CONF = {

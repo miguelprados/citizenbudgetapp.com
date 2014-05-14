@@ -16,4 +16,5 @@
 //= require i18n
 //= require ./simulators/simulator_helper
 //= require ./simulators/simulator
+//= require reports/graphs
 //= require scripts
