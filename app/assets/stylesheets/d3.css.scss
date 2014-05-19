@@ -8,16 +8,16 @@
 }
 
 .bar rect {
-  fill: steelblue;
+  fill: #ccc;
   shape-rendering: crispEdges;
 }
 
 .bar rect.default {
-  fill: #f6c;
+  fill: #666;
 }
 
 .bar rect.median {
-  fill: #f96;
+  fill: #3498db;
 }
 
 .bar text {

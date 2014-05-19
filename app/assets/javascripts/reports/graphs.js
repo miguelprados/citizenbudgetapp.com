@@ -23,10 +23,15 @@ var GRAPH_CONF = {
   // Width and height of the graph are exclusive of margins
   max_width: 900,
   height: 240,
-  margin: {top: 10, right: 30, bottom: 20, left: 40},
-
+  margin: {
+    top: 10,
+    right: 30,
+    bottom: 20,
+    left: 45
+  },
   max_bar_width: 100
 };
+
 // Set the maximum number of bars based on a desired minimum bar width:
 GRAPH_CONF.max_n_bars = Math.floor(GRAPH_CONF.max_width / 25);
 
@@ -130,37 +135,42 @@ function sliderGraph(graph, details) {
       .attr("y1", GRAPH_CONF.height + 10)
       .attr("x2", mean_scaled)
       .attr("y2", 0)
-      .attr("stroke-width", 3)
-      .attr("stroke", "#777");
+      .attr("stroke-width", 1)
+      .attr("stroke", "#000");
   }
 }
 
 function checkboxesGraph(graph, details) {
   var labels = [];
   var label_map = {};
-  if (details.options !== undefined) {
-    // radio buttons - we need to create a label map to translate
+  if (details.options !== undefined) { // radio buttons
+    // we need to create a label map to translate
     // options into labels.
     for (var i = 0; i < details.options.length; i++) {
       label_map[details.options[i]] = details.labels[i];
       labels.push(details.labels[i]);
     }
-  } else {
-    // checkboxes - raw_counts already uses labels directly.
-    labels = Object.keys(details.raw_counts);
+  } else { // checkboxes
+    for (var key in details.raw_counts) {
+      if (details.raw_counts.hasOwnProperty(key)) {
+        labels.push(key);
+      }
+    }
   }
 
   var raw_counts = d3.map(details.raw_counts);
   var data = [];
-  raw_counts.forEach(function(key, value) {
-    if (details.options !== undefined) {
-      // radio buttons
-      data.push({ x: label_map[key], y: value });
-    } else {
-      // checkboxes
-      data.push({ x: key, y: value });
+  for (var key in raw_counts) {
+    if (raw_counts.hasOwnProperty(key)) {
+      var x;
+      if (details.options !== undefined) { // radio buttons
+        x = label_map[key];
+      } else { // checkboxes
+        x = key;
+      }
+      data.push({x: x, y: raw_counts[key]});
     }
-  });
+  }
 
   var n_bars = data.length;
   var width = graphWidth(n_bars);
@@ -199,34 +209,27 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
   //   percentage: format as percentage
   //   yesno: format 0 as "no" and others as "yes" (translated)
 
-  var formatPercent = d3.format(".0%");
-
   var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
 
   if (x_format === 'percentage') {
-    xAxis = xAxis.tickFormat(formatPercent);
+    xAxis = xAxis.tickFormat(d3.format(".0%"));
   } else if (x_format === 'yesno') {
-    xAxis = xAxis.tickFormat(
-      function(d) {
-        return (d === 0) ? t('no') : t('yes');
-      }
-    );
-  } else if (!x.domain().every(function(n) {
-    // Returns false for numbers with more than 4 digits after
-    // the decimal place.
-    if (!$.isNumeric(n)) return true;
-    return (n%1).toString().length <= 6;
-  })) {
-    xAxis = xAxis.tickFormat(d3.format(".4r"));
+    xAxis = xAxis.tickFormat(function (d) {
+      return (d === 0) ? t('no') : t('yes');
+    });
+  } else if (x.domain().every(function (n) {return $.isNumeric(n);})) {
+    xAxis = xAxis.tickFormat(function (x) {
+      return d3.format(".3s")(x).replace(/\.([0-9]*[1-9])?0+(\D)?$/, '.$1$2').replace(/\.(\D)?$/, '$1');
+    });
   }
 
   function makeYAxis() {
     return d3.svg.axis()
       .scale(y)
       .orient("left")
-      .tickFormat(formatPercent);
+      .tickFormat(d3.format(".0%"));
   }
 
   var svg = graph.append("svg")
