@@ -158,6 +158,7 @@ class iOSCheckbox
     
   didChange: ->
     @onChange?(@elem, @elem.prop('checked'))
+    @elem.trigger('changed')
     
     if @isDisabled()
       @container.addClass(@disabledClass)
