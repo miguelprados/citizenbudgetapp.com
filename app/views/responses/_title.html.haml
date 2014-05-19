@@ -3,7 +3,7 @@
   %span
     %i.icon-info-sign
     - if object.extra_url?
-      = link_to custom_or_default(@questionnaire.read_more, t('.read_more')), object.extra
+      = link_to custom_or_default(@questionnaire.read_more, t('.read_more')), object.extra, target: '_blank'
     - else
       = link_to custom_or_default(@questionnaire.read_more, t('.read_more')), "##{object.title.parameterize}_extra", 'class' => 'popover-toggle', 'data-content' => escape_attribute(markdown(object.extra)).html_safe, 'data-placement' => placement, 'data-html' => true
 - if object.embed?
