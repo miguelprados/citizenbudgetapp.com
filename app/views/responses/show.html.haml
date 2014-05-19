@@ -42,9 +42,6 @@
         = link_to('#', {'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'}) do
           = t('.comments')
           %span.caret
-        %ul.dropdown-menu
-          %li
-            .fb-comments(data-href="#{response_url(@response)}" data-num-posts="2" data-width="470")
       - unless simple_navigation?
         = render partial: 'nav'
 
