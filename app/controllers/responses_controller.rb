@@ -53,8 +53,8 @@ private
 
   def find_questionnaire
     @questionnaire = Questionnaire.where(authorization_token: params[:token]).first if params[:token]
-    @questionnaire ||= Questionnaire.find(params[:id]) if params[:id]
     @questionnaire ||= Questionnaire.find_by_domain(request.host)
+    @questionnaire ||= Questionnaire.find(params[:id]) if params[:id] # last in case :id is for a response
 
     # In development, we generally work on the latest questionnaire.
     @questionnaire ||= Questionnaire.last if Rails.env.development?
