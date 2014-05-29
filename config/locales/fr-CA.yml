@@ -39,7 +39,7 @@ fr-CA:
       currency_unit_post: " $"
       required: requis
       submit: Envoyer
-      submit_text: Si vous êtes satisfait de vos choix, cliquez sur « Envoyer ».
+      submit_text: Si vous êtes satisfait de vos choix, cliquez sur « Envoyer ». Vous aurez accès aux résultats cumulatifs et pourrez laisser vos commentaires.
     show:
       header:
         default: "%{name} a rééquilibré le budget !"
@@ -83,7 +83,7 @@ fr-CA:
         response_preamble: *response_preamble
     hints:
       response:
-        email: Nous ne diffuserons pas votre adresse courriel ou toute autres données personnelles à une tierce personne.
+        email: Nous ne diffuserons pas votre adresse courriel ou tout autre donnée personnelle à une tierce personne.
       organization:
         name: e.g. "Ville de St-Endroit"
       questionnaire:

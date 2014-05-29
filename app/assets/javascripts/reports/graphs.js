@@ -143,7 +143,7 @@ function sliderGraph(graph, details) {
 function checkboxesGraph(graph, details) {
   var labels = [];
   var label_map = {};
-  if (details.options !== undefined) { // radio buttons
+  if (details.options !== undefined && details.labels !== undefined) { // radio buttons
     // we need to create a label map to translate
     // options into labels.
     for (var i = 0; i < details.options.length; i++) {
@@ -163,7 +163,7 @@ function checkboxesGraph(graph, details) {
   for (var key in raw_counts) {
     if (raw_counts.hasOwnProperty(key)) {
       var x;
-      if (details.options !== undefined) { // radio buttons
+      if (details.options !== undefined && details.labels !== undefined) { // radio buttons
         x = label_map[key];
       } else { // checkboxes
         x = key;
@@ -182,7 +182,7 @@ function checkboxesGraph(graph, details) {
   var bar_width = x.rangeBand();
 
   var max_data_value = d3.max(data, function(d) { return d.y; });
-  var max_percentage = d3.max(d3.values(details.counts))
+  var max_percentage = d3.max(d3.values(details.counts));
 
   var y_prescale = d3.scale.linear()
     .domain([0, max_data_value])
