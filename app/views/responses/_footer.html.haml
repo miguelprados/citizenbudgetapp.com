@@ -25,6 +25,7 @@
 
   :javascript
     var simulator_options = {
+      questionnaire_id: '#{@questionnaire._id.to_s}',
       disabled: #{disabled},
       change_required: #{!!@questionnaire.change_required},
       maximum_difference: #{@maximum_difference},

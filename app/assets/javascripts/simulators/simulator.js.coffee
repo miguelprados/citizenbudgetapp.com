@@ -310,6 +310,7 @@ class window.Simulator
     self = this
 
     @scope.find('.option').change ->
+      self.track()
       $this = $(this)
       self.updateQuestion($this, $this.val())
       self.updateSection($this)
@@ -324,6 +325,7 @@ class window.Simulator
         resizeContainer: false
         resizeHandle: false
         onChange: (input, checked) ->
+          self.track()
           self.updateQuestion(input, +checked)
           self.updateSection(input)
           self.update()
@@ -359,6 +361,7 @@ class window.Simulator
       self.updateQuestion($this, value)
 
     change = (event, ui) ->
+      self.track()
       $this = $(this)
       slide.call(this, event, ui)
       $this.find('input').val(ui.value) # update the associated form element
@@ -455,6 +458,9 @@ class window.Simulator
       value = $this.slider('value')
       updateTip($this, value)
       self.updateQuestion($this, value)
+
+  track: ->
+    _gaq.push(['_trackEvent', 'Simulators', 'Modify', @options.questionnaire_id]) if _gaq?
 
   prepareForm: ->
     @initializeMinMaxLabels()
