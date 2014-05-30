@@ -42,7 +42,7 @@ fr-CA:
       submit_text: Si vous êtes satisfait de vos choix, cliquez sur « Envoyer ». Vous aurez accès aux résultats cumulatifs et pourrez laisser vos commentaires.
     show:
       header:
-        default: "%{name} a rééquilibré le budget !"
+        default: "%{name} a soumis un budget !"
         taxes: "%{name} a soumis un budget !"
       share: &response_preamble Nous vous encourageons à partager et à discuter de vos choix budgétaires avec vos amis et votre famille.
       share_link: "Copiez ce lien pour partager vos choix budgétaires :"

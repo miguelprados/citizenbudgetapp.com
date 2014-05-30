@@ -61,7 +61,7 @@ en:
       submit_text: If you are satisfied with your choices, click "Submit".
     show:
       header:
-        default: "%{name} rebalanced the budget!"
+        default: "%{name} submitted a budget!"
         taxes: "%{name} submitted a budget!"
       share: &response_preamble We encourage you to share and discuss your budget choices below with your friends and family.
       share_link: "Copy this link to share your budget choices:"
