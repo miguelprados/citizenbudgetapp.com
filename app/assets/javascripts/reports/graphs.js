@@ -160,20 +160,20 @@ function checkboxesGraph(graph, details) {
 
   var raw_counts = d3.map(details.raw_counts);
   var data = [];
-  for (var key in raw_counts) {
-    if (raw_counts.hasOwnProperty(key)) {
-      var x;
-      if (details.options !== undefined && details.labels !== undefined) { // radio buttons
-        x = label_map[key];
-      } else { // checkboxes
-        x = key;
+  for (var original_key in raw_counts) {
+    if (raw_counts.hasOwnProperty(original_key)) {
+      var key = original_key;
+      if (key.charCodeAt(0) == 0) {
+        key = key.substring(1);
       }
-      data.push({x: x, y: raw_counts[key]});
+      if (details.options !== undefined && details.labels !== undefined) { // radio buttons
+        key = label_map[key];
+      }
+      data.push({x: key, y: raw_counts[original_key]});
     }
   }
 
-  var n_bars = data.length;
-  var width = graphWidth(n_bars);
+  var width = graphWidth(data.length);
 
   var x = d3.scale.ordinal()
     .domain(labels)
