@@ -14,6 +14,7 @@ group :production do
   gem 'rails_12factor'
 
   # Performance
+  gem 'action_dispatch-gz_static'
   gem 'memcachier'
   gem 'dalli'
   gem 'newrelic_rpm'
