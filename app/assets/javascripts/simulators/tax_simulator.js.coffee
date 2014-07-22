@@ -62,6 +62,8 @@ class window.TaxSimulator extends window.Simulator
 
     description = $('td.description').css('background-color')
     description = 'transparent' if description is 'rgba(0, 0, 0, 0)'
+    highlight = $('td.highlight').css('background-color')
+    highlight = 'transparent' if highlight is 'rgba(0, 0, 0, 0)'
 
     # The colors of the single solid bar in the graph.
     bar:
@@ -86,7 +88,7 @@ class window.TaxSimulator extends window.Simulator
       positive: '#000'
       negative: '#000'
       description: description # administrators can override the CSS
-      highlight: '#ff9'
+      highlight: highlight # administrators can override the CSS
       description_selected: change_description_background_color
       highlight_selected: change_highlight_background_color
 
