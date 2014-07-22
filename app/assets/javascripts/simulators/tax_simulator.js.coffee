@@ -53,9 +53,15 @@ class window.TaxSimulator extends window.Simulator
 
   colorSetting: ->
     # XXX hack to read CSS rule.
-    $element = $('<tr class="selected"><td></td></tr>').appendTo('body')
-    change_background_color = $element.find('td').css('background-color')
+    $element = $('<tr class="selected"><td class="description"></td></tr>').appendTo('body')
+    change_description_background_color = $element.find('td').css('background-color')
     $element.remove()
+    $element = $('<tr class="selected"><td class="highlight"></td></tr>').appendTo('body')
+    change_highlight_background_color = $element.find('td').css('background-color')
+    $element.remove()
+
+    description = $('td.description').css('background-color')
+    description = 'transparent' if description is 'rgba(0, 0, 0, 0)'
 
     # The colors of the single solid bar in the graph.
     bar:
@@ -79,9 +85,10 @@ class window.TaxSimulator extends window.Simulator
     question:
       positive: '#000'
       negative: '#000'
-      description: '#fff'
+      description: description # administrators can override the CSS
       highlight: '#ff9'
-      selected: change_background_color
+      description_selected: change_description_background_color
+      highlight_selected: change_highlight_background_color
 
   strings: ->
     en_US:
