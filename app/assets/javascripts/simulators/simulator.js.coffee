@@ -197,7 +197,7 @@ class window.Simulator
         color = @colors.question.negative
 
       $tr.find('.key').html(key)
-      $tr.find('.value').html(SimulatorHelper.number_to_currency(Math.abs(difference) * @scale(), strip_insignificant_zeros: true))
+      $tr.find('.value').html(SimulatorHelper.number_to_currency(Math.abs(difference) * @scale($tr), strip_insignificant_zeros: true))
       $tr.find('.impact').css('color', color).css('visibility', 'visible')
 
       unless $tr.hasClass('selected')
