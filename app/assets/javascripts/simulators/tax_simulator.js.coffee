@@ -52,45 +52,12 @@ class window.TaxSimulator extends window.Simulator
         $widget.html(content)
 
   colorSetting: ->
-    # XXX hack to read CSS rule.
-    $element = $('<tr class="selected"><td class="description"></td></tr>').appendTo('body')
-    change_description_background_color = $element.find('td').css('background-color')
-    $element.remove()
-    $element = $('<tr class="selected"><td class="highlight"></td></tr>').appendTo('body')
-    change_highlight_background_color = $element.find('td').css('background-color')
-    $element.remove()
-
-    description = $('td.description').css('background-color')
-    description = 'transparent' if description is 'rgba(0, 0, 0, 0)'
-    highlight = $('td.highlight').css('background-color')
-    highlight = 'transparent' if highlight is 'rgba(0, 0, 0, 0)'
-
-    # The colors of the single solid bar in the graph.
-    bar:
-      positive: '#000'
-      negative: '#f00'
-    # The colors of the status message in the navigation.
-    message:
-      background:
-        positive: '#000'
-        neutral: $('#message').css('background-color') # administrators can override the CSS
-        negative: '#000'
-      foreground:
-        positive: '#fff'
-        neutral: '#fff'
-        negative: '#fff'
-    # The colors of the budgetary values in the section navigation.
-    section:
-      positive: '#000'
-      negative: '#f00'
-    # The colors of the question and its budgetary values.
-    question:
-      positive: '#000'
-      negative: '#000'
-      description: description # administrators can override the CSS
-      highlight: highlight # administrators can override the CSS
-      description_selected: change_description_background_color
-      highlight_selected: change_highlight_background_color
+    setting = super
+    setting.message.background.positive = '#000'
+    setting.message.background.negative = '#000'
+    setting.message.foreground.positive = '#fff'
+    setting.question.negative = '#000'
+    setting
 
   strings: ->
     en_US:
