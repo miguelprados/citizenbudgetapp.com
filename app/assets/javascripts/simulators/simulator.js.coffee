@@ -55,6 +55,7 @@ class window.Simulator
     balance * @scale()
 
   # @return [Float] the simulator's net balance
+  # XXX This should be camel case to be consistent.
   net_balance: ->
     @options.starting_balance + @balance(@scope)
 
