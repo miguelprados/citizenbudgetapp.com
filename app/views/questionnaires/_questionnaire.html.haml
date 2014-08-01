@@ -152,7 +152,7 @@
                       = currency q.maximum_amount
                     %div(class="meta minimum#{' changed' if q.checked?}")
                       = currency q.minimum_amount
-          - if @response.persisted? && @questionnaire.starts_at > Time.new(2014, 5, 15) # @todo Remove conditional
+          - if @response.persisted? && @questionnaire.starts_at && @questionnaire.starts_at > Time.new(2014, 5, 15) # @todo Remove conditional
             %tr.graph-container
               %td(colspan="2")
                 .graph{:id => "graph_#{q.id}"}
