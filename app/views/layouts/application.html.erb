@@ -31,7 +31,7 @@
   <%= yield :head %>
   <%= javascript_include_tag 'individual/modernizr.min.js', 'https://www.google.com/jsapi' %>
   <!--[if lt IE 9]>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.2.2/aight.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.2.2/aight.js"></script>
   <![endif]-->
   <%= csrf_meta_tags %>
 </head>
@@ -45,7 +45,7 @@
 <script>var locale = '<%= system_locale %>';</script>
 <%= javascript_include_tag 'application', "individual/jquery.validationEngine-#{iso639_locale}" %>
 <!--[if lt IE 9]>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.2.2/aight.d3.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.2.2/aight.d3.js"></script>
 <![endif]-->
 
 <%= yield %>
