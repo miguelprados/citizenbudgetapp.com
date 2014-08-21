@@ -30,6 +30,9 @@
   <%= stylesheet_link_tag 'print', media: 'print' %>
   <%= yield :head %>
   <%= javascript_include_tag 'individual/modernizr.min.js', 'https://www.google.com/jsapi' %>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.2.2/aight.min.js"></script>
+  <![endif]-->
   <%= csrf_meta_tags %>
 </head>
 <body id="body-<%= controller.controller_name %>-<%= controller.action_name %>">
@@ -40,8 +43,10 @@
 <script>window.jQuery || document.write("<%=j javascript_include_tag 'individual/jquery.min.js' %>")</script>
 <script>window.jQuery.ui || document.write("<%=j javascript_include_tag 'individual/jquery-ui.min.js' %>")</script>
 <script>var locale = '<%= system_locale %>';</script>
-<%= javascript_include_tag 'application' %>
-<%= javascript_include_tag "individual/jquery.validationEngine-#{iso639_locale}" %>
+<%= javascript_include_tag 'application', "individual/jquery.validationEngine-#{iso639_locale}" %>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/aight/1.2.2/aight.d3.min.js"></script>
+<![endif]-->
 
 <%= yield %>
 
