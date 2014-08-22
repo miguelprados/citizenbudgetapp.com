@@ -119,7 +119,7 @@ class Question
     %w(checkbox onoff).include?(widget) && default_value.to_f == 0
   end
 
-  # @return [Boolean] whether the widget option is selected
+  # @return [Boolean] whether the widget option is selected by default
   def selected?(option)
     widget == 'option' && default_value.to_f == option.to_f
   end
