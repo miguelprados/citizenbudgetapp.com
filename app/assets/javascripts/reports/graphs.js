@@ -27,7 +27,7 @@ var GRAPH_CONF = {
     top: 10,
     right: 30,
     bottom: 20,
-    left: 45
+    left: 50
   },
   max_bar_width: 100
 };
@@ -251,6 +251,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
       return "translate(" + x(d.x) + "," + y(y_prescale(d.y)) + ")";
     });
 
+  // Bars.
   bar.append("rect")
     .attr("class", bar_class)
     .attr("x", 1)
@@ -259,6 +260,10 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
       return GRAPH_CONF.height - y(y_prescale(d.y));
     });
 
+  // Numbers on top of bar.
+  // @note White grid lines will occasionally cross these, and we can't change
+  // the order in which they appear in the SVG to prevent this, because the
+  // white grid lines' parent is `container` but the numbers' parent is `bar`.
   bar.append("text")
     .attr("dy", ".75em")
     .attr("y", -10)
@@ -266,10 +271,19 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     .attr("text-anchor", "middle")
     .text(function (d) { return d3.format(",.0f")(d.y); });
 
+  // Y-axis.
   container.append("g")
     .attr("class", "y axis")
     .call(makeYAxis());
 
+  container.append("text")
+    .attr("dy", ".75em")
+    .attr("y", -50)
+    .attr("text-anchor", "end")
+    .attr("transform", "rotate(-90)")
+    .text(t('y_axis'));
+
+  // White grid lines.
   container.append("g")
     .attr("class", "grid")
     .call(makeYAxis()
@@ -277,7 +291,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
       .tickSize(-width, 0)
       .tickFormat(""));
 
-  // Draw the X axis _after_ the grid lines
+  // X-axis.
   container.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + GRAPH_CONF.height + ")")

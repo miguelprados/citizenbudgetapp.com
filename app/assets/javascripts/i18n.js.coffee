@@ -16,6 +16,7 @@ window.I18n =
     year: 'year'
     yes: 'Yes'
     no: 'No'
+    y_axis: 'Percentage of respondents'
   fr_CA:
     currency_delimiter: ' '
     currency_format: '{{number}} {{unit}}'
@@ -31,6 +32,7 @@ window.I18n =
     year: 'année'
     yes: 'Oui'
     no: 'Non'
+    y_axis: 'Pourcentage des répondants'
 
 window.t = (string, args = {}, dict = I18n) ->
   current_locale = args.locale or window.locale or 'en_US'
