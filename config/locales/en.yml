@@ -251,8 +251,8 @@ en:
     participation_rate: "%{percentage} participation"
     time_to_complete: Median time to complete
     responses_title: Responses per day
-    # Traffic to example.com (UA-XXXXXXXXX-X)
-    visits_title: "Traffic to %{name} (%{property})"
+    visits_title: "Web visits per day"
+    sources_title: "Web traffic sources"
     responses: Responses
     visitors: Visitors
     visits: Visits

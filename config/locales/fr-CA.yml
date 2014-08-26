@@ -219,7 +219,8 @@ fr-CA:
     participation_rate: "participation de %{percentage}"
     time_to_complete: Temps médian requis
     responses_title: Nombre de soumissions par jour
-    visits_title: "Fréquentation de %{name} (%{property})"
+    visits_title: "Visites par jour"
+    sources_title: "Sources de trafic web"
     responses: Soumissions
     visitors: Visiteurs
     visits: Visites
