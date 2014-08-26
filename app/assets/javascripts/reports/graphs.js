@@ -89,7 +89,7 @@ function sliderGraph(graph, details) {
     var bar_width = x(details.minimum_units + data[0].dx);
   }
 
-  var max_bin_value = d3.max(data, function(d) { return d.y; });
+  var max_bin_value = d3.max(data, function (d) { return d.y; });
   var max_bin_percentage = max_bin_value / number_of_responses;
   var median = d3.median(values);
 
@@ -181,7 +181,7 @@ function checkboxesGraph(graph, details) {
 
   var bar_width = x.rangeBand();
 
-  var max_data_value = d3.max(data, function(d) { return d.y; });
+  var max_data_value = d3.max(data, function (d) { return d.y; });
   var max_percentage = d3.max(d3.values(details.counts));
 
   var y_prescale = d3.scale.linear()
@@ -247,7 +247,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     .data(data)
     .enter().append("g")
     .attr("class", "bar")
-    .attr("transform", function(d) {
+    .attr("transform", function (d) {
       return "translate(" + x(d.x) + "," + y(y_prescale(d.y)) + ")";
     });
 
@@ -255,7 +255,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     .attr("class", bar_class)
     .attr("x", 1)
     .attr("width", bar_width - 1)
-    .attr("height", function(d) {
+    .attr("height", function (d) {
       return GRAPH_CONF.height - y(y_prescale(d.y));
     });
 
@@ -264,7 +264,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     .attr("y", -10)
     .attr("x", bar_width / 2)
     .attr("text-anchor", "middle")
-    .text(function(d) { return d3.format(",.0f")(d.y); });
+    .text(function (d) { return d3.format(",.0f")(d.y); });
 
   container.append("g")
     .attr("class", "y axis")
@@ -286,12 +286,11 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     .call(wrap, bar_width);
 
   var max_label_height = 0;
-  container.selectAll('g.x.axis g.tick text')
-    .each(function() {
-      if (this.getBBox().height > max_label_height) {
-        max_label_height = this.getBBox().height;
-      }
-    });
+  container.selectAll('g.x.axis g.tick text').each(function () {
+    if (this.getBBox().height > max_label_height) {
+      max_label_height = this.getBBox().height;
+    }
+  });
 
   var old_height = parseInt(svg.attr("height"));
   svg.attr("height", old_height + max_label_height);
@@ -310,7 +309,7 @@ function graphWidth(n_bars) {
 // from: http://bl.ocks.org/mbostock/7555321
 // Also replaces HTML tags (such as <br>) with space.
 function wrap(text, width) {
-  text.each(function() {
+  text.each(function () {
     var text = d3.select(this),
       words = text.text().replace(/<[^>]+>/g, " ").split(/\s+/).reverse(),
       word,
