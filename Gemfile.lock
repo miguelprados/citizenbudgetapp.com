@@ -215,6 +215,9 @@ GEM
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     ntlm-http (0.1.1)
+    odf-report (0.4.3)
+      nokogiri (>= 1.5.0, >= 0)
+      rubyzip (>= 0.9.4, >= 0)
     oj (2.5.4)
     origin (1.1.0)
     orm_adapter (0.5.0)
@@ -356,6 +359,7 @@ DEPENDENCIES
   multi_json
   mustache
   newrelic_rpm
+  odf-report
   oj
   pry-rails
   rails (= 3.2.19)

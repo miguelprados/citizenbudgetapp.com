@@ -76,6 +76,7 @@ gem 'jquery-rails'
 group :development do
   gem 'mechanize'
   gem 'pry-rails'
+  gem 'odf-report'
 end
 
 group :development, :test do
