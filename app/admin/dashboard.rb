@@ -227,7 +227,7 @@ ActiveAdmin.register_page 'Dashboard' do
           statistics.merge!({
             name:      Questionnaire.sanitize_domain(data.profileInfo['profileName']),
             property:  data.profileInfo['webPropertyId'],
-            visitors:  data.totalsForAllResults['ga:visitors'],
+            visitors:  data.totalsForAllResults['ga:users'],
             visits:    data.totalsForAllResults['ga:visits'],
             pageviews: data.totalsForAllResults['ga:pageviews'],
           })
