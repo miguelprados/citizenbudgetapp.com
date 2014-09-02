@@ -214,29 +214,34 @@ ActiveAdmin.register_page 'Dashboard' do
             'end-date'   => ends_on,
           }
 
+          # Statistics
+          data = q.google_api_authorization.reports(parameters.merge({
+            'metrics'    => 'ga:users,ga:sessions,ga:pageviews',
+          }))
+
+          statistics.merge!({
+            name:      Questionnaire.sanitize_domain(data.profileInfo['profileName']),
+            property:  data.profileInfo['webPropertyId'],
+            visitors:  data.totalsForAllResults['ga:users'],
+            visits:    data.totalsForAllResults['ga:sessions'],
+            pageviews: data.totalsForAllResults['ga:pageviews'],
+          })
+
           # Traffic per day.
           data = q.google_api_authorization.reports(parameters.merge({
             'dimensions' => 'ga:date',
-            'metrics'    => 'ga:visitors,ga:visits,ga:pageviews',
+            'metrics'    => 'ga:users,ga:sessions,ga:pageviews',
             'sort'       => 'ga:date',
           }))
           charts[:visits] = data.rows.map{|row|
             %([#{date_to_js(Date.parse(row[0]))}, #{row[1]}, #{row[2]}, #{row[3]}])
           }.join(',')
 
-          statistics.merge!({
-            name:      Questionnaire.sanitize_domain(data.profileInfo['profileName']),
-            property:  data.profileInfo['webPropertyId'],
-            visitors:  data.totalsForAllResults['ga:users'],
-            visits:    data.totalsForAllResults['ga:visits'],
-            pageviews: data.totalsForAllResults['ga:pageviews'],
-          })
-
           # Traffic sources.
           data = q.google_api_authorization.reports(parameters.merge({
             'dimensions' => 'ga:source',
-            'metrics'    => 'ga:visitors',
-            'sort'       => '-ga:visitors',
+            'metrics'    => 'ga:users',
+            'sort'       => '-ga:users',
           }))
           charts[:sources] = data.rows.map{|row|
             %(["#{row[0]}", #{row[1]}])
