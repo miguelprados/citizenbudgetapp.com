@@ -187,7 +187,7 @@ ActiveAdmin.register_page 'Dashboard' do
       statistics = {}
 
       # Make all graphs for a consultation have the same x-axis.
-      starts_on = q.starts_on - 3.days
+      starts_on = q.starts_on
       ends_on = [q.today, q.ends_on].min
 
       begin
