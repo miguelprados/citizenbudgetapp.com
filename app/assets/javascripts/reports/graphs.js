@@ -45,6 +45,7 @@ function addGraph(id) {
   } else if (details.choices !== undefined) {
     // slider or scaler
     sliderGraph(graph, details);
+    // maintainIncreaseDecreaseGraph(graph, details);
   } else {
     console && console.log && console.log('Unsupported graph: ' + id);
   }
@@ -53,8 +54,7 @@ function addGraph(id) {
 function sliderGraph(graph, details) {
   var values = details.choices;
 
-  var n_choices = ((details.maximum_units - details.minimum_units) /
-           details.step) + 1;
+  var n_choices = ((details.maximum_units - details.minimum_units) / details.step) + 1;
   var n_bars = Math.min(n_choices, GRAPH_CONF.max_n_bars);
   var width = graphWidth(n_bars);
 
@@ -140,6 +140,64 @@ function sliderGraph(graph, details) {
   }
 }
 
+function maintainIncreaseDecreaseGraph(graph, details) {
+  var labels = [t('Decrease'), t('Maintain'), t('Increase')];
+
+  var raw_counts = {};
+  raw_counts[t('Decrease')] = 0;
+  raw_counts[t('Maintain')] = 0;
+  raw_counts[t('Increase')] = 0;
+  for (var i = 0, l = details.choices.length; i < l; i++) {
+    var key;
+    if (details.choices[i] < 1) {
+      key = t('Decrease');
+    }
+    else if (details.choices[i] > 1) {
+      key = t('Increase');
+    }
+    else {
+      key = t('Maintain');
+    }
+    raw_counts[key] += 1;
+  }
+
+  var raw_counts = d3.map(raw_counts);
+  var data = [];
+  var max_percentage = 0;
+  for (var original_key in raw_counts) {
+    if (raw_counts.hasOwnProperty(original_key)) {
+      var key = original_key;
+      if (key.charCodeAt(0) == 0) {
+        key = key.substring(1);
+      }
+      data.push({x: key, y: raw_counts[original_key]});
+      if (raw_counts[original_key] > max_percentage) {
+        max_percentage = raw_counts[original_key] / details.n;
+      }
+    }
+  }
+
+  var width = graphWidth(data.length);
+
+  var x = d3.scale.ordinal()
+    .domain(labels)
+    .rangeBands([0, width]);
+
+  var bar_width = x.rangeBand();
+
+  var max_data_value = d3.max(data, function (d) { return d.y; });
+
+  var y_prescale = d3.scale.linear()
+    .domain([0, max_data_value])
+    .range([0, max_percentage]);
+
+  var y = d3.scale.linear()
+    .domain([0, max_percentage])
+    .range([GRAPH_CONF.height, 0]);
+
+  drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '');
+}
+
 function checkboxesGraph(graph, details) {
   var labels = [];
   var label_map = {};
@@ -192,8 +250,7 @@ function checkboxesGraph(graph, details) {
     .domain([0, max_percentage])
     .range([GRAPH_CONF.height, 0]);
 
-  var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-            "standard", '');
+  drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '');
 }
 
 function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
@@ -237,7 +294,6 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
         GRAPH_CONF.margin.right)
     .attr("height", GRAPH_CONF.height + GRAPH_CONF.margin.top +
         GRAPH_CONF.margin.bottom);
-  window.svg = svg;
 
   var container = svg.append("g")
     .attr("transform", "translate(" + GRAPH_CONF.margin.left + "," +

@@ -385,7 +385,8 @@ class Questionnaire
           :default_value => question.default_value,
           :widget        => question.widget,
           # How large were the modifications?
-          :mean_choice => choices.sum / number_of_responses.to_f,
+          :mean_choice   => choices.sum / number_of_responses.to_f,
+          :n             => number_of_responses,
         })
 
         if question.widget == 'option'
