@@ -52,7 +52,13 @@ private
   end
 
   def find_questionnaire
-    @questionnaire = Questionnaire.where(authorization_token: params[:token]).first if params[:token]
+    if params[:token]
+      @questionnaire = Questionnaire.where(authorization_token: params[:token]).first
+      if @questionnaire.current? && @questionnaire.domain? && request.host != @questionnaire.domain && params[:action] == 'new'
+        redirect_to root_url(host: @questionnaire.domain, port: nil)
+      end
+    end
+
     @questionnaire ||= Questionnaire.find_by_domain(request.host)
     @questionnaire ||= Questionnaire.find(params[:id]) if params[:id] # last in case :id is for a response
 
