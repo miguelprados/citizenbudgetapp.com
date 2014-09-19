@@ -148,9 +148,9 @@
                         = check_box_tag q.id, '1', @response.answer(q) == '1', 'class' => 'onoff', 'data-value' => q.unit_amount, 'data-initial' => q.default_value, 'data-no-label' => q.no_label, 'data-yes-label' => q.yes_label, 'data-revenue' => q.revenue?, 'data-actual' => @response.answer(q), 'disabled' => 'disabled'
                       - else
                         = check_box_tag q.id, '1', q.checked?, 'class' => 'onoff', 'data-value' => q.unit_amount, 'data-initial' => q.default_value, 'data-no-label' => q.no_label, 'data-yes-label' => q.yes_label, 'data-revenue' => q.revenue?
-                    %div(class="meta maximum#{' changed' if q.unchecked?}")
+                    %div(class="meta maximum maximum-amount#{' changed' if q.unchecked?}")
                       = currency q.maximum_amount
-                    %div(class="meta minimum#{' changed' if q.checked?}")
+                    %div(class="meta minimum minimum-amount#{' changed' if q.checked?}")
                       = currency q.minimum_amount
           - if @response.persisted? && @questionnaire.starts_at && @questionnaire.starts_at > Time.new(2014, 5, 15) # @todo Remove conditional
             %tr.graph-container
