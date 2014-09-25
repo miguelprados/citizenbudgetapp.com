@@ -21,8 +21,8 @@ fr-CA:
     other: Coordonnées
 
   assessment_unit:
-    month: $/mois
-    year: $/année
+    month: €/mois
+    year: €/année
 
   questionnaires:
     questionnaire:
@@ -36,7 +36,7 @@ fr-CA:
       assessment: Entrez l'évaluation foncière de votre propriété ou utilisez la valeur par défault
       default_assessment: "(%{number})"
       currency_unit_pre: ""
-      currency_unit_post: " $"
+      currency_unit_post: " €"
       required: requis
       submit: Envoyer
       submit_text: Si vous êtes satisfait de vos choix, cliquez sur « Envoyer ». Vous aurez accès aux résultats cumulatifs et pourrez laisser vos commentaires.
@@ -517,7 +517,7 @@ fr-CA:
       options: "Les participants pouvaient choisir une valeur allant de %d%{symbol} à %d%{symbol}, avec une valeur de départ de %d%{symbol}."
       unidirectional: "Pour ceux qui ont changé le budget de ce %{name}, le choix moyen était de %.1f%{symbol}, la médiane %.1f%{symbol} et le mode %s%{symbol}."
       bidirectional: "De ceux qui ont modifié cette %{name}, %d %%%% ont réduit le budget, avec un choix moyen de %.1f%{symbol}, une médiane de %d%{symbol} et un mode de %s%{symbol}; %d %%%% l’ont augmenté, avec un choix moyen de %d%{symbol}, une médiane de %d%{symbol} et un mode de %s%{symbol}."
-      impact: "%s de ces choix était de $%s."
+      impact: "%s de ces choix était de €%s."
       savings: "L'épargne moyenne"
       cost: "Le coût moyen"
       central_tendencies: "Le choix moyen de tous les participants était de %.1f%{symbol}, la médiane %d%{symbol} et le mode %s%{symbol}."
