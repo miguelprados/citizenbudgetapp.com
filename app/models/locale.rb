@@ -3,6 +3,7 @@ class Locale
   LOCALES = {
     'en' => 'English (United States)',
     'fr-CA' => 'Français (Canada)',
+    'fr-FR' => 'Français (France)',
     'nl' => 'Nederlands',
   }
 

@@ -17,6 +17,12 @@ class window.DeviationSimulator extends window.Simulator
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: """Votre budget est en déficit ({{number}}). Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>renoncez à des activités ou augmentez les revenus pour équilibrer le budget</b>."""
         large_deficit: 'Votre budget est déséquilibré de {{number}}. <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget</b>.'
+      fr_FR:
+        large_surplus: 'Votre budget est déséquilibré de {{number}}. <b>Ajoutez des activités ou reduisez les revenus pour équilibrer le budget</b>.'
+        surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités ou reduisez les revenus pour équilibrer le budget</b>."""
+        balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
+        deficit: """Votre budget est en déficit ({{number}}). Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>renoncez à des activités ou augmentez les revenus pour équilibrer le budget</b>."""
+        large_deficit: 'Votre budget est déséquilibré de {{number}}. <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget</b>.'
     else
       en_US:
         large_surplus: 'Your budget is off balance by {{number}}. <b>Add activities to balance the budget</b>.'
@@ -25,6 +31,12 @@ class window.DeviationSimulator extends window.Simulator
         deficit: """Your budget is in deficit ({{number}}). If you're finished, <a href="#identification">submit your choices</a>. Otherwise, <b>cut activities to balance the budget</b>."""
         large_deficit: 'Your budget is off balance by {{number}}. <b>Cut activities to balance the budget</b>.'
       fr_CA:
+        large_surplus: 'Votre budget est déséquilibré de {{number}}. <b>Ajoutez des activités pour équilibrer le budget</b>.'
+        surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités pour équilibrer le budget</b>."""
+        balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
+        deficit: """Votre budget est en déficit ({{number}}). Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>renoncez à des activités pour équilibrer le budget</b>."""
+        large_deficit: 'Votre budget est déséquilibré de {{number}}. <b>Renoncez à des activités pour équilibrer le budget</b>.'
+      fr_FR:
         large_surplus: 'Votre budget est déséquilibré de {{number}}. <b>Ajoutez des activités pour équilibrer le budget</b>.'
         surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités pour équilibrer le budget</b>."""
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""

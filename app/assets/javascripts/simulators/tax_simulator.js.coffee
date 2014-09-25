@@ -70,6 +70,11 @@ class window.TaxSimulator extends window.Simulator
       losses: 'Diminution :'
       savings: 'Diminution :'
       costs: 'Augmentation :'
+    fr_FR:
+      gains: 'Augmentation :'
+      losses: 'Diminution :'
+      savings: 'Diminution :'
+      costs: 'Augmentation :'
 
   messages: ->
     en_US:
@@ -77,6 +82,10 @@ class window.TaxSimulator extends window.Simulator
       balanced: 'Your budget is balanced.'
       deficit: 'You have increased your tax dollars by {{number}}/{{assessment_period}} or {{percentage}}. This could result in a service level enhancement.'
     fr_CA:
+      surplus: 'Vos impôts diminueraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Il peut en résulter une réduction du niveau de service.'
+      balanced: "Vous avez atteint l'équilibre."
+      deficit: 'Vos impôts augmenteraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Cette augmentation peut se traduire par un niveau de service amélioré.'
+    fr_FR:
       surplus: 'Vos impôts diminueraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Il peut en résulter une réduction du niveau de service.'
       balanced: "Vous avez atteint l'équilibre."
       deficit: 'Vos impôts augmenteraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Cette augmentation peut se traduire par un niveau de service amélioré.'

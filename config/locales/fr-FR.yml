@@ -1,0 +1,709 @@
+fr-CA:
+  # --- Public section ---------------------------------------------------------
+
+  left_quote: "« "
+  right_quote: " »"
+  colon: " :"
+  set: Réglez
+  facebook_width: 175
+  create_response: &response_notice Merci d'avoir participé à la consultation ! Votre opinion est importante pour nous.
+  thank_you_subject: &thank_you_subject "%{organization} : Merci d'avoir participé à notre consultation !"
+  offline_header: Ce site est hors-ligne.
+  offline_body: S'il vous plaît essayer de nouveau à une date ultérieure.
+
+  labels:
+    no_label: "NON"
+    yes_label: "OUI"
+
+  group:
+    simulator: Simulateur (défaut)
+    custom: Section sur mesure
+    other: Coordonnées
+
+  assessment_unit:
+    month: $/mois
+    year: $/année
+
+  questionnaires:
+    questionnaire:
+      your_choice: Votre choix
+
+  responses:
+    new:
+      instructions: &instructions Modifiez une activité pour commencer.
+      positive_balance_instructions: "Vous avez %{starting_balance} à depenser. Modifiez une activité pour commencer."
+      negative_balance_instructions: "Le budget est en déficit de %{starting_balance}. Modifiez une activité pour commencer."
+      assessment: Entrez l'évaluation foncière de votre propriété ou utilisez la valeur par défault
+      default_assessment: "(%{number})"
+      currency_unit_pre: ""
+      currency_unit_post: " $"
+      required: requis
+      submit: Envoyer
+      submit_text: Si vous êtes satisfait de vos choix, cliquez sur « Envoyer ». Vous aurez accès aux résultats cumulatifs et pourrez laisser vos commentaires.
+    show:
+      header:
+        default: "%{name} a soumis un budget !"
+        taxes: "%{name} a soumis un budget !"
+      share: &response_preamble Nous vous encourageons à partager et à discuter de vos choix budgétaires avec vos amis et votre famille.
+      share_link: "Copiez ce lien pour partager vos choix budgétaires :"
+      copy_hint: copier dans le presse papier
+      tweet: Tweeter
+      invitation: "Vous n'avez pas encore soumis vos propres choix budgétaires ? <b><a href=\"%{url}\">Cliquez ici pour participer.</a></b>"
+      comments: Commentaires
+    title:
+      read_more: &read_more En savoir plus
+      read_more_tip: Cliquez pour en savoir plus
+      view_media: En savoir plus
+      view_media_tip: Cliquez pour en savoir plus
+    nav:
+      sections: Sections
+      balance: Solde
+    modals:
+      close: Fermer
+    modal:
+      close: Fermer
+    footer:
+      attribution: &attribution Tenez votre propre consultation en ligne avec
+
+  # --- Both public and administrative sections --------------------------------
+
+  formtastic:
+    required: requis
+    placeholders:
+      # @todo Placeholders need to be customizable.
+      response:
+        email: nom@exemple.com
+        postal_code: H0H 0H0
+      questionnaire:
+        instructions: *instructions
+        read_more: *read_more
+        attribution: *attribution
+        thank_you_subject: *thank_you_subject
+        response_notice: *response_notice
+        response_preamble: *response_preamble
+    hints:
+      response:
+        email: Nous ne diffuserons pas votre adresse courriel ou tout autre donnée personnelle à une tierce personne.
+      organization:
+        name: e.g. "Ville de St-Endroit"
+      questionnaire:
+        starts_at: Utilisez l'heure UTC.
+        ends_at: Utilisez l'heure UTC.
+        domain: Vous devez pointer vos DNS sur nos serveurs.
+        mode: Dans le mode « Services », le participant ajoute, coupe ou modifie des services and activités. Dans le mode « Taxes », le participant fait des changements en points de pourcentage aux budgets des services et le simulateur l'informe de l'impact sur ses taxes.
+        tax_rate: Exprimez le taux sous forme de fraction décimale.
+        header_image: Cet image sera affiché à la gauche de l'en-tête.
+        introduction: "Vous pouvez utiliser la syntaxe Markdown. Utilisez {{number_of_participants}} pour le nombre de participants."
+        instructions: Ce texte doit tenir sur une ligne.
+        read_more: e.g. "Plus d'info".
+        content_before: Personnaliser la page affiché avant la date de début.
+        content_after: Personnaliser la page affiché après la date de fin.
+        description: Ce texte sera affiché dans les résultats des moteurs de recherche.
+        attribution: Ce texte sera affiché en bas de page avant un lien vers le produit.
+        thank_you_template: "Utilisez {{name}} pour le nom du participant et {{url}} pour le URL de sa page personnelle."
+        response_notice: Court message de remerciement affiché lors d'une soumission.
+        response_preamble: Vous pouvez utiliser la syntaxe Markdown.
+        response_body: Vous pouvez utiliser la syntaxe Markdown.
+        google_analytics: Si vous utilisez Google Analytics.
+        google_analytics_profile: Si vous utilisez Google Analytics.
+        twitter_screen_name: Si vous utilisez Twitter. Ne pas inclure l'arobase « @ ».
+        twitter_text: Le texte du Tweet pour partager la consultation.
+        twitter_share_text: Le texte du Tweet pour partager les responses d'un participant.
+        facebook_app_id: Le numéro d'identification (ID) de l'application Facebook associée à votre nom de domaine
+      section:
+        title: e.g. "Services municipaux"
+        group: La section Coordonnées ajoutera automatiquement les champs Courriel et Nom.
+        description: Vous pouvez utiliser la syntaxe Markdown.
+        extra: Ce texte apparaîtra dans une bulle quand l'utilisateur clique pour savoir plus. Vous pouvez utiliser la syntaxe Markdown.
+        embed: Ce contenu apparaîtra dans une fenêtre modale. Collez le code embed de Speaker Deck, etc.
+      question:
+        description: Vous pouvez utiliser la syntaxe Markdown.
+        extra: Ce texte apparaîtra dans une bulle quand l'utilisateur clique pour savoir plus. Vous pouvez utiliser la syntaxe Markdown.
+        unit_amount: Omettez le signe monétaire.
+        unit_name: Utilisez la forme plurielle en minuscule.
+        options_as_list: Mettez chaque option sur une nouvelle ligne.
+        labels_as_list: Mettez les étiquettes « NON » et « OUI » sur différentes lignes et dans cette ordre.
+        step: Généralement vous pouvez utiliser une tranche de 1.
+        default_value: Si le composant est une case à cocher, mettez 1 pour qu'elle soit cochée par défault ou 0 pour qu'elle ne le soit pas.
+        maxlength: La longueur maximale du champ en nombre de caractères.
+    labels:
+      question:
+        _destroy: Supprimer question
+    actions:
+      create: Enregistrer
+      update: Enregistrer
+      cancel: Annuler
+
+  # --- Administrative section -------------------------------------------------
+
+  new_questionnaire: Ajouter une consultation
+  new_section: Ajouter une section à votre consultation
+  new_question: Ajouter une  question à cette section
+  example_name: Monsieur Untel
+  unknown_format: Les données ne sont pas disponibles dans ce format.
+  # http://userguide.icu-project.org/formatparse/datetime
+  icu_date_format: d MMM
+  percentage_format: "### %"
+  language: Changer de langue
+  'yes': Oui
+  'no': Non
+  untitled: Sans titre
+  default: Défaut
+
+  breadcrumb:
+    admin: Admin
+    dashboard: Tableau de bord
+
+  legend:
+    basic: Paramètres de base
+    email: Message de remerciement
+    response: Page personnelle
+    mode: Mode
+    appearance: Apparence
+    integration: Logiciels tierce partie
+    question: Question
+    widget: Paramètres # Composant d'interface graphique
+    fiscal: Paramètres fiscaux
+    html: HTML
+
+  google_api:
+    authentication_error: Impossible de s'authentifier auprès de l'API Google.
+    code_exchange_error: Impossible d'obtenir un jeton d'accès de l'API Google.
+    no_authorization_code: Aucun code d'autorisation n'a été reçu de l'API Google.
+    no_state: Aucun paramètre d'état n'a été reçu de l'API Google.
+    not_authorized: L'accès à vos données Google Analytics n'est pas autorisé.
+    not_configured: Ce système n'est pas configuré pour Google Analytics. S'il vous plaît contactez votre administrateur.
+    access_revoked: S'il vous plaît réautorisez l'accès à vos données Google Analytics et réessayez.
+    api_error: Une erreur s'est produite lors d'un appel à l'API Google. S'il vous plaît essayez de nouveau.
+
+  authorize_google_api: Autoriser l'accès à Google Analytics # Autoriser l'accès à vos données Google Analytics
+  deauthorize_google_api: Interdire Google Analytics # Interdire l'accès à vos données Google Analytics
+  deauthorize_google_api_success: L'accès à vos données Google Analytics a été interdit.
+
+  link_google_analytics: Lier Google Analytics # Lier votre compte Google Analytics
+  link_google_analytics_success: "Le profil Google Analytics %{property} est maintenant associé à votre consultation."
+  link_google_analytics_failure: "Impossible de trouver un nom de domaine correspondant dans le compte Google Analytics de %{username}."
+
+  questionnaire:
+    period: "du %{starts_at} au %{ends_at}"
+    starting: "à partir du %{date}"
+    ending: "se terminant le %{date}"
+
+  mode:
+    services: Services
+    taxes: Taxes
+
+  assessment_period:
+    month: Par mois
+    year: Par année
+
+  role:
+    superuser: Utilisateur root
+    administrator: Administrateur
+
+  widget:
+    slider: Curseur
+    scaler: Échelle en pourcentage
+    onoff: interrupteur marche-arrêt
+    option: Boutons radio (budgétaire)
+    checkbox: Case à cocher
+    checkboxes: Cases à cocher
+    readonly: Lecture seule
+    radio: Boutons radio (non budgétaire)
+    select: Liste déroulante
+    static: Statique
+    text: Champ de saisie
+    textarea: Zone de saisie
+
+  statistics:
+    participation_rate: "participation de %{percentage}"
+    time_to_complete: Temps médian requis
+    responses_title: Nombre de soumissions par jour
+    visits_title: "Visites par jour"
+    sources_title: "Sources de trafic web"
+    responses: Soumissions
+    visitors: Visiteurs
+    visits: Visites
+    pageviews: Pages vues
+    other: Autres
+
+  admin:
+    dashboard:
+      summary:
+        header: Rapport sur la consultation budgétaire en ligne
+        period: "Pour la période du %{starts_on} au %{ends_on}"
+        by: "Preparé par %{author} pour : %{organization}"
+
+        summary: Tendances
+
+        detail:
+          header: Réponses détaillées
+          widget:
+            onoff:
+              revenue:
+                positive: des participants l'ont choisi, représentant un gain de <strong class="positive">%{maximum_amount}</strong>.
+                negative: des participants l'ont choisi, représentant une perte de <strong class="negative">%{minimum_amount}</strong>.
+              expense:
+                positive: des participants l'ont choisi pour faire une économie de <strong class="positive">%{minimum_amount}</strong>.
+                negative: des participants l'ont choisi au coût de <strong class="negative">%{maximum_amount}</strong>.
+            nonbudgetary: des participants ont répondu à cette question.
+          choice: Le choix moyen était de <strong>%{choice}</strong>.
+          choice_and_impact:
+            revenue:
+              positive: Le choix moyen était de <strong>%{choice}</strong>, représentant un gain de <strong class="positive">%{impact}</strong>.
+              negative: Le choix moyen était de <strong>%{choice}</strong>, représentant une perte de <strong class="negative">%{impact}</strong>.
+            expense:
+              positive: Le choix moyen était de <strong>%{choice}</strong>, représentant une économie de <strong class="positive">%{impact}</strong>.
+              negative: Le choix moyen était de <strong>%{choice}</strong>, représentant un coût de <strong class="negative">%{impact}</strong>.
+          bidirectional: "De ceux qui l'ont modifié, %{proportion_who_decrease} l'ont réduit avec un choix moyen de %{mean_decrease}; %{proportion_who_increase} l'ont augmenté avec un choix moyen de %{mean_increase}."
+
+        demography: Démographie, etc.
+        response_rates: Taux de réponses
+      future:
+        copy_hint: copier dans le presse papier
+        table:
+          starts_at: Date de début
+          url: Lien
+      current:
+        table:
+          days_elapsed_header: Jours écoulés
+          days_left_header: Jours restants
+          summary_report_header: Rapport
+          download_raw_header: Télécharger données brutes
+          view: Afficher
+          days:
+            one: "%{count} jour"
+            other: "%{count} jours"
+    admin_users:
+      form:
+        automatic: Automatique
+
+  unauthorized:
+    manage:
+      all: &unauthorized Vous n'êtes pas autorisé à effectuer cette action.
+
+  # https://github.com/plataformatec/responders/blob/master/lib/responders/locales/en.yml
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} créé(e).'
+        alert: "%{resource_name} n'a pas pu être créé(e). Voir les messages d'erreurs ci-dessous."
+      update:
+        notice: '%{resource_name} mis(e) à jour.'
+        alert: "%{resource_name} n'a pas pu être mis(e) à jour. Voir les messages d'erreurs ci-dessous."
+      destroy:
+        notice: '%{resource_name} supprimé(e).'
+        alert: "%{resource_name} n'a pas pu être supprimé(e)."
+
+  active_admin:
+    access_denied:
+      message: *unauthorized
+    scopes:
+      current: Actuelles
+      future: Futures
+      past: Passées
+
+  number:
+    currency:
+      format:
+        precision: 0
+        strip_insignificant_zeros: true
+    percentage:
+      format:
+        precision: 1
+        strip_insignificant_zeros: true
+    precision:
+      format:
+        delimiter: ' ' # non-breaking space
+        strip_insignificant_zeros: true
+  date:
+    formats:
+      short: "%e %B"
+  time:
+    formats:
+      short: "%e %b %Y"
+
+  errors:
+    messages:
+      ends_at_must_be_greater_than_starts_at: La date de fin doit être supérieure à la date de début
+      maximum_units_must_be_greater_than_minimum_units: Le nombre d'unités maximal doit être supérieur au nombre d'unités minimal
+      default_value_must_be_between_minimum_and_maximum: La valeur par défaut doit être entre le minimum et le maximum
+      default_value_must_be_an_option: La valeur par défaut doit être une option possible
+      options_and_labels_must_agree: Il doit avoir le même nombre d'options et d'étiquettes
+      domain_must_be_active: Le nom de domaine doit être actif
+      domain_must_not_be_blacklisted: Le nom de domaine est sur la liste noire
+      reply_to_must_be_valid: L'adresse de courriel de correspondance doit être valide
+      maximum_deviation_must_not_be_set_in_taxes_mode: L'écart maximal ne doit pas être défini en mode « Taxes »
+      maximum_deviation_and_tax_rate_must_not_both_be_set: L'écart maximal et le taux d'imposition foncière ne doivent pas être définis tous les deux
+      response_must_change_at_least_one_value: La réponse doit changer au moins une valeur
+      response_must_balance: La réponse doit être balancée
+
+  activerecord:
+    models: &models
+      dashboard: Tabeau de bord
+      admin_user:
+        one: Administrateur
+        other: Administrateurs
+      organization:
+        one: Organisation
+        other: Organisations
+      questionnaire:
+        one: Consultation
+        other: Consultations
+      section:
+        one: Section
+        other: Sections
+      question:
+        one: Question
+        other: Questions
+      response:
+        one: Réponse
+        other: Réponses
+    attributes: &attributes
+      admin_user:
+        email: Adresse de courriel
+        locale: Localisation
+        password: Mot de passe
+        password_confirmation: Confirmation du mot de passe
+      organization:
+        name: Nom
+        questionnaires: Consultations
+      questionnaire:
+        title: Titre
+        organization: Organisation
+        locale: Localisation
+        starts_at: Date de début
+        ends_at: Date de fin
+        time_zone: Fuseau horaire
+        domain: Nom de domaine
+        email_required: Les participants doivent fournir une adresse courriel
+        authorization_token: Lien privé
+
+        mode: Mode
+        starting_balance: Solde initial
+        maximum_deviation: Écart maximal
+        default_assessment: Évaluation foncière par défaut
+        tax_rate: Taux d'imposition foncière
+        tax_revenue: Impôts fonciers
+        change_required: Les participants doivent changer le budget
+
+        logo: Logo
+        remove_logo: Supprimer logo
+        title_image: Image d'en-tête
+        remove_title_image: Supprimer image d'en-tête
+        introduction: Texte de présentation
+        instructions: Instructions
+        read_more: 'Texte des liens « En savoir plus »'
+        description: Description
+        description_before: Avant la consultation
+        description_after: Après la consultation
+        attribution: Attribution
+        stylesheet: CSS personnalisé
+        javascript: JavaScript personnalisé
+
+        reply_to: Adresse de courriel de correspondance
+        thank_you_subject: Sujet du message
+        thank_you_template: Modèle de courriel de remerciement
+
+        response_notice: Message de remerciement
+        response_preamble: Texte avant les options de partage social
+        response_body: Texte avant les choix budgétaires
+
+        google_analytics: Code de suivi Google Analytics
+        google_analytics_profile: Identifiant de profil Google Analytics
+        twitter_screen_name: Nom d'écran Twitter
+        twitter_text: Texte du Tweet
+        twitter_share_text: Texte du Tweet
+        facebook_app_id: Facebook App ID
+        open_graph_title: Titre Open Graph
+        open_graph_description: Description Open Graph
+        sections: Sections
+      section:
+        title: Titre
+        description: Description
+        extra: Informations supplémentaires
+        embed: Code embed
+        questions: Questions
+      question:
+        title: Titre
+        description: Description
+        extra: Informations supplémentaires
+        options: Options
+        labels: Étiquettes
+        options_as_list: Liste d'options
+        labels_as_list: Liste d'étiquettes
+        minimum_units: Nombre d'unités minimal
+        maximum_units: Nombre d'unités maximal
+        step: Par tranche de
+        default_value: Valeur de départ
+        required: Requis
+        widget: Composant d'interface graphique
+        unit_amount: Montant unitaire
+        unit_name: Nom de l'unité
+        size: Taille du champ texte
+        maxlength: Taille maximale
+        placeholder: Espace réservé
+        rows: Rangées
+        cols: Colonnes
+        revenue: Revenu?
+      response:
+        id: Identifiant
+        ip: Adresse IP
+        assessment: L'évaluation foncière de votre propriété
+        created_at: Soumise
+        time_to_complete: Temps requis
+        comments: Honeypot anti-spam
+        email: Courriel
+        name: Nom
+
+  # --- In-depth report --------------------------------------------------------
+
+  report:
+    no_answer: Pas de réponse
+    timeline:
+      title: "Nombre de soumissions par jour, du %{start_date} au %{end_date}"
+    priorities:
+      title: Priorités budgétaires des participants
+      legend:
+        - Coupure
+        - Aucun changement
+        - Addition
+    single_distribution:
+      title: "Distribution des participants selon le %{factor}"
+      legend:
+        - Participants
+        - Population
+    double_distribution:
+      title: "Distribution des participants selon le %{a} et le %{b}"
+    number_of_changes:
+      title: "Nombre de %{name} changées"
+      text: "En moyenne, les participants ont changé le niveau de dépenses de %.1f activités ou services (median %d, mode %s)."
+    choices:
+      title: Options choisies par les participants
+    magnitude_of_changes:
+      title: Largeur moyenne des changements par activité
+      text:
+        default: "Les participants ont effectué %.1f changements en moyenne (median %d, mode %s)."
+        taxes: "Les participants ont effectué des changements de %.1f %%%% en moyenne (median %d %%%%, mode %s)."
+    balance:
+      title:
+        default: Changement dans l'équilibre budgétaire
+        taxes: Impact sur le contribuable
+      legend:
+        - Lower taxes
+        - No change
+        - Higher taxes
+      legend:
+        default:
+          - Déficit
+          - Aucun changement
+          - Surplus
+        taxes:
+          - Baisse
+          - Aucun changement
+          - Hausse
+      text:
+        default: "Les participants changeraient le solde de %.2f en moyenne (médiane %.2f, mode %s)."
+        taxes: "Les participants changeraient le taux de taxation de %.2f %%%% en moyenne (médiane %.2f %%%%, mode %s)."
+    average:
+      title: "%{metric} moyenne par %{factor}"
+    histogram:
+      title: "%{title} par %{factor}"
+    text:
+      symbol:
+        default: ""
+        taxes: " %%"
+      participation_rate: "%.1f %% des participants ont changé cette activité."
+      options: "Les participants pouvaient choisir une valeur allant de %d%{symbol} à %d%{symbol}, avec une valeur de départ de %d%{symbol}."
+      unidirectional: "Pour ceux qui ont changé le budget de ce %{name}, le choix moyen était de %.1f%{symbol}, la médiane %.1f%{symbol} et le mode %s%{symbol}."
+      bidirectional: "De ceux qui ont modifié cette %{name}, %d %%%% ont réduit le budget, avec un choix moyen de %.1f%{symbol}, une médiane de %d%{symbol} et un mode de %s%{symbol}; %d %%%% l’ont augmenté, avec un choix moyen de %d%{symbol}, une médiane de %d%{symbol} et un mode de %s%{symbol}."
+      impact: "%s de ces choix était de $%s."
+      savings: "L'épargne moyenne"
+      cost: "Le coût moyen"
+      central_tendencies: "Le choix moyen de tous les participants était de %.1f%{symbol}, la médiane %d%{symbol} et le mode %s%{symbol}."
+      confidence: "La valeur de départ de %d%{symbol} est hors de l'intervalle de confiance à 95 %%%%; donc, avec une confiance de 95 %%%%, la moyenne de la population est %s à la valeur de départ."
+      less: inférieure
+      greater: supérieure
+    table:
+      mean: Moyenne
+      median: Médiane
+      mode: Mode(s)
+      participation_rate: "% qui l'ont changé"
+      participants: "No. qui l'ont changé"
+      decrease: "% qui l'ont réduit"
+      decrease_count: "No. qui l'ont réduit"
+      increase: "% qui l'ont augmenté"
+      increase_count: "No. qui l'ont augmenté"
+      minimum_units: Valeur minimale
+      maximum_units: Valeur maximale
+
+  # --- Time zones -------------------------------------------------------------
+
+  time_zone:
+    "American Samoa": "Samoa américaines" # -11:00
+    #"International Date Line West": "" # -11:00
+    "Midway Island": "Îles Midway" # -11:00
+    "Hawaii": "Hawaï" # -10:00
+    "Alaska": "Alaska" # -09:00
+    "Pacific Time (US & Canada)": "Pacific Time (É.-U. et Canada)" # -08:00
+    "Tijuana": "Tijuana" # -08:00
+    "Arizona": "Arizona" # -07:00
+    "Chihuahua": "Chihuahua" # -07:00
+    "Mazatlan": "Mazatlán" # -07:00
+    "Mountain Time (US & Canada)": "Mountain Time (É.-U. et Canada)" # -07:00
+    "Central America": "Amérique centrale" # -06:00
+    "Central Time (US & Canada)": "Central Time (É.-U. et Canada)" # -06:00
+    "Guadalajara": "Guadalajara" # -06:00
+    "Mexico City": "Mexico" # -06:00
+    "Monterrey": "Monterrey" # -06:00
+    "Saskatchewan": "Saskatchewan" # -06:00
+    "Bogota": "Bogotá" # -05:00
+    "Eastern Time (US & Canada)": "Heure de l'Est (É.-U. et Canada)" # -05:00
+    "Indiana (East)": "Indiana (est)" # -05:00
+    "Lima": "Lima" # -05:00
+    "Quito": "Quito" # -05:00
+    "Caracas": "Caracas" # -04:30
+    "Atlantic Time (Canada)": "Atlantic Time (Canada)" # -04:00
+    "Georgetown": "Georgetown" # -04:00
+    "La Paz": "La Paz" # -04:00
+    "Santiago": "Santiago" # -04:00
+    "Newfoundland": "Terre-Neuve" # -03:30
+    "Brasilia": "Brasilia" # -03:00
+    "Buenos Aires": "Buenos Aires" # -03:00
+    "Greenland": "Groenland" # -03:00
+    #"Mid-Atlantic": "" # -02:00
+    "Azores": "Açores" # -01:00
+    "Cape Verde Is.": "Cap-Vert" # -01:00
+    "Casablanca": "Casablanca" # +00:00
+    "Dublin": "Dublin" # +00:00
+    "Edinburgh": "Édimbourg" # +00:00
+    "Lisbon": "Lisbonne" # +00:00
+    "London": "Londres" # +00:00
+    "Monrovia": "Monrovia" # +00:00
+    "UTC": "UTC" # +00:00
+    "Amsterdam": "Amsterdam" # +01:00
+    "Belgrade": "Belgrade" # +01:00
+    "Berlin": "Berlin" # +01:00
+    "Bern": "Berne" # +01:00
+    "Bratislava": "Bratislava" # +01:00
+    "Brussels": "Bruxelles" # +01:00
+    "Budapest": "Budapest" # +01:00
+    "Copenhagen": "Copenhague" # +01:00
+    "Ljubljana": "Ljubljana" # +01:00
+    "Madrid": "Madrid" # +01:00
+    "Paris": "Paris" # +01:00
+    "Prague": "Prague" # +01:00
+    "Rome": "Rome" # +01:00
+    "Sarajevo": "Sarajevo" # +01:00
+    "Skopje": "Skopje" # +01:00
+    "Stockholm": "Stockholm" # +01:00
+    "Vienna": "Vienne" # +01:00
+    "Warsaw": "Varsovie" # +01:00
+    "West Central Africa": "Heure d'Afrique occidentale" # +01:00
+    "Zagreb": "Zagreb" # +01:00
+    "Athens": "Athènes" # +02:00
+    "Bucharest": "Bucarest" # +02:00
+    "Cairo": "Caire" # +02:00
+    "Harare": "Harare" # +02:00
+    "Helsinki": "Helsinki" # +02:00
+    "Istanbul": "Istanbul" # +02:00
+    "Jerusalem": "Jérusalem" # +02:00
+    "Kyiv": "Kiev" # +02:00
+    "Pretoria": "Pretoria" # +02:00
+    "Riga": "Riga" # +02:00
+    "Sofia": "Sofia" # +02:00
+    "Tallinn": "Tallinn" # +02:00
+    "Vilnius": "Vilnius" # +02:00
+    "Baghdad": "Bagdad" # +03:00
+    "Kuwait": "Koweït" # +03:00
+    "Minsk": "Minsk" # +03:00
+    "Nairobi": "Nairobi" # +03:00
+    "Riyadh": "Riyad" # +03:00
+    "Tehran": "Téhéran" # +03:30
+    "Abu Dhabi": "Abou Dabi" # +04:00
+    "Baku": "Bakou" # +04:00
+    "Moscow": "Moscou" # +04:00
+    "Muscat": "Mascate" # +04:00
+    "St. Petersburg": "Saint-Pétersbourg" # +04:00
+    "Tbilisi": "Tbilissi" # +04:00
+    "Volgograd": "Volgograd" # +04:00
+    "Yerevan": "Erevan" # +04:00
+    "Kabul": "Kaboul" # +04:30
+    "Islamabad": "Islamabad" # +05:00
+    "Karachi": "Karachi" # +05:00
+    "Tashkent": "Tachkent" # +05:00
+    "Chennai": "Chennai" # +05:30
+    "Kolkata": "Calcutta" # +05:30
+    "Mumbai": "Bombay" # +05:30
+    "New Delhi": "New Delhi" # +05:30
+    "Sri Jayawardenepura": "Sri Jayawardenapura" # +05:30
+    "Kathmandu": "Katmandou" # +05:45
+    "Almaty": "Almaty" # +06:00
+    "Astana": "Astana" # +06:00
+    "Dhaka": "Dacca" # +06:00
+    "Ekaterinburg": "Iekaterinbourg" # +06:00
+    "Rangoon": "Rangoun" # +06:30
+    "Bangkok": "Bangkok" # +07:00
+    "Hanoi": "Hanoï" # +07:00
+    "Jakarta": "Jakarta" # +07:00
+    "Novosibirsk": "Novossibirsk" # +07:00
+    "Beijing": "Pékin" # +08:00
+    "Chongqing": "Chongqing" # +08:00
+    "Hong Kong": "Hong Kong" # +08:00
+    "Krasnoyarsk": "Krasnoïarsk" # +08:00
+    "Kuala Lumpur": "Kuala Lumpur" # +08:00
+    "Perth": "Perth" # +08:00
+    "Singapore": "Singapour" # +08:00
+    "Taipei": "Taipei" # +08:00
+    "Ulaan Bataar": "Oulan-Bator" # +08:00
+    "Urumqi": "Ürümqi" # +08:00
+    "Irkutsk": "Irkoutsk" # +09:00
+    "Osaka": "Osaka" # +09:00
+    "Sapporo": "Sapporo" # +09:00
+    "Seoul": "Séoul" # +09:00
+    "Tokyo": "Tokyo" # +09:00
+    "Adelaide": "Adélaïde" # +09:30
+    "Darwin": "Darwin" # +09:30
+    "Brisbane": "Brisbane" # +10:00
+    "Canberra": "Canberra" # +10:00
+    "Guam": "Guam" # +10:00
+    "Hobart": "Hobart" # +10:00
+    "Melbourne": "Melbourne" # +10:00
+    "Port Moresby": "Port Moresby" # +10:00
+    "Sydney": "Sydney" # +10:00
+    "Yakutsk": "Iakoutsk" # +10:00
+    "New Caledonia": "Nouvelle-Calédonie" # +11:00
+    "Vladivostok": "Vladivostok" # +11:00
+    "Auckland": "Auckland" # +12:00
+    "Fiji": "Fidji" # +12:00
+    "Kamchatka": "Kamtchatka" # +12:00
+    "Magadan": "Magadan" # +12:00
+    "Marshall Is.": "Îles Marshall" # +12:00
+    "Solomon Is.": "Îles Salomon" # +12:00
+    "Wellington": "Wellington" # +12:00
+    "Nuku'alofa": "Nuku'alofa" # +13:00
+    "Samoa": "Samoa" # +13:00
+    "Tokelau Is.": "Tokelau" # +14:00
+
+  # --- Application branding ---------------------------------------------------
+
+  site_title: Budget Citoyen
+
+  app:
+    host: app.budgetcitoyen.com
+    domain: budgetcitoyen.com
+    product_name: Budget Citoyen
+    product_url: http://www.budgetcitoyen.com/
+    author_name: Nord Ouvert
+    author_url: http://nordouvert.ca/
+
+  layouts:
+    application:
+      facebook_admins: "100002666906486"
+      google_analytics: UA-21866813-7
+
+  # --- MAKE NO CHANGES PAST THIS POINT ----------------------------------------
+
+  mongoid:
+    models: *models
+    attributes: *attributes

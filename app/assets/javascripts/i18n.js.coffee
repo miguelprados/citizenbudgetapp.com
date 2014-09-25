@@ -33,6 +33,22 @@ window.I18n =
     yes: 'Oui'
     no: 'Non'
     y_axis: 'Pourcentage des répondants'
+  fr_FR:
+    currency_delimiter: ' '
+    currency_format: '{{number}} {{unit}}'
+    currency_separator: ','
+    currency_unit: '€'
+    percentage_format: '{{number}} {{symbol}}'
+    percentage_symbol: '%'
+    assessment_unit: '{{number}}/{{assessment_period}}'
+    instructions: 'Modifiez une activité pour commencer'
+    copy_hint: 'copier dans le presse papier'
+    copied_hint: 'copié!'
+    month: 'mois'
+    year: 'année'
+    yes: 'Oui'
+    no: 'Non'
+    y_axis: 'Pourcentage des répondants'
 
 window.t = (string, args = {}, dict = I18n) ->
   current_locale = args.locale or window.locale or 'en_US'

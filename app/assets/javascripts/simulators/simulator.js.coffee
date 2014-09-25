@@ -122,6 +122,11 @@ class window.Simulator
       losses: 'Pertes :'
       savings: 'Épargnes :'
       costs: 'Coûts :'
+    fr_FR:
+      gains: 'Gains :'
+      losses: 'Pertes :'
+      savings: 'Épargnes :'
+      costs: 'Coûts :'
 
   messages: ->
     if @scope.find('[data-revenue]').length
@@ -133,12 +138,20 @@ class window.Simulator
         surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités ou reduisez les revenus pour équilibrer le budget</b>."""
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget.</b>'
+      fr_FR:
+        surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités ou reduisez les revenus pour équilibrer le budget</b>."""
+        balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
+        deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget.</b>'
     else
       en_US:
         surplus: """Your budget has a surplus of {{number}}. If you're finished, <a href="#identification">submit your choices</a>. Otherwise, <b>add activities to balance the budget</b>."""
         balanced: """<b>Your budget is balanced!</b> If you're finished, <a href="#identification">submit your choices</a>."""
         deficit: 'Your budget is in deficit ({{number}}). <b>Cut activities to balance the budget.</b>'
       fr_CA:
+        surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités pour équilibrer le budget</b>."""
+        balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
+        deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités pour équilibrer le budget.</b>'
+      fr_FR:
         surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités pour équilibrer le budget</b>."""
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités pour équilibrer le budget.</b>'
