@@ -1,7 +1,7 @@
 # devise-i18n has a "fr.yml" file, but not an "fr-CA.yml" file.
 # https://github.com/tigrish/devise-i18n/blob/master/locales/fr.yml
 
-fr-CA:
+fr-FR:
   devise:
     confirmations:
       confirmed: Votre compte a été confirmé avec succès. Vous êtes désormais connecté(e).

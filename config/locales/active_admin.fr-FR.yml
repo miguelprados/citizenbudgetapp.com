@@ -1,7 +1,7 @@
 # activeadmin has a "fr.yml" file, but not an "fr-CA.yml" file.
 # https://github.com/gregbell/active_admin/blob/master/lib/active_admin/locales/fr.yml
 
-fr-CA:
+fr-FR:
   active_admin:
     dashboard: "Tableau de bord"
     dashboard_welcome:
