@@ -480,7 +480,7 @@ private
     if reply_to?
       begin
         address = Mail::Address.new(Mail::Address.new(reply_to).address)
-        unless (address.domain && address.__send__(:tree).domain.dot_atom_text.elements.size > 1 rescue false)
+        unless address.domain && address.domain.split('.').size > 1
           errors.add(:reply_to, I18n.t('errors.messages.reply_to_must_be_valid'))
         end
       rescue Mail::Field::ParseError

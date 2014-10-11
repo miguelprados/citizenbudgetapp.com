@@ -3,7 +3,7 @@ class EmailValidator < ActiveModel::EachValidator
   # Domain must be present and have two or more parts.
   def validate_each(record, attribute, value)
     address = Mail::Address.new value
-    unless (address.address == value && address.domain && address.__send__(:tree).domain.dot_atom_text.elements.size > 1 rescue false)
+    unless address.address == value && address.domain && address.domain.split('.').size > 1
       record.errors[attribute] << (options[:message] || 'is invalid')
     end
   end
