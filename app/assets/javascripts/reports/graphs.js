@@ -149,10 +149,10 @@ function maintainIncreaseDecreaseGraph(graph, details) {
   raw_counts[t('Increase')] = 0;
   for (var i = 0, l = details.choices.length; i < l; i++) {
     var key;
-    if (details.choices[i] < 1) {
+    if (details.choices[i] < details.default_value) {
       key = t('Decrease');
     }
-    else if (details.choices[i] > 1) {
+    else if (details.choices[i] > details.default_value) {
       key = t('Increase');
     }
     else {
