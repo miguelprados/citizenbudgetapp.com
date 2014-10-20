@@ -409,7 +409,10 @@ class Questionnaire
         changes = responses.where(:"answers.#{question.id}".ne => nil)
         number_of_changes = changes.count
 
-        details[:counts] = Hash.new(0)
+        details[:counts] = {}
+        question.options.each do |option|
+          details[:counts][option] = 0
+        end
         changes.each do |response|
           answer = response.answer(question)
           if question.multiple?

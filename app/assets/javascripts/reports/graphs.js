@@ -198,7 +198,7 @@ function maintainIncreaseDecreaseGraph(graph, details) {
   drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '');
 }
 
-function checkboxesGraph(graph, details) {
+function checkboxesGraph(graph, details) { // or radio buttons
   var labels = [];
   var label_map = {};
   if (details.options !== undefined && details.labels !== undefined) { // radio buttons
