@@ -21,6 +21,11 @@ class window.ImpactSimulator extends window.Simulator
         balanced: "Vous avez atteint l'équilibre."
         deficit: 'Vos choix ont augmenté le total des impôts fonciers requis pour équilibrer le budget de {{number}} ou {{percentage}}.'
 
+    $('#assessment input').bind 'keydown keypress keyup', (event) ->
+      if event.keyCode == 13
+        event.preventDefault()
+        $(this).blur()
+
   # Display the default message in the navigation only.
   messageSelector: ->
     '#message'
