@@ -271,22 +271,10 @@ en:
         detail:
           header: Responses for each question
           widget:
-            onoff:
-              revenue:
-                positive: chose it for a gain of <strong class="positive">%{maximum_amount}</strong>.
-                negative: chose it at a loss of <strong class="negative">%{minimum_amount}</strong>.
-              expense:
-                positive: chose it for a savings of <strong class="positive">%{minimum_amount}</strong>.
-                negative: chose it at a cost of <strong class="negative">%{maximum_amount}</strong>.
+            onoff: chose it.
             nonbudgetary: answered this question.
           choice: The average choice was <strong>%{choice}</strong>.
-          choice_and_impact:
-            revenue:
-              positive: The average choice was <strong>%{choice}</strong>, a gain of <strong class="positive">%{impact}</strong>.
-              negative: The average choice was <strong>%{choice}</strong>, a loss of <strong class="negative">%{impact}</strong>.
-            expense:
-              positive: The average choice was <strong>%{choice}</strong>, a savings of <strong class="positive">%{impact}</strong>.
-              negative: The average choice was <strong>%{choice}</strong>, a cost of <strong class="negative">%{impact}</strong>.
+          choice_and_impact: The average choice was <strong>%{choice}</strong>.
           bidirectional: "Of those who modified it, %{proportion_who_decrease} decreased it with an average choice of %{mean_decrease}, and %{proportion_who_increase} increased it with an average choice of %{mean_increase}."
 
         demography: Demography, etc.
