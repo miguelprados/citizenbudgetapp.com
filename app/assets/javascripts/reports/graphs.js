@@ -120,7 +120,7 @@ function sliderGraph(graph, details) {
   }
 
   var svg = drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-            bar_class, x_format);
+            bar_class, x_format, details);
 
   svg.append("text")
     .attr("x", width / 2)
@@ -195,7 +195,7 @@ function maintainIncreaseDecreaseGraph(graph, details) {
     .domain([0, max_percentage])
     .range([GRAPH_CONF.height, 0]);
 
-  drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '');
+  drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '', details);
 }
 
 function checkboxesGraph(graph, details) { // or radio buttons
@@ -250,11 +250,11 @@ function checkboxesGraph(graph, details) { // or radio buttons
     .domain([0, max_percentage])
     .range([GRAPH_CONF.height, 0]);
 
-  drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '');
+  drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '', details);
 }
 
 function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
-           bar_class, x_format) {
+           bar_class, x_format, details) {
   // Actually draws the graph and returns its svg container.
   // graph: d3.select-ed container in which to put the graph.
   // data: data to graph
@@ -274,7 +274,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     xAxis = xAxis.tickFormat(d3.format(".0%"));
   } else if (x_format === 'yesno') {
     xAxis = xAxis.tickFormat(function (d) {
-      return (d === 0) ? t('no') : t('yes');
+      return details.labels[d];
     });
   } else if (x.domain().every(function (n) {return $.isNumeric(n);})) {
     xAxis = xAxis.tickFormat(function (x) {

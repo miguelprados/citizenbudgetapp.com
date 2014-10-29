@@ -389,6 +389,14 @@ class Questionnaire
           :n             => number_of_responses,
         })
 
+        if question.widget == 'onoff'
+          details[:labels] = if question.checked?
+            [question.yes_label, question.no_label]
+          else
+            [question.no_label, question.yes_label]
+          end
+        end
+
         if question.widget == 'option'
           details[:counts] = Hash.new(0)
           changes.each do |response|

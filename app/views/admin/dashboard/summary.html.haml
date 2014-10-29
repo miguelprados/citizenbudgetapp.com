@@ -50,7 +50,7 @@
 - i = 0
 - @questionnaire.sections.simulator.each do |section|
   - if section.questions.any?{|q| q.budgetary? || q.options?}
-    %h4= section.title
+    %h4= section.title.html_safe
 
     - section.questions.each do |q|
       - if q.budgetary?
@@ -59,7 +59,7 @@
         %div(class="question #{@details[q.id.to_s][:percentage_of_population] >= 0.55 ? 'stress' : 'subdue'}")
           %h5
             %span= i += 1
-            = q.title
+            = q.title.html_safe
           %p
             - if q.widget == 'scaler'
               =t('.detail.choice', choice: number_to_percentage(@details[q.id.to_s][:mean_choice] * 100)).html_safe
@@ -82,7 +82,7 @@
         %div.question.stress
           %h5
             %span= i += 1
-            = q.title
+            = q.title.html_safe
           - if q.description?
             %p
               %i
@@ -94,6 +94,9 @@
             =t '.detail.widget.nonbudgetary'
       - unless q.widget == 'textarea'
         .graph{:id => "graph_#{q.id}"}
+
+:javascript
+  var locale = '#{system_locale}';
 
 -# Google Charts adds null values for missing dates in the time series.
 -# https://developers.google.com/chart/interactive/docs/gallery/linechart
