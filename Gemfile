@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '1.9.3'
-gem 'rails', '3.2.19'
+gem 'rails', '3.2.20'
 gem 'rails-i18n'
 
 group :production do
