@@ -274,7 +274,12 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     xAxis = xAxis.tickFormat(d3.format(".0%"));
   } else if (x_format === 'yesno') {
     xAxis = xAxis.tickFormat(function (d) {
-      return details.labels[d];
+      if (details.labels) {
+        return details.labels[d];
+      }
+      else {
+        return (d === 0) ? t('no') : t('yes');
+      }
     });
   } else if (x.domain().every(function (n) {return $.isNumeric(n);})) {
     xAxis = xAxis.tickFormat(function (x) {
