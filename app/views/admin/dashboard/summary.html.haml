@@ -48,7 +48,7 @@
 %h3=t '.detail.header'
 
 - i = 0
-- @questionnaire.sections.simulator.each do |section|
+- @questionnaire.sections.each do |section|
   - if section.questions.any?{|q| q.budgetary? || q.options?}
     %h4= section.title.html_safe
 

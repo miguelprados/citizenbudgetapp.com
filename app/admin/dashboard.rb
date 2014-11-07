@@ -24,7 +24,7 @@ ActiveAdmin.register_page 'Dashboard' do
 
     # Collections
     @responses = @questionnaire.responses
-    @questions = @questionnaire.sections.simulator.map(&:questions).flatten
+    @questions = @questionnaire.sections.map(&:questions).flatten
     @number_of_responses = @responses.count
 
     @details = {}

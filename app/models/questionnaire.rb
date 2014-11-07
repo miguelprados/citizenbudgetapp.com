@@ -361,7 +361,7 @@ class Questionnaire
     number_of_responses = responses.count
 
     all_details = {}
-    sections.simulator.map(&:questions).flatten.each do |question|
+    sections.map(&:questions).flatten.each do |question|
       details = {}
       if question.budgetary?
         changes = responses.where(:"answers.#{question.id}".ne => question.default_value)
