@@ -428,7 +428,9 @@ class Questionnaire
               details[:counts][a] += 1
             end
           else
-            details[:counts][answer] += 1
+            if details[:counts].key?(answer) || answer.present?
+              details[:counts][answer] += 1
+            end
           end
         end
 
