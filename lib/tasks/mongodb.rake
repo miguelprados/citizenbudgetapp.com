@@ -23,8 +23,8 @@ END
   task pull: :environment do
     if Rails.env.development?
       uri = URI.parse `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp
-      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -o dump-dir`.chomp
-      puts `rm -f dump-dir#{uri.path}/system.*`.chomp # MongoLab adds system collections, which we don't need.
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c questionnaires -o dump-dir`.chomp
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c responses -o dump-dir`.chomp
       puts `mongorestore -h localhost -d citizen_budget_development --drop dump-dir#{uri.path}`.chomp
     else
       puts 'rake mongodb:pull can only be run in development'
@@ -35,8 +35,8 @@ END
   task download: :environment do
     if Rails.env.development?
       uri = URI.parse `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp
-      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -o dump-dir`.chomp
-      puts `rm -f dump-dir#{uri.path}/system.*`.chomp # MongoLab adds system collections, which we don't need.
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c questionnaires -o dump-dir`.chomp
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c responses -o dump-dir`.chomp
     else
       puts 'rake mongodb:download can only be run in development'
     end

@@ -33,7 +33,7 @@ class Response
   # @param [Question] question a question
   # @return the answer to the question
   def answer(question)
-    answers[question.id.to_s] || question.default_value
+    answers[question.id.to_s] || ['checkbox', 'onoff', 'option', 'slider', 'scaler'].include?(question.widget) && question.default_value
   end
 
   # @param [Question] question a question
