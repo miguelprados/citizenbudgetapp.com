@@ -317,7 +317,11 @@ class Questionnaire
     end
     sections.each do |section|
       section.questions.each do |question|
-        row << question.default_value || I18n.t(:default)
+        if ['checkbox', 'onoff', 'option', 'slider', 'scaler'].include?(question.widget)
+          row << question.default_value || I18n.t(:default)
+        else
+          row << I18n.t(:default)
+        end
       end
     end
     rows << row
