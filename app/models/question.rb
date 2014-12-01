@@ -185,7 +185,7 @@ private
     if %w(scaler slider).include?(widget) && options.present?
       @minimum_units = options.first.to_f
       @maximum_units = options.last.to_f
-      @step = (options[1] - options[0]).round(3)
+      @step = (options[1] - options[0]).round(4)
     elsif widget == 'onoff'
       @minimum_units = 0
       @maximum_units = 1
