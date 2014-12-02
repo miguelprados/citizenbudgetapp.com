@@ -101,12 +101,13 @@ function sliderGraph(graph, details) {
     .domain([0, max_bin_percentage])
     .range([GRAPH_CONF.height, 0]);
 
-  var default_value = parseInt(details.default_value);
+  var default_value = parseFloat(details.default_value);
   function bar_class(d) {
-    if (default_value >= d.x && default_value < d.x + d.dx) {
+    var maximum = parseFloat((d.x + d.dx).toFixed(10));
+    if (default_value >= d.x && default_value < maximum) {
       return "default";
     }
-    if (median >= d.x && median < d.x + d.dx) {
+    if (median >= d.x && median < maximum) {
       return "median";
     }
     return "standard";
@@ -283,7 +284,7 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
     });
   } else if (x.domain().every(function (n) {return $.isNumeric(n);})) {
     xAxis = xAxis.tickFormat(function (x) {
-      return d3.format(".3s")(x).replace(/\.([0-9]*[1-9])?0+(\D)?$/, '.$1$2').replace(/\.(\D)?$/, '$1');
+      return d3.format(".3f")(x).replace(/\.([0-9]*[1-9])?0+(\D)?$/, '.$1$2').replace(/\.(\D)?$/, '$1');
     });
   }
 
