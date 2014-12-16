@@ -71,6 +71,9 @@ window.fbAsyncInit = function() {
   js.src = "//connect.facebook.net/<%= system_locale %>/all.js";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+</script>
+<!--[if gt IE 8]><!-->
+<script>
 window.twttr = (function (d,s,id) {
   var t, js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
@@ -78,6 +81,7 @@ window.twttr = (function (d,s,id) {
   return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
 }(document, "script", "twitter-wjs"));
 </script>
+<!--<![endif]-->
 
 <% if Rails.env.production? && google_analytics_tracking_code %>
 <script>
