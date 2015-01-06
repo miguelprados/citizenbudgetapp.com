@@ -53,7 +53,7 @@ ActiveAdmin.register Questionnaire do
   member_action :sort, method: :post do
     authorize! :update, resource
     resource.sections.each do |s|
-      s.update_attribute :position, params[:section].index(s.id.to_s)
+      s.set :position, params[:section].index(s.id.to_s)
     end
     render nothing: true, status: 204
   end

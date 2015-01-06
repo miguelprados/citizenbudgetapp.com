@@ -116,7 +116,7 @@ ActiveAdmin.register Section do
 
   member_action :sort, method: :post do
     resource.questions.each do |q|
-      q.update_attribute :position, params[:question].index(q.id.to_s)
+      q.set :position, params[:question].index(q.id.to_s)
     end
     render nothing: true, status: 204
   end
