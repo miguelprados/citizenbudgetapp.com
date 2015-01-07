@@ -30,12 +30,6 @@ module ResponsesHelper
     string.gsub '"', '&quot;'
   end
 
-  # @param [Section] section a questionnaire section
-  # @return [Integer] one column if the section has nonbudgetary questions only
-  def colspan(section)
-    section.nonbudgetary? && 1 || 2
-  end
-
   # @return [Boolean] whether there is a single section
   def simple_navigation?
     @simulator.one?

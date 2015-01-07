@@ -9,12 +9,12 @@
         %tr
           %th.category
             = render partial: 'title', locals: {object: section, placement: 'bottom'}
-          - unless section.nonbudgetary?
-            %th.column.highlight
+          %th.column.highlight
+            - unless section.nonbudgetary?
               =t '.your_choice'
       - if section.description?
         %tr
-          %td.description(colspan="#{colspan(section)}")
+          %td.description(colspan="2")
             :markdown
               #{section.description}
     %tbody
@@ -22,7 +22,7 @@
         - unless @response.persisted? && %w(text textarea).include?(q.widget)
           %tr(id="question-#{q.id}")
             - if q.readonly?
-              %td.description(colspan="#{colspan(section)}")
+              %td.description(colspan="2")
                 - if q.title?
                   .header
                     = render partial: 'title', locals: {object: q, placement: 'bottom'}
@@ -40,7 +40,7 @@
                 %div(class="widget widget-#{q.widget}")
                   .control.control-static(data-widget="#{q.widget}" data-value="#{q.unit_amount}")
             - elsif q.nonbudgetary?
-              %td.description(colspan="#{colspan(section)}")
+              %td.description(colspan="2")
                 .header
                   = render partial: 'title', locals: {object: q, placement: 'bottom'}
                 - if q.description?
@@ -73,7 +73,7 @@
                   - elsif q.widget == 'textarea'
                     = text_area_tag q.id, nil, html_attributes(q)
             - elsif q.widget == 'option'
-              %td.description(colspan="#{colspan(section)}")
+              %td.description(colspan="2")
                 .header
                   = render partial: 'title', locals: {object: q, placement: 'top'}
                 - if q.description?
