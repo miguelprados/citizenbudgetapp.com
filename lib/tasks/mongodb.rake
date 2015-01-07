@@ -23,6 +23,8 @@ END
   task pull: :environment do
     if Rails.env.development?
       uri = URI.parse `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c admin_users -o dump-dir`.chomp
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c organizations -o dump-dir`.chomp
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c questionnaires -o dump-dir`.chomp
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c responses -o dump-dir`.chomp
       puts `mongorestore -h localhost -d citizen_budget_development --drop dump-dir#{uri.path}`.chomp
@@ -35,6 +37,8 @@ END
   task download: :environment do
     if Rails.env.development?
       uri = URI.parse `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c admin_users -o dump-dir`.chomp
+      puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c organizations -o dump-dir`.chomp
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c questionnaires -o dump-dir`.chomp
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c responses -o dump-dir`.chomp
     else
