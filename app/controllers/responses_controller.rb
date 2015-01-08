@@ -54,7 +54,7 @@ private
   def find_questionnaire
     if params[:token]
       @questionnaire = Questionnaire.where(authorization_token: params[:token]).first
-      if @questionnaire && @questionnaire.current? && @questionnaire.domain? && request.host != @questionnaire.domain && params[:action] == 'new'
+      if @questionnaire && @questionnaire.current? && @questionnaire.domain? && ![@questionnaire.domain, ENV['ACTION_MAILER_HOST']].include?(request.host) && params[:action] == 'new'
         redirect_to root_url(host: @questionnaire.domain, port: nil)
       end
     end
