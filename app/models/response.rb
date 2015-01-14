@@ -34,7 +34,11 @@ class Response
   # @return the answer to the question
   def answer(question)
     if answers.key?(question.id.to_s)
-      answers[question.id.to_s]
+      if question.widget == 'checkboxes' && answers[question.id.to_s].nil?
+        []
+      else
+        answers[question.id.to_s]
+      end
     elsif ['checkbox', 'onoff', 'option', 'slider', 'scaler'].include?(question.widget)
       question.default_value
     end
