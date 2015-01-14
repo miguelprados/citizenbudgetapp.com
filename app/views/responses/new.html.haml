@@ -6,7 +6,7 @@
       #{Mustache.render(@questionnaire.introduction, number_of_participants: @questionnaire.responses.count)}
 
   = bootstrap_form_for @response, html: {class: 'form-horizontal'} do |f|
-    - unless @questionnaire.current?
+    - if !@questionnaire.current? || params[:token]
       = hidden_field_tag :token, @questionnaire.authorization_token
     %section#questionnaire
       - unless simple_navigation?
