@@ -211,7 +211,6 @@ h6 {
 h1,
 h2,
 legend {
-  font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: normal;
 }
 h1 {
@@ -226,10 +225,7 @@ h1 {
 /* Introduction --------------------------------------------------------------*/
 
 #introduction {
-  font-family: Georgia, "Times New Roman", Times, serif;
-
   p {
-    font-size: 1.08em;
     line-height: 1.5em;
     margin-bottom: 1em;
   }
@@ -252,7 +248,6 @@ th {
 }
 th.category {
   font-weight: normal;
-  font-family: Georgia, "Times New Roman", Times, serif;
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 1px;
