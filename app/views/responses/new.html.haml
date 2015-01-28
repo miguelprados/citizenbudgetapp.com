@@ -81,7 +81,7 @@
                         = option
                   - elsif q.widget == 'radio'
                     - q.options.each do |option|
-                      %label(class="#{q.options.size > 5 ? "radio" : "radio inline"}")
+                      %label(class="#{q.options.size > 4 ? "radio" : "radio inline"}")
                         = radio_button_tag q.id, option, q.default_value == option, html_attributes(q)
                         = option
                   - elsif q.widget == 'select'
