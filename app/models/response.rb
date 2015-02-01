@@ -22,7 +22,7 @@ class Response
   field :email, type: String
   field :name, type: String
 
-  validates_presence_of :questionnaire_id, :initialized_at, :answers, :ip
+  validates_presence_of :questionnaire_id, :initialized_at, :ip  # Answers can be blank if all radio buttons
   # We don't do more ambitious validation to avoid excluding valid responses.
 
   # @return [Float] the time to submit the response in seconds
