@@ -190,12 +190,12 @@ class Questionnaire
 
   # @return [Date] the consultation's start date in its time zone
   def starts_on
-    local_starts_at.to_date
+    starts_at && local_starts_at.to_date
   end
 
   # @return [Date] the consultation's end date in its time zone
   def ends_on
-    local_ends_at.to_date
+    ends_at && local_ends_at.to_date
   end
 
   # @return [Date] the current date in the consultation's time zone

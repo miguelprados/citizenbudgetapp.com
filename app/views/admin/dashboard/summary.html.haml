@@ -3,7 +3,8 @@
 
 %h1
   =t '.header'
-  %span=t '.period', starts_on: l(@starts_on, format: :short), ends_on: l(@ends_on, format: :long)
+  - if @starts_on && @ends_on
+    %span=t '.period', starts_on: l(@starts_on, format: :short), ends_on: l(@ends_on, format: :long)
 %p.attribution=t '.by', author: t('app.author_name'), organization: @questionnaire.organization.name
 
 .blocks.clearfix
@@ -20,7 +21,8 @@
     .title
       =t 'statistics.responses'
     .subtitle
-      =t 'statistics.participation_rate', percentage: number_to_percentage(@number_of_responses / @statistics[:visitors].to_f * 100)
+      - if @statistics[:visitors]
+        =t 'statistics.participation_rate', percentage: number_to_percentage(@number_of_responses / @statistics[:visitors].to_f * 100)
 
   .block.block-large
     .number
