@@ -25,9 +25,6 @@ class window.TaxSimulator extends window.Simulator
       # Reset to default value if custom value is invalid.
       $('#assessment input').val('') if self.customAssessment() <= 0
 
-      # Need to update all numbers to match the new assessment.
-      self.update()
-
       self.scope.find('input:first').each ->
         self.updateSection($(this))
 
@@ -50,6 +47,9 @@ class window.TaxSimulator extends window.Simulator
         $widget = $(this)
         content = t 'assessment_unit', number: self.tipSlider($widget, 1.0), assessment_period: t(self.options.assessment_period)
         $widget.html(content)
+
+      # Need to update all numbers to match the new assessment.
+      self.update()
 
   colorSetting: ->
     setting = super
