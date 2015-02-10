@@ -164,7 +164,6 @@ function maintainIncreaseDecreaseGraph(graph, details) {
 
   var raw_counts = d3.map(raw_counts);
   var data = [];
-  var max_percentage = 0;
   for (var original_key in raw_counts) {
     if (raw_counts.hasOwnProperty(original_key)) {
       var key = original_key;
@@ -172,9 +171,6 @@ function maintainIncreaseDecreaseGraph(graph, details) {
         key = key.substring(1);
       }
       data.push({x: key, y: raw_counts[original_key]});
-      if (raw_counts[original_key] > max_percentage) {
-        max_percentage = raw_counts[original_key] / details.n;
-      }
     }
   }
 
@@ -190,10 +186,10 @@ function maintainIncreaseDecreaseGraph(graph, details) {
 
   var y_prescale = d3.scale.linear()
     .domain([0, max_data_value])
-    .range([0, max_percentage]);
+    .range([0, max_data_value / details.n]);
 
   var y = d3.scale.linear()
-    .domain([0, max_percentage])
+    .domain([0, max_data_value / details.n])
     .range([GRAPH_CONF.height, 0]);
 
   drawGraph(graph, data, x, y, y_prescale, width, bar_width, 'standard', '', details);
