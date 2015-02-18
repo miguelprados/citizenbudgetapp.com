@@ -363,13 +363,14 @@ class Questionnaire
 
   def chart_data # @todo Significant duplication of dashboard.rb
     number_of_responses = responses.count
+    reponses = responses.to_a
 
     all_details = {}
     sections.map(&:questions).flatten.each do |question|
       details = {}
       if question.budgetary?
-        changes = responses.where(:"answers.#{question.id}".ne => question.default_value)
-        number_of_changes = changes.count
+        changes = responses.select{|r| r.answers[question.id.to_s] != question.default_value}
+        number_of_changes = changes.size
         number_of_nonchanges = number_of_responses - number_of_changes
 
         # Start with all the respondents who did not change the value.
@@ -418,8 +419,8 @@ class Questionnaire
         end
       # Multiple choice survey questions.
       elsif question.options?
-        changes = responses.where(:"answers.#{question.id}".ne => nil)
-        number_of_changes = changes.count
+        changes = responses.select{|r| r.answers[question.id.to_s]}
+        number_of_changes = changes.size
 
         details[:counts] = {}
         question.options.each do |option|

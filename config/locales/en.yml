@@ -270,12 +270,6 @@ en:
 
         detail:
           header: Responses for each question
-          widget:
-            onoff: chose it.
-            nonbudgetary: answered this question.
-          choice: The average choice was <strong>%{choice}</strong>.
-          choice_and_impact: The average choice was <strong>%{choice}</strong>.
-          bidirectional: "Of those who modified it, %{proportion_who_decrease} decreased it with an average choice of %{mean_decrease}, and %{proportion_who_increase} increased it with an average choice of %{mean_increase}."
 
         demography: Demography, etc.
         response_rates: Response rates

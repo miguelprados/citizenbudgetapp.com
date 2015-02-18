@@ -238,12 +238,6 @@ fr-CA:
 
         detail:
           header: Réponses détaillées
-          widget:
-            onoff: des participants l'ont choisi.
-            nonbudgetary: des participants ont répondu à cette question.
-          choice: Le choix moyen était de <strong>%{choice}</strong>.
-          choice_and_impact: Le choix moyen était de <strong>%{choice}</strong>.
-          bidirectional: "De ceux qui l'ont modifié, %{proportion_who_decrease} l'ont réduit avec un choix moyen de %{mean_decrease}; %{proportion_who_increase} l'ont augmenté avec un choix moyen de %{mean_increase}."
 
         demography: Démographie, etc.
         response_rates: Taux de réponses

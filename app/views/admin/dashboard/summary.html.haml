@@ -56,32 +56,12 @@
 
     - section.questions.each do |q|
       - if q.budgetary?
-        -# @todo The proportion of participants who must be in favor of a change for
-        -#   it to be significant depends on the sample size.
-        %div(class="question #{@details[q.id.to_s][:percentage_of_population] >= 0.55 ? 'stress' : 'subdue'}")
+        %div(class="question subdue")
           %h5
             %span= i += 1
             = q.title.html_safe
-          %p
-            - if q.widget == 'scaler'
-              =t('.detail.choice', choice: number_to_percentage(@details[q.id.to_s][:mean_choice] * 100)).html_safe
-            - elsif q.widget == 'slider' && q.options.size > 2
-              =t(".detail.choice_and_impact", choice: number_with_precision(@details[q.id.to_s][:mean_choice], precision: 1)).html_safe
-              - unless [q.maximum_units, q.minimum_units].include?(q.cast_default_value)
-                =t '.detail.bidirectional', proportion_who_decrease: number_to_percentage(@details[q.id.to_s][:proportion_who_decrease] * 100, precision: 0), mean_decrease: number_with_precision(@details[q.id.to_s][:mean_decrease], precision: 1), proportion_who_increase: number_to_percentage(@details[q.id.to_s][:proportion_who_increase] * 100, precision: 0), mean_increase: number_with_precision(@details[q.id.to_s][:mean_increase], precision: 1)
-            - elsif q.widget == 'slider' && q.options.size == 2 || q.widget == 'onoff'
-              %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
-              =t(".detail.widget.onoff").html_safe
-            - elsif q.widget == 'option'
-              %table
-                - @details[q.id.to_s][:counts].each do |option,count|
-                  %tr
-                    %td= number_to_percentage count * 100, precision: 0
-                    %th
-                      :markdown
-                        #{q.labels[q.options.index(option)]}
       - elsif q.options?
-        %div.question.stress
+        %div.question.subdue
           %h5
             %span= i += 1
             = q.title.html_safe
@@ -91,9 +71,6 @@
                 =t :left_quote
                 = strip_tags(RDiscount.new(q.description).to_html)
                 =t :right_quote
-          %p
-            %strong= number_to_percentage @details[q.id.to_s][:percentage_of_population] * 100
-            =t '.detail.widget.nonbudgetary'
       - unless q.widget == 'textarea'
         .graph{:id => "graph_#{q.id}"}
 
