@@ -422,7 +422,7 @@ class Questionnaire
         changes = responses.select{|r| r.answers[question.id.to_s]}
         number_of_changes = changes.size
 
-        details[:counts] = {}
+        details[:counts] = Hash.new(0)
         question.options.each do |option|
           details[:counts][option] = 0
         end
