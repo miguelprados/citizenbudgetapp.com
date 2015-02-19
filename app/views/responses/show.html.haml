@@ -38,10 +38,6 @@
 
   %nav
     %ul.nav.nav-pills
-      %li.dropdown.open
-        = link_to('#', {'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'}) do
-          = t('.comments')
-          %span.caret
       - unless simple_navigation?
         = render partial: 'nav'
 
