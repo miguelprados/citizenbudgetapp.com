@@ -228,10 +228,11 @@ class window.Simulator
     else
       $table.prev('table')
 
-    $span = $('#' + $anchor.attr('id') + '_link span')
-    if $span.parents('.dropdown-menu').length
-      balance = @balance($table)
-      $span.html(SimulatorHelper.number_to_currency(balance, strip_insignificant_zeros: true)).css('color', if balance >= 0 then @colors.section.positive else @colors.section.negative).toggle(balance != 0)
+    # @todo Was overlapping with text and displaying red on increases in tax version.
+    # $span = $('#' + $anchor.attr('id') + '_link span')
+    # if $span.parents('.dropdown-menu').length
+    #   balance = @balance($table)
+    #   $span.html(SimulatorHelper.number_to_currency(balance, strip_insignificant_zeros: true)).css('color', if balance >= 0 then @colors.section.positive else @colors.section.negative).toggle(balance != 0)
 
   # Updates the simulator after a change has been made to the budget.
   update: ->
