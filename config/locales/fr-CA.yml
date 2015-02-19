@@ -9,7 +9,6 @@ fr-CA:
   create_response: &response_notice Merci d'avoir participé à la consultation ! Votre opinion est importante pour nous.
   thank_you_subject: &thank_you_subject "%{organization} : Merci d'avoir participé à notre consultation !"
   offline_header: Ce site est hors-ligne.
-  offline_body: S'il vous plaît essayer de nouveau à une date ultérieure.
 
   labels:
     no_label: "NON"

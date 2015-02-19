@@ -9,7 +9,6 @@ fr-FR:
   create_response: &response_notice Merci d'avoir participé à la consultation ! Votre opinion est importante pour nous.
   thank_you_subject: &thank_you_subject "%{organization} : Merci d'avoir participé à notre consultation !"
   offline_header: Ce site est hors-ligne.
-  offline_body: S'il vous plaît essayer de nouveau à une date ultérieure.
 
   labels:
     no_label: "NON"
@@ -238,24 +237,6 @@ fr-FR:
 
         detail:
           header: Réponses détaillées
-          widget:
-            onoff:
-              revenue:
-                positive: des participants l'ont choisi, représentant un gain de <strong class="positive">%{maximum_amount}</strong>.
-                negative: des participants l'ont choisi, représentant une perte de <strong class="negative">%{minimum_amount}</strong>.
-              expense:
-                positive: des participants l'ont choisi pour faire une économie de <strong class="positive">%{minimum_amount}</strong>.
-                negative: des participants l'ont choisi au coût de <strong class="negative">%{maximum_amount}</strong>.
-            nonbudgetary: des participants ont répondu à cette question.
-          choice: Le choix moyen était de <strong>%{choice}</strong>.
-          choice_and_impact:
-            revenue:
-              positive: Le choix moyen était de <strong>%{choice}</strong>, représentant un gain de <strong class="positive">%{impact}</strong>.
-              negative: Le choix moyen était de <strong>%{choice}</strong>, représentant une perte de <strong class="negative">%{impact}</strong>.
-            expense:
-              positive: Le choix moyen était de <strong>%{choice}</strong>, représentant une économie de <strong class="positive">%{impact}</strong>.
-              negative: Le choix moyen était de <strong>%{choice}</strong>, représentant un coût de <strong class="negative">%{impact}</strong>.
-          bidirectional: "De ceux qui l'ont modifié, %{proportion_who_decrease} l'ont réduit avec un choix moyen de %{mean_decrease}; %{proportion_who_increase} l'ont augmenté avec un choix moyen de %{mean_increase}."
 
         demography: Démographie, etc.
         response_rates: Taux de réponses
