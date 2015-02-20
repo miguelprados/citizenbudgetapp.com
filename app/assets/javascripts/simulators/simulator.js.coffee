@@ -210,8 +210,11 @@ class window.Simulator
         key = if revenue then t('losses') else t('costs')
         color = @colors.question.negative
 
+      impact = Math.abs(difference) * @scale($tr)
+      strip_insignificant_zeros = Math.round(impact) == impact
+
       $tr.find('.key').html(key)
-      $tr.find('.value').html(SimulatorHelper.number_to_currency(Math.abs(difference) * @scale($tr), strip_insignificant_zeros: true))
+      $tr.find('.value').html(SimulatorHelper.number_to_currency(impact, strip_insignificant_zeros: strip_insignificant_zeros))
       $tr.find('.impact').css('color', color).css('visibility', 'visible')
 
       unless $tr.hasClass('selected')
