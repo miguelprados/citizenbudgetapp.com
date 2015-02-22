@@ -228,9 +228,9 @@ namespace :data do
 
     class Fixnum
       # @return [Integer] the factorial of the number
-      # @note This implementation only works for numbers greater than one.
+      # @note This implementation only works for numbers greater than zero.
       def factorial
-        (2..self).reduce(:*)
+        (1..self).reduce(:*)
       end
 
       # @param [Integer] k the size of a combination
