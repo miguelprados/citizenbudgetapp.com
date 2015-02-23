@@ -176,7 +176,7 @@ namespace :data do
   desc 'Deletes duplicate responses. If close matches are found, displays the differences for the end-user to decide.'
   task deduplicate: :environment do
     class Response
-      DIFF_EXCLUDE_KEYS = %w(_id questionnaire_id initialized_at created_at updated_at)
+      DIFF_EXCLUDE_KEYS = %w(_id questionnaire_id initialized_at created_at updated_at comments)
 
       # @return [Hash] the attributes with which to calculate the difference
       #   between responses
@@ -247,6 +247,13 @@ namespace :data do
       def fingerprint
         UnicodeUtils.downcase(gsub(/[[:space:]]|\p{Punct}|\p{Cntrl}/, ''))
       end
+
+      # @see https://gist.github.com/jpmckinney/1374639
+      def fingerprint_name
+        UnicodeUtils.downcase(gsub(/[[:space:]]+/, ' ').strip).gsub(/\p{Punct}|\p{Cntrl}/, '').split.sort.join(' ').tr(
+          "ÀÁÂÃÄÅàáâãäåĀāĂăĄąÇçĆćĈĉĊċČčÐðĎďĐđÈÉÊËèéêëĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħÌÍÎÏìíîïĨĩĪīĬĭĮįİıĴĵĶķĸĹĺĻļĽľĿŀŁłÑñŃńŅņŇňŉŊŋÒÓÔÕÖØòóôõöøŌōŎŏŐőŔŕŖŗŘřŚśŜŝŞşŠšſŢţŤťŦŧÙÚÛÜùúûüŨũŪūŬŭŮůŰűŲųŴŵÝýÿŶŷŸŹźŻżŽž",
+          "aaaaaaaaaaaaaaaaaaccccccccccddddddeeeeeeeeeeeeeeeeeegggggggghhhhiiiiiiiiiiiiiiiiiijjkkkllllllllllnnnnnnnnnnnoooooooooooooooooorrrrrrsssssssssttttttuuuuuuuuuuuuuuuuuuuuwwyyyyyyzzzzzz")
+      end
     end
 
     if ENV['ID'].blank?
@@ -254,38 +261,60 @@ namespace :data do
     end
 
     responses = Questionnaire.find(ENV['ID']).responses.to_a
-    progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: responses.size.combinations(2))
     total = responses.last.answers.size
     threshold = ENV['THRESHOLD'] ? ENV['THRESHOLD'].to_i : total / 4
     maybes = 0
 
-    (responses.size - 2).downto(0).each do |i|
-      a = responses[i]
+    if ENV['RATE'] == 'fast'
+      hash = {}
+      responses.each do |response|
+        # key = response.email
+        # key = response.ip
+        key = response.name.fingerprint_name
+        hash[key] ||= []
+        hash[key] << response
+      end
+      outer_loop = hash.select{|_,v| v.size > 1}
+      response_at = ->(i) { hash[i[0]][0] }
+      inner_loop = ->(i) { hash[i[0]].drop(1) }
+      delete_at = ->(i, j) { hash[i[0]].delete_at(1 + j) }
+      progress_total = hash.reduce(0){|memo,(_,v)| memo + v.size}
+    else
+      outer_loop = (responses.size - 2).downto(0)
+      response_at = ->(i) { responses[i] }
+      inner_loop = ->(i) { responses.drop(1 + i) }
+      delete_at = ->(i, j) { responses.delete_at(1 + i + j) }
+      progress_total = responses.size.combinations(2)
+    end
 
-      responses.drop(i + 1).each_with_index do |b,j|
+    progressbar = ProgressBar.create(format: '%a |%B| %p%% %e', length: 80, smoothing: 0.5, total: progress_total)
+
+    outer_loop.each do |i|
+      a = response_at.call(i)
+      inner_loop.call(i).each_with_index do |b,j|
         progressbar.increment
         difference = a.diff(b)
-        intersection = a.intersection(b, difference)
-        count = difference.key?('answers') ? difference['answers'].size : 0
-
-        # If all values are shared:
-        if difference.size.zero?
+        if difference.size.zero? # if all values are shared
           b.destroy
-          responses.delete_at(i + j + 1)
+          delete_at.call(i, j)
           puts "Deleted #{b.id} (duplicates #{a.id})\n"
-        elsif intersection.size.nonzero? && count < threshold # && difference.size <= 3 intersection != ['ip'] && intersection.include?('email')
-          if ENV['MODE'] == 'interactive'
-            puts
-            puts puts_recursive_hash(difference, skip_numeric_children: true)
-            puts "Are #{a.id} and #{b.id} duplicates (difference on #{difference.keys.to_sentence})? (y/n)"
-            puts "- Same and non-empty on #{intersection.to_sentence} (#{intersection.map{|key| a[key]}.to_sentence})"
-            if STDIN.gets == "y\n"
-              b.destroy
-              responses.delete_at(i + j + 1)
-              puts "Deleted #{b.id}\n\n"
+        else
+          intersection = a.intersection(b, difference)
+          count = difference.key?('answers') ? difference['answers'].size : 0
+          if intersection.size.nonzero? && count < threshold # && difference.size <= 3 intersection != ['ip'] && intersection.include?('email')
+            if ENV['MODE'] == 'interactive'
+              puts
+              puts puts_recursive_hash(difference, skip_numeric_children: true)
+              puts "Are #{a.id} and #{b.id} duplicates (difference on #{difference.keys.to_sentence})? (y/n)"
+              puts "- Same and non-empty on #{intersection.to_sentence} (#{intersection.map{|key| a[key]}.to_sentence})"
+              if STDIN.gets == "y\n"
+                b.destroy
+                delete_at.call(i, j)
+                puts "Deleted #{b.id}\n\n"
+              end
+            else
+              maybes += 1
             end
-          else
-            maybes += 1
           end
         end
       end
