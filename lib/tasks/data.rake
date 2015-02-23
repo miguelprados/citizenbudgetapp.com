@@ -262,15 +262,15 @@ namespace :data do
 
     responses = Questionnaire.find(ENV['ID']).responses.to_a
     total = responses.last.answers.size
-    threshold = ENV['THRESHOLD'] ? ENV['THRESHOLD'].to_i : total / 4
+    threshold = (ENV['THRESHOLD'] ? ENV['THRESHOLD'].to_i : total / 4.0).ceil
     maybes = 0
 
     if ENV['RATE'] == 'fast'
       hash = {}
       responses.each do |response|
-        # key = response.email
+        key = response.email
         # key = response.ip
-        key = response.name.fingerprint_name
+        # key = response.name.fingerprint_name
         hash[key] ||= []
         hash[key] << response
       end
