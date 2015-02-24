@@ -261,16 +261,21 @@ namespace :data do
     end
 
     responses = Questionnaire.find(ENV['ID']).responses.to_a
-    total = responses.last.answers.size
+    total = responses.map{|r| r.answers.size}.max
     threshold = (ENV['THRESHOLD'] ? ENV['THRESHOLD'].to_i : total / 4.0).ceil
     maybes = 0
 
     if ENV['RATE'] == 'fast'
       hash = {}
       responses.each do |response|
-        key = response.email
-        # key = response.ip
-        # key = response.name.fingerprint_name
+        key = case ENV['FACTOR']
+        when 'email'
+          response.email
+        when 'ip'
+          response.ip
+        when 'name'
+          response.name.fingerprint_name
+        end
         hash[key] ||= []
         hash[key] << response
       end
@@ -301,7 +306,7 @@ namespace :data do
         else
           intersection = a.intersection(b, difference)
           count = difference.key?('answers') ? difference['answers'].size : 0
-          if intersection.size.nonzero? && count < threshold # && difference.size <= 3 intersection != ['ip'] && intersection.include?('email')
+          if intersection.size.nonzero? && count < threshold
             if ENV['MODE'] == 'interactive'
               puts
               puts puts_recursive_hash(difference, skip_numeric_children: true)
