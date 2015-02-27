@@ -63,7 +63,7 @@ gem 'ruby-progressbar'
 # in production environments by default.
 group :assets do
   # Non-Heroku deployments
-  # gem 'therubyracer', require: 'v8'
+  gem 'therubyracer', require: 'v8'
 
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
