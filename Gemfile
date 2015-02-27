@@ -17,7 +17,9 @@ group :production do
   gem 'action_dispatch-gz_static'
   gem 'memcachier'
   gem 'dalli'
-  gem 'newrelic_rpm'
+
+  # Heroku deployments
+  # gem 'newrelic_rpm'
 end
 
 # Background jobs
