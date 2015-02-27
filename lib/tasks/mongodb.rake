@@ -8,7 +8,7 @@ namespace :mongodb do
  !    To proceed, type "nogoingback"
 END
       if STDIN.gets == "nogoingback\n"
-        uri = URI.parse('MONGOLAB_URI'] || `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp)
+        uri = URI.parse(ENV['MONGOLAB_URI'] || `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp)
         puts `mongodump -h localhost -d citizen_budget_development -o dump-dir`.chomp
         puts `mongorestore -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} dump-dir/citizen_budget_development`.chomp
       else
@@ -22,7 +22,7 @@ END
   desc 'Copy a production database to development'
   task pull: :environment do
     if Rails.env.development?
-      uri = URI.parse('MONGOLAB_URI'] || `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp)
+      uri = URI.parse(ENV['MONGOLAB_URI'] || `heroku config:get MONGOLAB_URI --app #{ENV['APP']}`.chomp)
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c admin_users -o dump-dir`.chomp
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c organizations -o dump-dir`.chomp
       puts `mongodump -h #{uri.host}:#{uri.port} -d #{uri.path.sub '/', ''} -u #{uri.user} -p #{uri.password} -c questionnaires -o dump-dir`.chomp
