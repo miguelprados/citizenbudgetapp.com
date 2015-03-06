@@ -6,7 +6,9 @@ gem 'rails-i18n'
 
 group :production do
   # Non-Heroku deployments
-  gem 'foreman'
+  unless ENV['HEROKU']
+    gem 'foreman'
+  end
 
   # Error logging
   gem 'airbrake'
@@ -19,7 +21,9 @@ group :production do
   gem 'dalli'
 
   # Heroku deployments
-  # gem 'newrelic_rpm'
+  if ENV['HEROKU']
+    gem 'newrelic_rpm'
+  end
 end
 
 # Background jobs
@@ -65,7 +69,9 @@ gem 'ruby-progressbar'
 # in production environments by default.
 group :assets do
   # Non-Heroku deployments
-  gem 'therubyracer', require: 'v8'
+  unless ENV['HEROKU']
+    gem 'therubyracer', require: 'v8'
+  end
 
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
