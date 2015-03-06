@@ -104,10 +104,10 @@ class Questionnaire
   before_save :add_domain
   before_create :set_authorization_token
 
-  scope :current, where(:starts_at.ne => nil, :ends_at.ne => nil, :starts_at.lte => Time.now, :ends_at.gte => Time.now)
-  scope :future, where(:starts_at.ne => nil, :starts_at.gt => Time.now)
-  scope :past, where(:ends_at.ne => nil, :ends_at.lt => Time.now)
-  scope :active, where(:ends_at.ne => nil, :ends_at.gte => Time.now)
+  scope :current, lambda { where(:starts_at.ne => nil, :ends_at.ne => nil, :starts_at.lte => Time.now, :ends_at.gte => Time.now) }
+  scope :future, lambda { where(:starts_at.ne => nil, :starts_at.gt => Time.now) }
+  scope :past, lambda { where(:ends_at.ne => nil, :ends_at.lt => Time.now) }
+  scope :active, lambda { where(:ends_at.ne => nil, :ends_at.gte => Time.now) }
 
   # @param [String] domain a domain name
   # @return [Enumerable] questionnaires whose domain name matches

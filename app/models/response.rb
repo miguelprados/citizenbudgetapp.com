@@ -138,15 +138,23 @@ class Response
   # @see lib/active_record/integration.rb
   # @see lib/active_support/cache.rb
   def cache_key
-    # Scope "responses/new" by questionnaire, and expire the cache when the
-    # questionnaire changes.
-    parts = [super]
-    parts << questionnaire.updated_at.utc.to_s(:number) if questionnaire? && questionnaire.updated_at?
+    parts = [super] # e.g. responses/new
+
+    if questionnaire?
+      parts << questionnaire.id.to_s
+      if questionnaire.updated_at?
+        parts << questionnaire.updated_at.utc.to_s(:number)
+      end
+      if questionnaire.current?
+        parts << 'current'
+      end
+    end
+
     # We can expire the cache when assets change by uncommenting the following
     # line, but we already expire it on each commit by setting RAILS_APP_VERSION
     # to the current Git revision in a pre-commit hook.
-    #
     # parts << CitizenBudget::Application.config.assets.version
-    parts.join '-'
+
+    parts.join('-')
   end
 end

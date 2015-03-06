@@ -88,6 +88,6 @@ private
     parts = [record.cache_key]
     parts << params[:token] if params[:token] # use a different cache for token access
     parts << 'flash' if flash[:notice] # cache flash separately
-    parts.join '-'
+    parts.join('-')
   end
 end
