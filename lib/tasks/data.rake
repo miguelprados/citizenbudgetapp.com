@@ -270,11 +270,13 @@ namespace :data do
       responses.each do |response|
         key = case ENV['FACTOR']
         when 'email'
-          response.email
+          response.email.downcase
         when 'ip'
           response.ip
         when 'name'
           response.name.fingerprint_name
+        else
+          raise "FACTOR=#{key} is blank or unrecognized"
         end
         hash[key] ||= []
         hash[key] << response
