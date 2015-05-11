@@ -9,8 +9,8 @@ class PagesController < ApplicationController
         if questionnaire.google_api_authorization.configured?
           begin
             questionnaire.google_api_authorization.redeem_authorization_code! params[:code]
-          rescue => e # GoogleAPIAuthorization::CodeExchangeError
-            flash[:error] = e.message # t('google_api.code_exchange_error')
+          rescue ::GoogleApiAuthorization::CodeExchangeError
+            flash[:error] = t('google_api.code_exchange_error')
           end
         else
           flash[:error] = t('google_api.not_configured')
