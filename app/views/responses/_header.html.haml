@@ -7,7 +7,7 @@
       = header
     - else
       - if @questionnaire.title_image?
-        = image_tag @questionnaire.title_image.square.url, size: '72x72', alt: ''
+        = image_tag @questionnaire.title_image.medium.url, height: '100', alt: ''
       = @questionnaire.title
   <!--[if gt IE 7]><!-->
   #facebook

@@ -171,7 +171,7 @@ ActiveAdmin.register Questionnaire do
           link_to(image_tag(q.logo.large.url), q.logo_url) if q.logo?
         end
         row :title_image do |q|
-          link_to(image_tag(q.title_image.square.url), q.title_image_url) if q.title_image?
+          link_to(image_tag(q.title_image.medium.url), q.title_image_url) if q.title_image?
         end
         row :introduction do |q|
           RDiscount.new(Mustache.render(q.introduction, number_of_participants: 12345)).to_html.html_safe if q.introduction?
