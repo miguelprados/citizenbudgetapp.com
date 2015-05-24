@@ -4,6 +4,8 @@ class window.Simulator
     @scope = $("table.#{@identifier}")
     # The bar's maximum left position.
     @bar_left = 100
+    # The bar's maximum width.
+    @bar_width = 100
     # Whether the message has pulsated a first time.
     @pulsated = false
     # Administrators can override the instructions.
@@ -265,7 +267,7 @@ class window.Simulator
       $amount.html(amount).toggleClass('negative', net_balance < 0)
 
       # If pixels are less than zero, the bar moves right (increase).
-      pixels = -Math.round(SimulatorHelper.tanh(3 * net_balance / @options.maximum_difference / @scale()) * 100)
+      pixels = -Math.round(SimulatorHelper.tanh(3 * net_balance / @options.maximum_difference / @scale()) * @bar_width)
       width = Math.abs(pixels)
 
       # If at zero.
