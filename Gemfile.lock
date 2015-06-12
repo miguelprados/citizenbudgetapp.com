@@ -202,7 +202,7 @@ GEM
     mongoid-grid_fs (1.9.0)
       mime-types (~> 1.19)
       mongoid (~> 3.0)
-    moped (1.5.2)
+    moped (1.5.3)
     multi_json (1.10.1)
     multipart-post (1.2.0)
     mustache (0.99.5)
