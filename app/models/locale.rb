@@ -4,7 +4,7 @@ class Locale
     'en' => 'English (United States)',
     'fr-CA' => 'Français (Canada)',
     'fr-FR' => 'Français (France)',
-    'nl' => 'Nederlands',
+    # 'nl' => 'Nederlands',
   }
 
   class << self
