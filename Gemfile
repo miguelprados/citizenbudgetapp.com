@@ -11,7 +11,7 @@ group :production do
   end
 
   # Error logging
-  gem 'airbrake'
+  gem 'airbrake', '~> 3.1.15'
   gem 'heroku'
   gem 'rails_12factor'
 
