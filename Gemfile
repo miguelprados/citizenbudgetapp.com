@@ -35,6 +35,7 @@ gem 'mongoid', '~> 3.1.0' # 4.0 is backwards-incompatible
 # Admin
 gem 'formtastic', '~> 2.2.1'
 gem 'activeadmin', '0.6.3'
+gem 'bourbon', '~> 3.1.8'
 gem 'activeadmin-mongoid', '0.3.0'
 gem 'cancan'
 gem 'devise', '~> 2.1.3' # 2.2 is backwards-incompatible
@@ -73,7 +74,7 @@ group :assets do
     gem 'therubyracer', require: 'v8'
   end
 
-  gem 'sass-rails'
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
