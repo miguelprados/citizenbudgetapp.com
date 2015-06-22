@@ -35,6 +35,7 @@ gem 'mongoid', '~> 3.1.0' # 4.0 is backwards-incompatible
 # Admin
 gem 'formtastic', '~> 2.2.1'
 gem 'activeadmin', '0.6.3'
+gem 'inherited_resources', '~> 1.4.1'
 gem 'sass', '~> 3.2.14'
 gem 'activeadmin-mongoid', '0.3.0'
 gem 'cancan'
