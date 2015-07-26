@@ -5,8 +5,11 @@ class window.TaxSimulator extends window.Simulator
 
     # Override to not toggle tip at minimum value.
     window.updateTip = ($slider, value) ->
-      content = self.tipSlider($slider, value)
-      $slider.find('.tip-content').html(content) if content
+      if updateTipOverride?
+        updateTip($slider, value)
+      else
+        content = self.tipSlider($slider, value)
+        $slider.find('.tip-content').html(content) if content
 
     # In order to set appropriate labels on slider widgets, we must multiply the
     # personal tax impact by a to-be-determined multipler.

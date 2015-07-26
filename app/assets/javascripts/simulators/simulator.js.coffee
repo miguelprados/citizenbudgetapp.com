@@ -371,9 +371,12 @@ class window.Simulator
 
     # Must be global for `loadAnwers` call.
     window.updateTip = ($slider, value) ->
-      content = self.tipSlider($slider, value)
-      $slider.find('.tip-content').html(content) if content
-      $slider.find('.tip').toggle(value != parseFloat($slider.data('minimum')))
+      if updateTipOverride?
+        updateTip($slider, value)
+      else
+        content = self.tipSlider($slider, value)
+        $slider.find('.tip-content').html(content) if content
+        $slider.find('.tip').toggle(value != parseFloat($slider.data('minimum')))
 
     # `change` will be called once the respondent stops sliding.
     slide = (event, ui) ->
