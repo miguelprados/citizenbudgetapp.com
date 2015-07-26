@@ -17,7 +17,7 @@ $ ->
   $('#response_initialized_at').val("#{now.getUTCFullYear()}-#{now.getUTCMonth() + 1}-#{now.getUTCDate()} #{now.getUTCHours()}:#{now.getUTCMinutes()}:#{now.getUTCSeconds()} UTC")
 
   # Open non-Bootstrap links in new windows.
-  $('.description a:not([class]),.modal.embed a:not([class])').attr('target', '_blank')
+  $('#introduction  a:not([class]),.description a:not([class]),.modal.embed a:not([class]),.popover-content a:not([class])').attr('target', '_blank')
 
   # Initialize Bootstrap plugins.
   $('.dropdown-toggle').dropdown()
