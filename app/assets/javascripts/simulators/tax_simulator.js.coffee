@@ -6,7 +6,7 @@ class window.TaxSimulator extends window.Simulator
     # Override to not toggle tip at minimum value.
     window.updateTip = ($slider, value) ->
       if updateTipOverride?
-        updateTip($slider, value)
+        updateTipOverride($slider, value)
       else
         content = self.tipSlider($slider, value)
         $slider.find('.tip-content').html(content) if content

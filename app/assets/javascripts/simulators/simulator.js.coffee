@@ -372,7 +372,7 @@ class window.Simulator
     # Must be global for `loadAnwers` call.
     window.updateTip = ($slider, value) ->
       if updateTipOverride?
-        updateTip($slider, value)
+        updateTipOverride($slider, value)
       else
         content = self.tipSlider($slider, value)
         $slider.find('.tip-content').html(content) if content
