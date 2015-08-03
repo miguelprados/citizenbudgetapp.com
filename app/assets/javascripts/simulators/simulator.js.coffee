@@ -390,6 +390,8 @@ class window.Simulator
       $this = $(this)
       slide.call(this, event, ui)
       $this.find('input').val(ui.value) # update the associated form element
+      if sliderOnChange?
+        sliderOnChange($this, ui)
       self.updateSection($this)
       self.update()
 
