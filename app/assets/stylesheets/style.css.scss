@@ -171,6 +171,9 @@ td.description {
     span a {
       white-space: nowrap;
       background-color: #ff9;
+      a {
+        background-color: transparent;
+      }
     }
   }
 
