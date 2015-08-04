@@ -42,6 +42,7 @@ gem 'cancan'
 gem 'devise', '~> 2.1.3' # 2.2 is backwards-incompatible
 gem 'devise-i18n'
 gem 'google-api-client', '~> 0.6.4', require: 'google/api_client'
+gem 'jwt', '~> 0.1.4' # google-api-client
 gem 'mustache', '~> 0.99.0'
 
 # Image uploads
