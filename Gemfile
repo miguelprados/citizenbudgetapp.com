@@ -41,7 +41,7 @@ gem 'activeadmin-mongoid', '0.3.0'
 gem 'cancan'
 gem 'devise', '~> 2.1.3' # 2.2 is backwards-incompatible
 gem 'devise-i18n'
-gem 'google-api-client', require: 'google/api_client'
+gem 'google-api-client', '~> 0.6.4', require: 'google/api_client'
 gem 'mustache', '~> 0.99.0'
 
 # Image uploads
@@ -73,6 +73,7 @@ group :assets do
   # Non-Heroku deployments
   unless ENV['HEROKU']
     gem 'therubyracer', require: 'v8'
+    gem 'libv8', '3.16.14.7'
   end
 
   gem 'sass-rails', '~> 3.2.3'
