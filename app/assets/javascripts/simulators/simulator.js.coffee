@@ -201,8 +201,11 @@ class window.Simulator
 
       if $tr.hasClass('selected')
         $tr.removeClass('selected')
-        $tr.find('td.description').animate('background-color': @colors.question.description, 'slow')
-        $tr.find('td.highlight').animate('background-color': @colors.question.highlight, 'slow')
+        if questionHighlightOverride?
+          questionHighlightOverride($tr)
+        else
+          $tr.find('td.description').animate('background-color': @colors.question.description, 'slow')
+          $tr.find('td.highlight').animate('background-color': @colors.question.highlight, 'slow')
     else
       difference = (current - initial) * value
       if difference >= 0
