@@ -5,7 +5,9 @@ CitizenBudget::Application.routes.draw do
   resources :responses, only: [:new, :create, :show] do
     collection do
       get 'count'
+      match 'count', controller: 'responses', action: 'preflight', contraints: {method: 'OPTIONS'}
       get 'charts'
+      match 'charts', controller: 'responses', action: 'preflight', contraints: {method: 'OPTIONS'}
     end
   end
 

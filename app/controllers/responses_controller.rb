@@ -45,6 +45,12 @@ class ResponsesController < ApplicationController
   def offline
   end
 
+  def preflight
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+    render nothing: true
+  end
+
 private
 
   def set_locale
