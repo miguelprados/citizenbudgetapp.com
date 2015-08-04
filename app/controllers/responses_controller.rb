@@ -35,10 +35,14 @@ class ResponsesController < ApplicationController
   end
 
   def count
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
     render json: @questionnaire.responses.count
   end
 
   def charts
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
     render json: @questionnaire.chart_data
   end
 
