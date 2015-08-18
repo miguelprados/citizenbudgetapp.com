@@ -8,7 +8,8 @@
     - else
       - if @questionnaire.title_image?
         = image_tag @questionnaire.title_image.medium.url, height: '100', alt: ''
-      = @questionnaire.title
+      :markdown
+        #{@questionnaire.title}
   <!--[if gt IE 7]><!-->
   #facebook
     = facebook_button
