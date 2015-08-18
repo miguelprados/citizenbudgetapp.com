@@ -22,7 +22,7 @@ $ ->
   # Initialize Bootstrap plugins.
   $('.dropdown-toggle').dropdown()
 
-  $('.popover-toggle').popover(trigger: 'click').click (event) -> event.preventDefault()
+  $('.popover-toggle').popover(trigger: 'click focus').click (event) -> event.preventDefault()
   $('[rel="tooltip"]').tooltip()
 
   # Bootstrap hacks.
