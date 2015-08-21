@@ -49,6 +49,22 @@ window.I18n =
     yes: 'Oui'
     no: 'Non'
     y_axis: 'Pourcentage des répondants'
+  uk_UA:
+    currency_delimiter: ' '
+    currency_format: '{{number}} {{unit}}'
+    currency_separator: ','
+    currency_unit: 'грн.'
+    percentage_format: '{{number}}{{symbol}}'
+    percentage_symbol: '%'
+    assessment_unit: '{{number}}/{{assessment_period}}'
+    instructions: 'Змініть бюджет, щоб почати'
+    copy_hint: 'скопіювати'
+    copied_hint: 'скопійовано!'
+    month: 'місяць'
+    year: 'рік'
+    yes: 'Так'
+    no: 'Ні'
+    y_axis: 'Доля респондентів у відсотках'
 
 window.t = (string, args = {}, dict = I18n) ->
   current_locale = args.locale or window.locale or 'en_US'
