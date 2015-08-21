@@ -5,12 +5,12 @@ en:
   # --- Public section ---------------------------------------------------------
 
   # http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks
-  left_quote: "“"
-  right_quote: "”"
+  left_quote: "«"
+  right_quote: "»"
   colon: ":"
 
   # Button text to set a variable.
-  set: Set
+  set: Встановити
 
   # The width of the Facebook button in pixels. In English, the button will
   # have the short words "Like" and "Send", whereas in French it will have
@@ -18,80 +18,80 @@ en:
   facebook_width: 155
 
   # This message appears after the participant submits their response.
-  create_response: &response_notice Thank you for your participation! Your opinion is important to us.
+  create_response: &response_notice Дякуємо за вашу участь! Ваша думка дуже важлива для нас!
 
   # The subject of the thank-you email that is sent to participants.
-  thank_you_subject: &thank_you_subject "%{organization}: Thank you for participating in our consultation !"
+  thank_you_subject: &thank_you_subject "%{organization}: Дякуємо за участь у консультації!"
 
   # The message to display if a questionnaire is offline.
-  offline_header: This website is offline.
+  offline_header: Цей вебсайт зараз оффлайн.
 
   labels:
     # YAML doesn't like "no" and "yes" keys and values. Lame!
-    no_label: "NO"
-    yes_label: "YES"
+    no_label: "Ні"
+    yes_label: "Так"
 
   group:
-    simulator: Simulator (default)
-    custom: Advanced customization
-    other: Contact information
+    simulator: Симулятор (за замовчуванням)
+    custom: Розширені налаштування
+    other: Контактна інформація
 
   assessment_unit:
-    month: $/month
-    year: $/year
+    month: грн/місяць
+    year: грн/рік
 
   questionnaires:
     questionnaire:
-      your_choice: Your choice
+      your_choice: Ваш вибір
 
   responses:
     new:
-      instructions: &instructions Change an activity to start
-      positive_balance_instructions: "You have %{starting_balance} to spend. Change an activity to start."
-      negative_balance_instructions: "The budget is %{starting_balance} in deficit. Change an activity to start."
-      assessment: Enter your current property value assessment or use the pre-set value
+      instructions: &instructions Змініть активність, щоб почати
+      positive_balance_instructions: "У вас є %{starting_balance} для витрат. Змініть активність, щоб почати."
+      negative_balance_instructions: "Бюджет дефіциті: %{starting_balance} у дефіциті. Змініть активність, щоб почати."
+      assessment: Введіть вашу оцінку поточної вартості майна або використовуйте заздалегідь задане значення
       default_assessment: "(%{number})"
       # If the currency unit should appear before the number, populate
       # +currency_unit_pre+. Otherwise, populate +currency_unit_post+.
-      currency_unit_pre: $
-      currency_unit_post: ""
-      required: required
-      submit: Submit
-      submit_text: If you are satisfied with your choices, click "Submit".
+      currency_unit_pre: ""
+      currency_unit_post: грн.
+      required: обов'язково
+      submit: Надіслати
+      submit_text: Якщо ви упевнені у свєму виборі, натисніть «Надіслати».
     show:
       header:
-        default: "%{name} submitted a budget!"
-        taxes: "%{name} submitted a budget!"
-      share: &response_preamble We encourage you to share and discuss your budget choices below with your friends and family.
-      share_link: "Copy this link to share your budget choices:"
-      copy_hint: copy to clipboard
-      tweet: Tweet
-      invitation: Have you already submitted your own budget proposal? If not, <b><a href="%{url}">click here to participate.</a></b>
-      comments: Comments
+        default: "Користувач %{name} надіслав свої бюджетні рекомендації!"
+        taxes: "Користувач %{name} надіслав свою версію бюджету!"
+      share: &response_preamble Ми заохочуємо вас поділитись вашими бюджетними рекомендаціями nf обміркувати їх з друзями.
+      share_link: "Скопіюйте це посилання для того, щоб поділитись вашим вибором з друзями:"
+      copy_hint: Скопіювати
+      tweet: Надіслами твіт
+      invitation: Ви вже надіслали ваші бюджетні рекомендації? Якщо ні, то <b><a href="%{url}">натисніть тут, щоб взяти участь</a></b>.
+      comments: Коментарі
     title:
-      read_more: &read_more Learn more
-      read_more_tip: Click for more info
-      view_media: View media
-      view_media_tip: Click to view media
+      read_more: &read_more Дізнатись більше
+      read_more_tip: Натисніть, щоб отримати більше інформації
+      view_media: Показати медіа файли
+      view_media_tip: Натисніть, щоб подивитись медіа файли
     nav:
-      sections: Sections
-      balance: Balance
+      sections: Секції
+      balance: Баланс
     modals:
-      close: Close
+      close: Закрити
     modal:
-      close: Close
+      close: Закрити
     footer:
-      attribution: &attribution This online budget consultation is powered by
+      attribution: &attribution Ця система бюджетних консультацій стала можливою завдяки
 
   # --- Both public and administrative sections --------------------------------
 
   formtastic:
-    required: required
+    required: обов'язково
     placeholders:
       # @todo Placeholders need to be customizable.
       response:
         email: name@example.com
-        postal_code: H0H 0H0
+        postal_code: 12345
       questionnaire:
         instructions: *instructions
         read_more: *read_more
@@ -101,250 +101,250 @@ en:
         response_preamble: *response_preamble
     hints:
       response:
-        email: We will not share your e-mail address or other contact information with any third parties.
+        email: Ми не будемо розповсюджувати ваш email і будь-яку іншу контактну інформацію.
       # The remaining translations in this section are administrative only.
       organization:
-        name: e.g. "City of St. Elsewhere"
+        name: наприклад, "Київ"
       questionnaire:
-        starts_at: Set the time in UTC.
-        ends_at: Set the time in UTC.
-        domain: You must set your domain's DNS to point to our servers.
-        mode: In "Services" mode, participants add, cut or modify services and activities, like increasing parking fees. In "Taxes" mode, participants make percentage-wise changes to the budgets of bundles of services, like healthcare, and the simulator reports the impact on their taxes.
-        tax_rate: Enter the tax rate as a decimal fraction, not as a percentage.
-        header_image: This will be displayed to the left of the header.
-        introduction: "You can use Markdown syntax. Use {{number_of_participants}} for the number of participants."
-        instructions: This text must fit within one line. (Usually left blank to use the default value.)
-        read_more: e.g. "More Info". (Usually left blank to use the default value.)
-        content_before: Customize the page shown before the start date. (Usually left blank.)
-        content_after: Customize the page shown after the end date. (Usually left blank.)
-        description: This will be displayed on search engine results pages. (Usually left blank.)
-        attribution: This will be displayed in the footer before a link to the product. (Usually left blank to use the default value.)
-        thank_you_template: "Use {{name}} for the respondent's name and {{url}} for the response URL."
-        response_notice: Short thank-you message shown after each submission.
-        response_preamble: You can use Markdown syntax.
-        response_body: You can use Markdown syntax.
-        google_analytics: If you use Google Analytics.
-        google_analytics_profile: If you use Google Analytics.
-        twitter_screen_name: If you use Twitter. Do not include the "@" symbol.
-        twitter_text: The default tweet for sharing the budget consultation.
-        twitter_share_text: The default tweet for sharing an individual's responses.
-        facebook_app_id: If you have a Facebook app for this domain name.
+        starts_at: Час у форматі UTC.
+        ends_at: Час у форматі UTC.
+        domain: Необхідно налаштувати DNS домена.
+        mode: У режимі «Сервіси», учасники збільшують, або зменьшують статті бюджету, як то парковочні тарифи. У режимі «Податки» учасники збільшують, або зменьшують статті бюджету і бачать, як це впливає на їхні налоги.
+        tax_rate: Введіть ставку податку у вигляді десяткового дробу.
+        header_image: Це буде відображено ліворуч від зображення у заголовку.
+        introduction: "Ви можете використовувати синтакс розмітки. Використовуйте {{number_of_participants}} для відображення кількості учасників."
+        instructions: Цей текст має вміщуватись в одну лінію. (Зазвичай залишається порожнім для значення за замовчуванням)
+        read_more: наприклад, "Більше інформації". (Зазвичай залишається порожнім для значення за замовчуванням)
+        content_before: Налаштувати сторінку, показану до дати початку. (Зазвичай залишається порожнім)
+        content_after: Налаштувати сторінку, показану після дати закінчення. (Зазвичай залишається порожнім)
+        description: Це буде відображатися на сторінках результатів пошукових систем. (Зазвичай залишається порожнім)
+        attribution: Це буде відображатися в футері перед посиланням на продукт. (Зазвичай залишається порожнім для значення за замовчуванням)
+        thank_you_template: "Використовуйте {{name}} для відображення імені користувача і {{url}} для URL відповіді."
+        response_notice: Коротке повідомлення, що відображається користувачеві після надсилання рекомендацій.
+        response_preamble: Ви можете використовувати синтакс розмітки.
+        response_body: Ви можете використовувати синтакс розмітки.
+        google_analytics: Якщо ви використовуєте Google Analytics.
+        google_analytics_profile: Якщо ви використовуєте Google Analytics.
+        twitter_screen_name: Якщо ви використовуєте Twitter. Не включайте символ "@".
+        twitter_text: Твіт за замовчуванням для того, щоб ділитись посиланням на бюджетну консультацію.
+        twitter_share_text: Твіт за замовчуванням для того, щоб ділитись результатами відповідей користувача.
+        facebook_app_id: Якщо у вас є Facebook аплікація для цього доменного імені.
       section:
-        title: e.g. "City Services"
-        group: The Contact information section will automatically add Email and Name fields.
-        description: You can use Markdown syntax.
-        extra: This text will appear in a small overlay when people click for more information. You can use Markdown syntax.
-        embed: This content will appear in a modal window. Paste the embed code from Speaker Deck, etc.
+        title: наприклад, "Комунальні служби"
+        group: Секція «Контактна інформація» автоматично додасть поля Email та Ім'я.
+        description: Ви можете використовувати синтакс розмітки.
+        extra: Цей текст буде показано коли користвуач натискатиме на посилання «Більше інформації». Ви можете використовувати синтакс розмітки.
+        embed: Цей контент буде показано в модальному вікні. Скопіюйте embed код сюди.
       question:
-        description: You can use Markdown syntax.
-        extra: This text will appear in a small overlay when people click for more information. You can use Markdown syntax.
-        unit_amount: Omit currency signs.
-        unit_name: Use the lowercase plural form.
-        options_as_list: Put each option on a separate line.
-        labels_as_list: Put the "NO" and "YES" display labels on separate lines in that order.
-        step: You can often set this to 1.
-        default_value: If this is a check box, 1 is checked, 0 is unchecked.
-        maxlength: The maximum length of the field in characters.
+        description: Ви можете використовувати синтакс розмітки.
+        extra: Цей текст буде показано коли користвуач натискатиме на посилання «Більше інформації». Ви можете використовувати синтакс розмітки.
+        unit_amount: Не використовуйте грошові знаки.
+        unit_name: Використовуйте малі літери множини.
+        options_as_list: Впишіть кожну опцію на окремому рядку.
+        labels_as_list: Впишіть лейбли "Ні" і "Так" в такому самому порядку на різних рядках.
+        step: Зазвичай ви можете встановити значення 1.
+        default_value: Якщо це чекбокс, то 1 значить наявність відмітки, 0 її відсутність.
+        maxlength: Максимальна довжина поля в літерах.
     labels:
       question:
-        _destroy: Delete question
+        _destroy: Видалити питання
     actions:
-      create: "Save %{model}"
-      update: "Save %{model}"
-      cancel: Cancel
+      create: "Зберегти %{model}"
+      update: "Зберегти %{model}"
+      cancel: Відмінити
 
   # --- Administrative section -------------------------------------------------
   # The translations in this section are only visible to administrators. If you
   # only want to translate the public-facing text, you may skip this section.
 
-  new_questionnaire: Add a new consultation
-  new_section: Add a section to your consultation
-  new_question: Add a question to this section
-  example_name: John Doe
-  unknown_format: Data are not available in the requested format.
+  new_questionnaire: Додати нову консультацію
+  new_section: Додати секцію консультації
+  new_question: Додати питання секції
+  example_name: Володимир Акименко
+  unknown_format: Дані не доступні у запитуваному форматі.
   # Express the date format to be used in graphs in ICU format:
   # http://userguide.icu-project.org/formatparse/datetime
-  icu_date_format: MMM d
+  icu_date_format: dd.MM.Y
   # https://developers.google.com/chart/interactive/docs/reference#numberformatter
   percentage_format: "###%"
-  language: Switch language
-  yes: Yes
-  no: No
-  untitled: Untitled
-  default: Default
+  language: Змінити мову
+  yes: Так
+  no: Ні
+  untitled: Без назви
+  default: За замовчуванням
 
   breadcrumb:
-    admin: Admin
-    dashboard: Dashboard
+    admin: Адміністратор
+    dashboard: Панель управління
 
   # These strings appear when editing a questionnaire, a section or its questions.
   legend:
-    basic: Basic
-    email: Thank-you email
-    response: Personal page
-    mode: Mode
-    appearance: Appearance
-    integration: Third-party integration
-    question: Question
-    widget: Widget parameters
-    fiscal: Fiscal parameters
+    basic: Базовий
+    email: Email-подяка
+    response: Персональна сторінка
+    mode: Режим
+    appearance: Зовнішній вигляд
+    integration: Інтеграція з сторонніми (third-party) сервісами
+    question: Питання
+    widget: Параметри віджета
+    fiscal: Фінансові параметри
     html: HTML
 
   # Google API errors.
   google_api:
-    authentication_error: Couldn't authenticate with the Google API.
-    code_exchange_error: Couldn't obtain a Google API access token.
-    no_authorization_code: No Google API authorization code was received.
-    no_state: No Google API state parameter was received.
-    not_authorized: Access to your Google Analytics account has not been authorized.
-    not_configured: This system is not configured for Google Analytics. Please contact your administrator.
-    access_revoked: Please re-authorize Google Analytics and try again.
-    api_error: A Google API error occurred. Please try again.
+    authentication_error: Не можливо аутентифікуватись з Google API.
+    code_exchange_error: Не можливо отримати маркер доступу (access token) Google API.
+    no_authorization_code: Не було отримано код авторизації Google API.
+    no_state: Відсутній параметр стану Google API.
+    not_authorized: Доступ до аккаунту Google Analytics не було авторизовано.
+    not_configured: Система на нелаштована під Google Analytics. Зв'яжіться з адміністратором.
+    access_revoked: Переавторизуйте Google Analytics і спробуйте знов.
+    api_error: Помилка Google API. Спробуйте знов.
 
   # Google API actions.
-  authorize_google_api: Authorize Google Analytics
-  deauthorize_google_api: Deauthorize Google Analytics
-  deauthorize_google_api_success: Access to your Google Analytics account has been successfully revoked.
+  authorize_google_api: Авторизувати Google Analytics
+  deauthorize_google_api: Деавторизувати Google Analytics
+  deauthorize_google_api_success: Доступ до аккаунту Google Analytics було успішно анульовано.
 
   # Google Analytics actions.
-  link_google_analytics: Link Google Analytics
-  link_google_analytics_success: "The Google Analytics profile %{property} is now linked to your consultation."
-  link_google_analytics_failure: "Couldn't find a matching domain in %{username}'s Google Analytics account."
+  link_google_analytics: Підключити Google Analytics
+  link_google_analytics_success: "Профайл Google Analytics %{property} тепер приєднано до вашої консультації."
+  link_google_analytics_failure: "Не вдалося знайти відповідний домен в аккаунті Google Analytics користувача  %{username}."
 
   questionnaire:
-    period: "%{starts_at} to %{ends_at}"
-    starting: "starting %{date}"
-    ending: "ending %{date}"
+    period: "%{starts_at} — %{ends_at}"
+    starting: "починається %{date}"
+    ending: "завершується %{date}"
 
   mode:
-    services: Services
-    taxes: Taxes
+    services: Сервіси
+    taxes: Податки
 
   assessment_period:
-    month: Monthly
-    year: Yearly
+    month: Щомісячно
+    year: Щорічно
 
   # An administrator's role limits what actions they are authorized to perform.
   role:
-    superuser: Superuser
-    administrator: Administrator
+    superuser: Супер користувач
+    administrator: Адміністратор
 
   # Participants answers questions by using one of the following widgets.
   widget:
     # Budgetary.
-    slider: Slider
-    scaler: Percentage scale
-    onoff: On/off switch
-    option: Radio buttons (budgetary)
+    slider: Слайдер (Slider)
+    scaler: Процентна шкала (Percentage scale)
+    onoff: Перемикач вкл/викл (On/off switch)
+    option: Радіо кнопки, що впливають на бюджет (Radio buttons (budgetary))
     # Non-budgetary.
-    checkbox: Check box
-    checkboxes: Check boxes
-    readonly: Read-only
-    radio: Radio buttons (non-budgetary)
-    select: Drop-down list
-    static: Static
-    text: Text box
-    textarea: Text area
+    checkbox: Чекбокс (Check box)
+    checkboxes: Чекбокси (Check boxes)
+    readonly: Лише для читання (Read-only)
+    radio: Радіо кнопки, що не впливають на бюджет (Radio buttons (non-budgetary))
+    select: Список, що відкривається (Drop-down list)
+    static: Статика (Static)
+    text: Однорядкове текстове поле (Text box)
+    textarea: Багаторядкове текстове поле (Text area)
 
   statistics:
     participation_rate: "%{percentage} participation"
-    time_to_complete: Median time to complete
-    responses_title: Responses per day
-    visits_title: "Web visits per day"
-    sources_title: "Web traffic sources"
-    responses: Responses
-    visitors: Visitors
-    visits: Visits
-    pageviews: Pageviews
-    other: Other
+    time_to_complete: Час для завершення
+    responses_title: Відповідей на день
+    visits_title: "Відвідувань на день"
+    sources_title: "Джерела трафіку"
+    responses: Відповіді
+    visitors: Відвідувачі
+    visits: Відвідування
+    pageviews: Перегляди сторінок
+    other: Інше
 
   admin:
     dashboard:
       summary:
-        header: Online Budget Consultation Report
-        period: "For the period %{starts_on} to %{ends_on}"
-        by: "Prepared by %{author} for: %{organization}"
+        header: Звіт щодо бюджетних консультацій
+        period: "Період: %{starts_on} — %{ends_on}"
+        by: "Підготував: користувач %{author} для організації %{organization}"
 
-        summary: Trends
+        summary: Тренди
 
         detail:
-          header: Responses for each question
+          header: Відповіді на кожне запитання
 
-        demography: Demography, etc.
-        response_rates: Response rates
+        demography: Демографія тощо.
+        response_rates: Частота відповідей
       future:
-        copy_hint: copy to clipboard
+        copy_hint: скопіювати
         table:
           # The consultations starts on...
-          starts_at: Starts on
+          starts_at: Початок:
           url: URL
       current:
         table:
-          days_elapsed_header: Days elapsed
-          days_left_header: Days left
-          summary_report_header: Report
-          download_raw_header: Download raw data
-          view: View
+          days_elapsed_header: Днів пройшло
+          days_left_header: Днів залишилось
+          summary_report_header: Звіт
+          download_raw_header: Завантажити необроблені дані
+          view: Вид
           # If your language has more or fewer plural forms than English, you
           # may need to add keys for :zero, :two, :few and/or :many.
           days:
-            one: "%{count} day"
-            other: "%{count} days"
+            one: "%{count} день"
+            other: "%{count} днів"
     admin_users:
       form:
-        automatic: Automatic
+        automatic: Автомитично
 
   # https://github.com/ryanb/cancan/wiki/Translating-your-app
   unauthorized:
     # CanCan falls back to the 'manage.all' translation.
     manage:
-      all: &unauthorized You are not authorized to access this page.
+      all: &unauthorized Ви не авторизовані для доступу до цієї сторінки.
 
   # https://github.com/plataformatec/responders/blob/master/lib/responders/locales/en.yml
   flash:
     actions:
       create:
-        notice: '%{resource_name} was created.'
-        alert: '%{resource_name} could not be created. See errors below.'
+        notice: 'Було створено %{resource_name}.'
+        alert: 'Не можливо створити %{resource_name}. Перегляньте помилки нижче.'
       update:
-        notice: '%{resource_name} was updated.'
-        alert: '%{resource_name} could not be updated. See errors below.'
+        notice: '%{resource_name} було оновлено.'
+        alert: 'Не можливо оновити %{resource_name}. Перегляньте помилки нижче.'
       destroy:
-        notice: '%{resource_name} was removed.'
-        alert: '%{resource_name} could not be removed.'
+        notice: '%{resource_name} було видалено.'
+        alert: 'Не можливо видалити %{resource_name}.'
 
   active_admin:
     access_denied:
       message: *unauthorized
     # Administrators can filter current, future and past consultations.
     scopes:
-      current: Current
-      future: Future
-      past: Past
+      current: Поточний
+      future: Майбутній
+      past: Минулий
     devise:
       change_password:
-        title: "Choose your password"
-        submit: "Set my password"
+        title: "Оберіть пароль"
+        submit: "Зберегти пароль"
 
     # In English, we override the following Active Admin translations to be more
     # concise. Check the Active Admin translations for your language in case you
     # want to make changes, too. The original English translations are given in
     # the comments below.
-    edit_model: Edit # "Edit %{model}"
-    update_model: Edit # "Edit %{model}"
-    delete_model: Delete # "Delete %{model}"
+    edit_model: Редагувати # "Edit %{model}"
+    update_model: Редагувати # "Edit %{model}"
+    delete_model: Видалити # "Delete %{model}"
     pagination:
       one: "" # Displaying <b>1</b> %{model}"
       one_page: "" # "Displaying <b>all %{n}</b> %{model}"
-      multiple: "Displaying %{model} <b>%{from}-%{to}</b> of <b>%{total}</b>" # "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b> in total"
-    has_many_delete: Remove # "Delete"
+      multiple: "%{model} <b>%{from}-%{to}</b> із <b>%{total}</b>" # "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{total}</b> in total"
+    has_many_delete: Видалити # "Delete"
 
   # We use Devise's "reset password" functionality to invite new administrators
   # to access the app and set their password.
   devise:
     mailer:
       reset_password_instructions:
-        subject: Set your Citizen Budget password
+        subject: Встановіть ваш пароль
 
   # In English, we override the following default Rails translations. Check the
   # Rails translations for your language in case you need to change them, too.
@@ -373,139 +373,139 @@ en:
   # Validation errors.
   errors:
     messages:
-      ends_at_must_be_greater_than_starts_at: The end time must be after the start time
-      maximum_units_must_be_greater_than_minimum_units: Maximum units must be greater than minimum units
-      default_value_must_be_between_minimum_and_maximum: Default value must be between minimum and maximum
-      default_value_must_be_an_option: Default value must be a valid option
-      options_and_labels_must_agree: The number of options and labels must be the same
-      domain_must_be_active: The domain name must be active
-      domain_must_not_be_blacklisted: The domain name is blacklisted
-      reply_to_must_be_valid: The reply-to address must be valid
-      maximum_deviation_must_not_be_set_in_taxes_mode: Maximum deviation must not be set in "Taxes" mode
-      maximum_deviation_and_tax_rate_must_not_both_be_set: Maximum deviation and tax rate must not both be set
-      response_must_change_at_least_one_value: The response must change at least one value
-      response_must_balance: The response must balance
+      ends_at_must_be_greater_than_starts_at: Час закінчення має бути після часу початку
+      maximum_units_must_be_greater_than_minimum_units: Максимум має бути більше, ніж мінімум
+      default_value_must_be_between_minimum_and_maximum: Значення за замовчуванням має бути між мінімумом і максимумом
+      default_value_must_be_an_option: Значення за замовчуванням повинне бути допустимим варіантом
+      options_and_labels_must_agree: Кількість опцій і назв повинна бути однаковою
+      domain_must_be_active: Доменне ім'я повинне бути активним
+      domain_must_not_be_blacklisted: Доменне ім'я знаходиться в чорному списку
+      reply_to_must_be_valid: Адреса для відповіді повинна бути дійсна
+      maximum_deviation_must_not_be_set_in_taxes_mode: Максимальне відхилення не повинно бути встановлено в режимі "Податки"
+      maximum_deviation_and_tax_rate_must_not_both_be_set: Максимальне відхилення і ставка податку не мають бути встановлені одочасно
+      response_must_change_at_least_one_value: Рекомендація має змінити принаймні одне значення
+      response_must_balance: Рекомендація має узгоджуватись з балансом
 
   activerecord:
     models: &models
-      dashboard: Dashboard
+      dashboard: Панель управління
       admin_user:
-        one: Admin user
-        other: Admin users
+        one: Адміністратор
+        other: Адміністратори
       organization:
-        one: Organization
-        other: Organizations
+        one: Організація
+        other: Організації
       questionnaire:
-        one: Consultation
-        other: Consultations
+        one: Консультація
+        other: Консультації
       section:
-        one: Section
-        other: Sections
+        one: Секція
+        other: Секції
       question:
-        one: Question
-        other: Questions
+        one: Питання
+        other: Питання
       response:
-        one: Response
-        other: Responses
+        one: Відповідь
+        other: Відповіді
     attributes: &attributes
       admin_user:
         email: Email
-        locale: Locale
-        password: Password
-        password_confirmation: Password confirmation
+        locale: Місце проведення
+        password: Пароль
+        password_confirmation: Підтвердження паролю
       organization:
-        name: Name
-        questionnaires: Consultations
+        name: Ім'я
+        questionnaires: Консультації
       questionnaire:
         # Basic
-        title: Title
-        organization: Organization
-        locale: Locale
-        starts_at: Start date
-        ends_at: End date
-        time_zone: Time zone
-        domain: Domain name
-        email_required: Respondents must provide an email address
-        authorization_token: Private URL
+        title: Назва
+        organization: Організація
+        locale: Місце проведення
+        starts_at: Дата початку
+        ends_at: Дата закінчення
+        time_zone: Часовий пояс
+        domain: Доменне ім'я
+        email_required: Респонденти мають надати email
+        authorization_token: Приватний URL
 
         # Mode
         mode: Mode
-        starting_balance: Starting balance
-        maximum_deviation: Maximum imbalance
-        default_assessment: Default property assessment
-        tax_rate: Property tax rate
-        tax_revenue: Property tax revenue
-        change_required: Respondents must change the budget
+        starting_balance: Початковий баланс
+        maximum_deviation: Максимальний баланс
+        default_assessment: Оцінка вартості майна за замовчуванням
+        tax_rate: Ставка податку
+        tax_revenue: Дохід з податку на майно
+        change_required: Респонденти мають змінити бюджет
 
         # Appearance
-        logo: Logo
-        remove_logo: Remove logo
-        title_image: Header image
-        remove_title_image: Remove header image
-        introduction: Introductory text
-        instructions: Instructions
-        read_more: '"Learn more" link text'
+        logo: Логотип
+        remove_logo: Видилити лого
+        title_image: Зображення у заголовку
+        remove_title_image: Видалити зображення у заголовку
+        introduction: Текст-привітання
+        instructions: Інструкції
+        read_more: 'Текст в полі "Дізнатись більше"'
         description: Meta description
-        description_before: Before consultation
-        description_after: After consultation
-        attribution: Attribution
-        stylesheet: Custom CSS
-        javascript: Custom JavaScript
+        description_before: Перед консультацією
+        description_after: Після консультації
+        attribution: Атрибуція
+        stylesheet: Параметри CSS
+        javascript: Параметри JavaScript
 
         # Thank-you email
-        reply_to: Reply-to address
-        thank_you_subject: Message subject
-        thank_you_template: Thank-you email template
+        reply_to: Адреса для відповіді
+        thank_you_subject: Тема листа
+        thank_you_template: Шаблон листа-подяки
 
         # Individual response
-        response_notice: Thank-you message
-        response_preamble: Text before social sharing options
-        response_body: Text before budget choices
+        response_notice: Повідомлення-подяка
+        response_preamble: Текст перед кнопками «поділитись» соціальних мереж Text before social sharing options
+        response_body: Текст перед звітом про кнсультацію
 
         # Third-party integration
-        google_analytics: Google Analytics tracking code
-        google_analytics_profile: Google Analytics profile ID
-        twitter_screen_name: Twitter screen name
-        twitter_text: Tweet text to share consultation
-        twitter_share_text: Tweet text to share response
+        google_analytics: Код Google Analytics
+        google_analytics_profile: ID профайлу Google Analytics
+        twitter_screen_name: Twitter псевдонім
+        twitter_text: Текст твіту для того, щоб поділитись консультацією
+        twitter_share_text: Текст твіту для того, щоб поділитись відповіддю
         facebook_app_id: Facebook App ID
         open_graph_title: Open Graph Title
         open_graph_description: Open Graph Description
-        sections: Sections
+        sections: Секції
       section:
-        title: Title
-        description: Description
-        extra: Additional information
+        title: Назва
+        description: Опис
+        extra: Додаткова інформація
         embed: Embed
-        questions: Questions
+        questions: Питання
       question:
-        title: Title
-        description: Description
-        extra: Additional information
-        options: Options
-        labels: Labels
-        options_as_list: Options as list
-        labels_as_list: Labels as list
-        minimum_units: Minimum units
-        maximum_units: Maximum units
-        step: Step
-        default_value: Default value
-        required: Required
-        widget: Widget
-        unit_amount: Unit amount
-        unit_name: Unit name
-        size: Text field size
-        maxlength: Maximum length
-        placeholder: Placeholder
-        rows: Rows
-        cols: Columns
-        revenue: Revenue?
+        title: Назва
+        description: Опис
+        extra: Додаткова інформація
+        options: Опції
+        labels: Заголовки
+        options_as_list: Опції списком
+        labels_as_list: Заголовки списком
+        minimum_units: Мінімум одиниць
+        maximum_units: Максимум одиниць
+        step: Крок
+        default_value: Значення за замовчуванням
+        required: Обов'язкво
+        widget: Віджет
+        unit_amount: Кількість одиниць (Unit amount)
+        unit_name: Назва одиниці
+        size: Розмір текстового поля
+        maxlength: Максимальний об'єм тексту
+        placeholder: Заповнювач (Placeholder)
+        rows: Рядки
+        cols: Колонки
+        revenue: Дохід?
       response:
         id: ID
-        ip: IP address
-        assessment: Property assessment
-        created_at: Submitted
-        time_to_complete: Time to complete
+        ip: IP адреса
+        assessment: Оцінка власності
+        created_at: Надіслано
+        time_to_complete: Час завершення
         comments: Anti-spam honeypot
 
   # --- Application branding ---------------------------------------------------
@@ -533,77 +533,77 @@ en:
   # Only change translations in this section if you are using the report authoring tools.
 
   report:
-    no_answer: No answer
+    no_answer: Немає відповіді
     timeline:
-      title: "Submissions per day, from %{start_date} to %{end_date}"
+      title: "Відповідей а день, %{start_date} — %{end_date}"
     priorities:
-      title: Participants' budget priorities
+      title: Бюджетні приорітети учасників
       legend:
-        - Coupure
-        - Aucun changement
-        - Addition
+        - Урізаний бюджет
+        - Без змін
+        - Збільшений бюджет
     single_distribution:
-      title: "Distribution of participants by %{factor}"
+      title: "Розподілення учасників за %{factor}"
       legend:
-        - Participants
-        - Population
+        - Учасникі
+        - Населення
     double_distribution:
-      title: "Distribution of participants by %{a} and %{b}"
+      title: "Розподілення учасників за %{a} і %{b}"
     number_of_changes:
-      title: "Number of %{name} changed"
-      text: "Participants made %.1f changes on average (median %d, mode %s)."
+      title: "Кількість %{name} змінено"
+      text: "У середньому учасники зробили змін: %.1f (мадіана: %d, мода: %s)."
     choices:
-      title: Options chosen by participants
+      title: Опції обрані учасниками
     magnitude_of_changes:
-      title: Average magnitude of changes per activity
+      title: Середня величина змін у відповіді
       text:
-        default: "Participants made changes of %.1f on average (median %d, mode %s)."
-        taxes: "Participants made changes of %.1f%% on average (median %d%%, mode %s)."
+        default: "У середньому учасники зробили змін: %.1f (мадіана: %d, мода: %s)."
+        taxes: "У середньому учасники зробили змін: %.1f%% (мадіана: %d%%, мода: %s)."
     balance:
       title:
-        default: Change in budget balance
-        taxes: Change in tax dollars
+        default: Зміни в бюджетному балансі
+        taxes: Зміни у податкових надходженнях
       legend:
         default:
-          - Deficit
-          - No change
-          - Surplus
+          - Дефіцит
+          - Без змін
+          - Надлишок
         taxes:
-          - Lower taxes
-          - No change
-          - Higher taxes
+          - Нижчі податки
+          - Без змін
+          - Вишчі податки
       text:
-        default: "Participants would change the balance by %.2f on average (median %.2f, mode %s)."
-        taxes: "Participants would change taxes by %.2f%% on average (median %.2f%%, mode %s)."
+        default: "У середньому учасники змінюють бюджетний баланс на %.2f (мадіана: %.2f, мода: %s)."
+        taxes: "У середньому учасники змінюють налоги на %.2f%% (медіана: %.2f%%, мода: %s)."
     average:
-      title: "Average %{metric} by %{factor}"
+      title: "У середньому %{metric} у розрізі %{factor}"
     histogram:
-      title: "%{title} by %{factor}"
+      title: "%{title} у розрізі %{factor}"
     text:
       symbol:
         default: ""
         taxes: "%%"
-      participation_rate: "%.1f%% of participants changed its budget."
-      options: "Participants could select a value within the range of %d%{symbol} to %d%{symbol}, with a starting value of %d%{symbol}."
-      unidirectional: "Of those who changed this %{name}'s budget, the average choice was %.1f%{symbol}, the median %.1f%{symbol} and the mode %s%{symbol}."
-      bidirectional: "Of those who changed this %{name}'s budget, %d%%%% decreased the budget, with an average choice of %.1f%{symbol}, median %d%{symbol} and mode %s%{symbol}; %d%%%% increased the budget, with an average choice of %d%{symbol}, median %d%{symbol} and mode %s%{symbol}."
-      impact: "The %s the average choice is $%s."
-      savings: "savings for"
-      cost: "cost of"
-      central_tendencies: "The average choice of all participants was %.1f%{symbol}, median %d%{symbol} and mode %s%{symbol}."
-      confidence: "The default value of %d%{symbol} lies outside the 95%%%% confidence interval; therefore, with 95%%%% confidence, the population average is %s than the default value."
+      participation_rate: "Учасників, що змінили бюджет: %.1f%%."
+      options: "Учасники можуть обрати значення в діапазоні %d%{symbol} — %d%{symbol}, зі стартовим значенням %d%{symbol}."
+      unidirectional: "Середнє значення для бюджету %{name} — %.1f%{symbol}, медіана — %.1f%{symbol}, мода — %s%{symbol}."
+      bidirectional: "Серед тих, хто змінив бюджет %{name}, %d%%%% зменьшили його, із середнім вибором у %.1f%{symbol}, медіаною %d%{symbol} і модою %s%{symbol}; %d%%%% збільшили бюджет, із середнім вибором у %d%{symbol}, медіаною %d%{symbol} і модою %s%{symbol}."
+      impact: "%s середній вибір — $%s."
+      savings: "економія для"
+      cost: "вартість"
+      central_tendencies: "Середній вибір всіх учаників — %.1f%{symbol}, мадіана — %d%{symbol}, мода — %s%{symbol}."
+      confidence: "Значення за замовчуванням %d%{symbol} знаходиться за межою 95%%%% інтервалу впевненості; тому із впевненістю 95%%%%, середнє значення для населення %s ніж значення за замовчуванням."
       less: less
       greater: greater
     table:
-      mean: Average
-      median: Median
-      mode: Mode(s)
-      participation_rate: "% who changed it"
-      participants: "Number who changed it"
-      decrease: "% who decreased it"
-      decrease_count: "Number who decreased it"
-      increase: "% who increased it"
-      increase_count: "Number who increased it"
+      mean: Середнє значення
+      median: Медіана
+      mode: Мода
+      participation_rate: "% внесли зміни"
+      participants: "Кількість учасників, що внесли зміни"
+      decrease: "% зменшили його"
+      decrease_count: "Кількість учасників, що його зменшили"
+      increase: "% збільшили його"
+      increase_count: "Кількість учасників, що його збільшили"
 
   # --- Time zones -------------------------------------------------------------
   # Rails doesn't translate time zone names. Citizen Budget adds this feature.
