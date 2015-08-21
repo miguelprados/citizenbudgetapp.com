@@ -26,7 +26,7 @@ class window.DeviationSimulator extends window.Simulator
       uk_UA:
         large_surplus: 'Ваш бюджет незбалансований на {{number}}. <b>Будь ласка зведіть баланс бюджету, використовуючи наявні інструменти.</b>.'
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
-        balanced: """<b>Ваш бюджет збалансовано!</b> If you're finished, <a href="#identification">submit your choices</a>."""
+        balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">submit your choices</a>."""
         deficit: """Ваш бюджет має дефіцит: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
         large_deficit: 'Ваш бюджет не збалансовано на {{number}}. <b>Будь ласка зведіть баланс бюджету, використовуючи наявні інструменти.</b>.'
     else
@@ -51,7 +51,7 @@ class window.DeviationSimulator extends window.Simulator
       uk_UA:
         large_surplus: 'Ваш бюджет незбалансований на {{number}}. <b>Будь ласка зведіть баланс бюджету, використовуючи наявні інструменти.</b>.'
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
-        balanced: """<b>Ваш бюджет збалансовано!</b> If you're finished, <a href="#identification">submit your choices</a>."""
+        balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">submit your choices</a>."""
         deficit: """Ваш бюджет має дефіцит: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
         large_deficit: 'Ваш бюджет не збалансовано на {{number}}. <b>Будь ласка зведіть баланс бюджету, використовуючи наявні інструменти.</b>.'
 
