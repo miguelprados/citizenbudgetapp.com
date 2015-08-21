@@ -20,6 +20,10 @@ class window.ImpactSimulator extends window.Simulator
         surplus: 'Vos choix ont diminué le total des impôts fonciers requis pour équilibrer le budget de {{number}} ou {{percentage}}.'
         balanced: "Vous avez atteint l'équilibre."
         deficit: 'Vos choix ont augmenté le total des impôts fonciers requis pour équilibrer le budget de {{number}} ou {{percentage}}.'
+      en_US:
+        surplus: 'Ваш вибір зменшив рівень доходу з податку на майно потрібний для балансу на {{number}}, або {{percentage}}.'
+        balanced: 'Ваш бюджет збалансовано.'
+        deficit: 'Ваш вибір збільшив рівень доходу з податку на майно потрібний для балансу на {{number}}, або {{percentage}}.'
 
     $('#assessment input').bind 'keydown keypress keyup', (event) ->
       if event.keyCode == 13
