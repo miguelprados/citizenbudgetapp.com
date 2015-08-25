@@ -46,9 +46,9 @@ en:
 
   responses:
     new:
-      instructions: &instructions Змініть активність, щоб почати
+      instructions: &instructions Змініть бюджет, щоб почати
       positive_balance_instructions: "У вас є %{starting_balance} для витрат. Змініть активність, щоб почати."
-      negative_balance_instructions: "Бюджет дефіциті: %{starting_balance} у дефіциті. Змініть активність, щоб почати."
+      negative_balance_instructions: "Бюджет у дефіциті: %{starting_balance}. Змініть активність, щоб почати."
       assessment: Введіть вашу оцінку поточної вартості майна або використовуйте заздалегідь задане значення
       default_assessment: "(%{number})"
       # If the currency unit should appear before the number, populate
@@ -57,12 +57,12 @@ en:
       currency_unit_post: грн.
       required: обов'язково
       submit: Надіслати
-      submit_text: Якщо ви упевнені у свєму виборі, натисніть «Надіслати».
+      submit_text: Якщо ви впевнені у своєму виборі, натисніть «Надіслати».
     show:
       header:
         default: "Користувач %{name} надіслав свої бюджетні рекомендації!"
         taxes: "Користувач %{name} надіслав свою версію бюджету!"
-      share: &response_preamble Ми заохочуємо вас поділитись вашими бюджетними рекомендаціями nf обміркувати їх з друзями.
+      share: &response_preamble Ми заохочуємо вас поділитись вашими бюджетними рекомендаціями та обміркувати їх з друзями.
       share_link: "Скопіюйте це посилання для того, щоб поділитись вашим вибором з друзями:"
       copy_hint: Скопіювати
       tweet: Надіслами твіт
@@ -120,7 +120,7 @@ en:
         description: Це буде відображатися на сторінках результатів пошукових систем. (Зазвичай залишається порожнім)
         attribution: Це буде відображатися в футері перед посиланням на продукт. (Зазвичай залишається порожнім для значення за замовчуванням)
         thank_you_template: "Використовуйте {{name}} для відображення імені користувача і {{url}} для URL відповіді."
-        response_notice: Коротке повідомлення, що відображається користувачеві після надсилання рекомендацій.
+        response_notice: Коротке повідомлення, що показується користувачеві після надсилання рекомендацій.
         response_preamble: Ви можете використовувати синтакс розмітки.
         response_body: Ви можете використовувати синтакс розмітки.
         google_analytics: Якщо ви використовуєте Google Analytics.
@@ -439,7 +439,7 @@ en:
 
         # Appearance
         logo: Логотип
-        remove_logo: Видилити лого
+        remove_logo: Видалити лого
         title_image: Зображення у заголовку
         remove_title_image: Видалити зображення у заголовку
         introduction: Текст-привітання
@@ -459,7 +459,7 @@ en:
 
         # Individual response
         response_notice: Повідомлення-подяка
-        response_preamble: Текст перед кнопками «поділитись» соціальних мереж Text before social sharing options
+        response_preamble: Текст перед кнопками «поділитись» соціальних мереж
         response_body: Текст перед звітом про кнсультацію
 
         # Third-party integration
