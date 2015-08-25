@@ -79,7 +79,7 @@ class window.TaxSimulator extends window.Simulator
       savings: 'Diminution :'
       costs: 'Augmentation :'
     uk_UA:
-      gains: 'Зільшити:'
+      gains: 'Збільшити:'
       losses: 'Зменшити:'
       savings: 'Зменшити:'
       costs: 'Збільшити:'
@@ -98,9 +98,9 @@ class window.TaxSimulator extends window.Simulator
       balanced: "Vous avez atteint l'équilibre."
       deficit: 'Vos impôts augmenteraient de {{number}}/{{assessment_period}}, donc {{percentage}}. Cette augmentation peut se traduire par un niveau de service amélioré.'
     uk_UA:
-      surplus: 'Ви зменшили об'єм податків на {{number}}/{{assessment_period}} або {{percentage}}. Це може призвести до погіршення якості послуг.'
+      surplus: "Ви зменшили об'єм податків на {{number}}/{{assessment_period}} або {{percentage}}. Це може призвести до погіршення якості послуг."
       balanced: 'Ваш бюджет збалансовано.'
-      deficit: 'Ви збільшили об'єм податків на {{number}}/{{assessment_period}} або {{percentage}}. Це може призвести до покращення якості послуг.'
+      deficit: "Ви збільшили об'єм податків на {{number}}/{{assessment_period}} або {{percentage}}. Це може призвести до покращення якості послуг."
 
 
   messageOptions: (net_balance) ->
