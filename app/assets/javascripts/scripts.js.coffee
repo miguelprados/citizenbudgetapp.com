@@ -22,7 +22,8 @@ $ ->
   # Initialize Bootstrap plugins.
   $('.dropdown-toggle').dropdown()
 
-  $('.popover-toggle').popover(trigger: 'focus')
+  # Before changing this line, make sure popovers still work properly on the iPad.
+  $('.popover-toggle').popover(trigger: 'click').click (event) -> event.preventDefault()
   $('[rel="tooltip"]').tooltip()
 
   # Bootstrap hacks.
