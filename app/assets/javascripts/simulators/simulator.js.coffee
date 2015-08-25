@@ -151,7 +151,7 @@ class window.Simulator
         deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget.</b>'
       uk_UA:
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
-        balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">submit your choices</a>."""
+        balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">надішліть результат</a>."""
         deficit: 'Ваш бюджет має дефіцит: {{number}}. <b>Зведіть баланс бюджету, використовуючи наявні інструменти</b>.'
     else
       en_US:
@@ -167,8 +167,8 @@ class window.Simulator
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités pour équilibrer le budget.</b>'
       uk_UA:
-        surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
-        balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">submit your choices</a>."""
+        surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">надішліть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
+        balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">надішліть результат</a>."""
         deficit: 'Ваш бюджет має дефіцит: {{number}}. <b>Зведіть баланс бюджету, використовуючи наявні інструменти</b>.'
 
   # @return [String] the CSS selector for the status message
