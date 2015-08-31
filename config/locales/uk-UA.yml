@@ -276,7 +276,7 @@ en:
         copy_hint: скопіювати
         table:
           # The consultations starts on...
-          starts_at: Початок:
+          starts_at: "Початок:"
           url: URL
       current:
         table:
