@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/opennorth/citizenbudgetapp.com.png?label=ready&title=Ready)](https://waffle.io/opennorth/citizenbudgetapp.com)
 # Citizen Budget
 
 [![Dependency Status](https://gemnasium.com/opennorth/citizenbudgetapp.com.png)](https://gemnasium.com/opennorth/citizenbudgetapp.com)
