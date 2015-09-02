@@ -1,7 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/opennorth/citizenbudgetapp.com.png?label=ready&title=Ready)](https://waffle.io/opennorth/citizenbudgetapp.com)
 # Citizen Budget
 
 [![Dependency Status](https://gemnasium.com/opennorth/citizenbudgetapp.com.png)](https://gemnasium.com/opennorth/citizenbudgetapp.com)
+[![Stories in Ready](https://badge.waffle.io/opennorth/citizenbudgetapp.com.png?label=ready&title=Ready)](https://waffle.io/opennorth/citizenbudgetapp.com)
 
 [Citizen Budget](http://www.citizenbudget.com/) is an open-source online, interactive budget simulator. Cities use it to invite citizens to get involved in their budget process by submitting balanced budgets and defining local priorities.
 
