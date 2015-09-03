@@ -59,7 +59,8 @@
         %div(class="question subdue")
           %h5
             %span= i += 1
-            = q.title.html_safe
+            - if q.title?
+              = q.title.html_safe
       - elsif q.options?
         %div.question.subdue
           %h5
