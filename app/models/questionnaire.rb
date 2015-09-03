@@ -367,6 +367,8 @@ class Questionnaire
 
     all_details = {}
     sections.map(&:questions).flatten.each do |question|
+      next unless question.widget
+
       details = {}
       if question.budgetary?
         changes = responses.select{|r| r.answers[question.id.to_s] != question.default_value}
