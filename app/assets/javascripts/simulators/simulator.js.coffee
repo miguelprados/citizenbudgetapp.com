@@ -1,3 +1,9 @@
+# Must be global for `loadAnwers` call.
+window.updateTip = ($slider, value) ->
+  content = self.tipSlider($slider, value)
+  $slider.find('.tip-content').html(content) if content
+  $slider.find('.tip').toggle(value != parseFloat($slider.data('minimum')))
+
 class window.Simulator
   constructor: (@options = {}, @identifier = 'simulator') ->
     # The tables belonging to this simulator.
@@ -199,6 +205,15 @@ class window.Simulator
 
   # Updates
 
+  highlightQuestion: ($tr) ->
+    $tr.find('td.description').animate('background-color': @colors.question.description, 'slow')
+    $tr.find('td.highlight').animate('background-color': @colors.question.highlight, 'slow')
+
+  updateQuestionImpact: ($tr, key, value, color, visibility) ->
+    $tr.find('.key').html(key)
+    $tr.find('.value').html(SimulatorHelper.number_to_currency(value, strip_insignificant_zeros: Math.round(value) == value))
+    $tr.find('.impact').css('color', color).css('visibility', visibility)
+
   # Updates a question after it's been changed.
   updateQuestion: ($control, current) ->
     $tr     = $control.parents('tr')
@@ -208,17 +223,12 @@ class window.Simulator
     revenue = $control.data('revenue')
 
     if current == initial
-      $tr.find('.key').html('')
-      $tr.find('.value').html(SimulatorHelper.number_to_currency(0, strip_insignificant_zeros: true))
-      $tr.find('.impact').css('visibility', 'hidden')
+      updateQuestionValue($tr, '', 0, '#000', 'hidden')
 
       if $tr.hasClass('selected')
         $tr.removeClass('selected')
-        if questionHighlightOverride?
-          questionHighlightOverride($tr)
-        else
-          $tr.find('td.description').animate('background-color': @colors.question.description, 'slow')
-          $tr.find('td.highlight').animate('background-color': @colors.question.highlight, 'slow')
+        @highlightQuestion($tr)
+
     else
       difference = (current - initial) * value
       if difference >= 0
@@ -229,11 +239,8 @@ class window.Simulator
         color = @colors.question.negative
 
       impact = Math.abs(difference) * @scale($tr)
-      strip_insignificant_zeros = Math.round(impact) == impact
 
-      $tr.find('.key').html(key)
-      $tr.find('.value').html(SimulatorHelper.number_to_currency(impact, strip_insignificant_zeros: strip_insignificant_zeros))
-      $tr.find('.impact').css('color', color).css('visibility', 'visible')
+      updateQuestionValue($tr, key, impact, color, 'visible')
 
       unless $tr.hasClass('selected')
         $tr.addClass('selected')
@@ -382,17 +389,11 @@ class window.Simulator
       $this.iphoneStyle(options)
 
   # Slider widgets.
+  changeSlider: ->
+    # pass
+
   initializeSliderWidgets: ->
     self = this
-
-    # Must be global for `loadAnwers` call.
-    window.updateTip = ($slider, value) ->
-      if updateTipOverride?
-        updateTipOverride($slider, value)
-      else
-        content = self.tipSlider($slider, value)
-        $slider.find('.tip-content').html(content) if content
-        $slider.find('.tip').toggle(value != parseFloat($slider.data('minimum')))
 
     # `change` will be called once the respondent stops sliding.
     slide = (event, ui) ->
@@ -406,8 +407,7 @@ class window.Simulator
       $this = $(this)
       slide.call(this, event, ui)
       $this.find('input').val(ui.value) # update the associated form element
-      if sliderOnChange?
-        sliderOnChange($this, ui)
+      self.changeSlider($this, ui)
       self.updateSection($this)
       self.update()
 
