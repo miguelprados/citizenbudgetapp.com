@@ -223,7 +223,7 @@ class window.Simulator
     revenue = $control.data('revenue')
 
     if current == initial
-      updateQuestionValue($tr, '', 0, '#000', 'hidden')
+      @updateQuestionImpact($tr, '', 0, '#000', 'hidden')
 
       if $tr.hasClass('selected')
         $tr.removeClass('selected')
@@ -240,7 +240,7 @@ class window.Simulator
 
       impact = Math.abs(difference) * @scale($tr)
 
-      updateQuestionValue($tr, key, impact, color, 'visible')
+      @updateQuestionImpact($tr, key, impact, color, 'visible')
 
       unless $tr.hasClass('selected')
         $tr.addClass('selected')
