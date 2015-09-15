@@ -1,6 +1,6 @@
 # Must be global for `loadAnwers` call.
 window.updateTip = ($slider, value) ->
-  content = self.tipSlider($slider, value)
+  content = main_simulator.tipSlider($slider, value)
   $slider.find('.tip-content').html(content) if content
   $slider.find('.tip').toggle(value != parseFloat($slider.data('minimum')))
 
