@@ -31,17 +31,24 @@ class window.TaxSimulator extends window.Simulator
       # Not all widgets have been implemented in "Taxes" mode.
       self.scope.find('.widget-scaler').each ->
         $widget = $(this)
-        $slider = $widget.find('.slider')
+        $control = $widget.find('.slider')
 
         # @see Simulator#updateQuestion
-        difference = ($slider.slider('value') - $slider.data('initial')) * $slider.data('value')
+        difference = ($control.slider('value') - parseFloat($control.data('initial'))) * parseFloat($control.data('value'))
         $widget.find('.value').html(SimulatorHelper.number_to_currency(Math.abs(difference) * self.scale(), strip_insignificant_zeros: true))
 
         # In case we display minimum and maximum values again:
-        # $widget.find('.minimum.taxes').html(SimulatorHelper.number_to_currency(taxAmount($slider, $slider.data('minimum'))))
-        # $widget.find('.maximum.taxes').html(SimulatorHelper.number_to_currency(taxAmount($slider, $slider.data('maximum'))))
+        # $widget.find('.minimum.taxes').html(SimulatorHelper.number_to_currency(taxAmount($control, $control.data('minimum'))))
+        # $widget.find('.maximum.taxes').html(SimulatorHelper.number_to_currency(taxAmount($control, $control.data('maximum'))))
 
-        updateTip($slider, $slider.slider('value'))
+        updateTip($control, $control.slider('value'))
+
+      self.scope.find('.control-onoff').each ->
+        $widget = $(this)
+        $control = $widget.find('.onoff')
+
+        difference = (+$control.prop('checked') - parseFloat($control.data('initial'))) * parseFloat($control.data('value'))
+        $widget.find('.value').html(SimulatorHelper.number_to_currency(Math.abs(difference) * self.scale(), strip_insignificant_zeros: true))
 
       self.scope.find('.control-static').each ->
         $widget = $(this)
