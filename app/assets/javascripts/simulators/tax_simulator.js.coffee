@@ -21,6 +21,7 @@ class window.TaxSimulator extends window.Simulator
       if event.keyCode == 13
         event.preventDefault()
         $(this).blur()
+
     $('#assessment input').blur ->
       # Reset to default value if custom value is invalid.
       $('#assessment input').val('') if self.customAssessment() <= 0
@@ -43,7 +44,7 @@ class window.TaxSimulator extends window.Simulator
 
         updateTip($control, $control.slider('value'))
 
-      self.scope.find('.control-onoff').each ->
+      self.scope.find('.widget-onoff').each ->
         $widget = $(this)
         $control = $widget.find('.onoff')
 
