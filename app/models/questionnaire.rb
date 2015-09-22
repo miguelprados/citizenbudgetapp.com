@@ -332,7 +332,7 @@ class Questionnaire
         if column == 'id'
           response.id.to_s # axlsx may error when trying to convert Moped::BSON::ObjectId
         elsif column != 'assessment' || assessment?
-          response.send column
+          response.send(column)
         end
       end
       sections.each do |section|
