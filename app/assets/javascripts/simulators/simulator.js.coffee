@@ -428,7 +428,6 @@ class window.Simulator
         create: (event, ui) ->
           content = self.tipSlider($this, initial)
           $(this).find('a').append('<div class="tip"><div class="tip-content">' + content + '</div><div class="tip-arrow"></div></div>') if content
-          $(this).find('.tip').toggle(initial != minimum)
         slide: not self.options.disabled and slide
         change: not self.options.disabled and change
         disabled: self.options.disabled
