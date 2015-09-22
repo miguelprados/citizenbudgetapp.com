@@ -57,6 +57,7 @@ CitizenBudget::Application.configure do
     individual/jquery-ui.min.js
     individual/jquery.validationEngine-en.js
     individual/jquery.validationEngine-fr.js
+    individual/jquery.validationEngine-uk.js
     individual/modernizr.min.js
     simulators/default_simulator.js
     simulators/deviation_simulator.js
