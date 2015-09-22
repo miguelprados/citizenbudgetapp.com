@@ -53,7 +53,7 @@ window.I18n =
     currency_delimiter: ' '
     currency_format: '{{number}} {{unit}}'
     currency_separator: ','
-    currency_unit: '₴'
+    currency_unit: 'грн.'
     percentage_format: '{{number}}{{symbol}}'
     percentage_symbol: '%'
     assessment_unit: '{{number}}/{{assessment_period}}'

@@ -37,8 +37,8 @@ uk:
     other: Контактна інформація
 
   assessment_unit:
-    month: ₴/місяць
-    year: ₴/рік
+    month: грн/місяць
+    year: грн/рік
 
   questionnaires:
     questionnaire:
@@ -53,8 +53,8 @@ uk:
       default_assessment: "(%{number})"
       # If the currency unit should appear before the number, populate
       # +currency_unit_pre+. Otherwise, populate +currency_unit_post+.
-      currency_unit_pre: "₴"
-      currency_unit_post: ""
+      currency_unit_pre: ""
+      currency_unit_post: " грн."
       required: обов'язково
       submit: Надіслати
       submit_text: Якщо ви впевнені у своєму виборі, натисніть «Надіслати».
