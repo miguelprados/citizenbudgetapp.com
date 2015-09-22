@@ -2,7 +2,6 @@
 window.updateTip = ($slider, value) ->
   content = main_simulator.tipSlider($slider, value)
   $slider.find('.tip-content').html(content) if content
-  $slider.find('.tip').toggle(value != parseFloat($slider.data('minimum')))
 
 class window.Simulator
   constructor: (@options = {}, @identifier = 'simulator') ->
