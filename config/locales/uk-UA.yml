@@ -1,7 +1,7 @@
 # Fragments like %{example} are placeholders and should not be changed. You may,
 # however, move them within the translation text.
 
-uk_UA:
+uk-UA:
   # --- Public section ---------------------------------------------------------
 
   # http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks
