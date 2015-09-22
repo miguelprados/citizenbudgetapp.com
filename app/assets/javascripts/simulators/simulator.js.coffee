@@ -134,7 +134,7 @@ class window.Simulator
       losses: 'Pertes :'
       savings: 'Épargnes :'
       costs: 'Coûts :'
-    uk_UA:
+    uk:
       gains: 'Прибуток:'
       losses: 'Втрати:'
       savings: 'Економія:'
@@ -154,7 +154,7 @@ class window.Simulator
         surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités ou reduisez les revenus pour équilibrer le budget</b>."""
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget.</b>'
-      uk_UA:
+      uk:
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
         balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">надішліть результат</a>."""
         deficit: 'Ваш бюджет має дефіцит: {{number}}. <b>Зведіть баланс бюджету, використовуючи наявні інструменти</b>.'
@@ -171,7 +171,7 @@ class window.Simulator
         surplus: """Votre budget montre un surplus de {{number}}. Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>ajoutez des activités pour équilibrer le budget</b>."""
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: 'Votre budget est en déficit ({{number}}). <b>Renoncez à des activités pour équilibrer le budget.</b>'
-      uk_UA:
+      uk:
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">надішліть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
         balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">надішліть результат</a>."""
         deficit: 'Ваш бюджет має дефіцит: {{number}}. <b>Зведіть баланс бюджету, використовуючи наявні інструменти</b>.'

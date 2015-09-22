@@ -49,11 +49,11 @@ window.I18n =
     yes: 'Oui'
     no: 'Non'
     y_axis: 'Pourcentage des répondants'
-  uk_UA:
+  uk:
     currency_delimiter: ' '
     currency_format: '{{number}} {{unit}}'
     currency_separator: ','
-    currency_unit: 'грн.'
+    currency_unit: '₴'
     percentage_format: '{{number}}{{symbol}}'
     percentage_symbol: '%'
     assessment_unit: '{{number}}/{{assessment_period}}'

@@ -23,7 +23,7 @@ class window.DeviationSimulator extends window.Simulator
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: """Votre budget est en déficit ({{number}}). Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>renoncez à des activités ou augmentez les revenus pour équilibrer le budget</b>."""
         large_deficit: 'Votre budget est déséquilibré de {{number}}. <b>Renoncez à des activités ou augmentez les revenus pour équilibrer le budget</b>.'
-      uk_UA:
+      uk:
         large_surplus: 'Ваш бюджет незбалансований на {{number}}. <b>Будь ласка зведіть баланс бюджету, використовуючи наявні інструменти</b>.'
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">надішліть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
         balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">надішліть результат</a>."""
@@ -48,7 +48,7 @@ class window.DeviationSimulator extends window.Simulator
         balanced: """<b>Vous avez atteint l'équilibre!</b> Si vous avez fini, <a href="#identification">soumettez vos choix</a>."""
         deficit: """Votre budget est en déficit ({{number}}). Vous pouvez <a href="#identification">soumettre vos choix</a>. Sinon, <b>renoncez à des activités pour équilibrer le budget</b>."""
         large_deficit: 'Votre budget est déséquilibré de {{number}}. <b>Renoncez à des activités pour équilibrer le budget</b>.'
-      uk_UA:
+      uk:
         large_surplus: 'Ваш бюджет незбалансований на {{number}}. <b>Будь ласка зведіть баланс бюджету, використовуючи наявні інструменти.</b>.'
         surplus: """Ваш бюджет має надлишок: {{number}}. Якщо ви закінчили <a href="#identification">збережіть результат</a>. Або, <b>зведіть баланс бюджету, використовуючи наявні інструменти</b>."""
         balanced: """<b>Ваш бюджет збалансовано!</b> Якщо ви закінчили, <a href="#identification">submit your choices</a>."""

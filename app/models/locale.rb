@@ -4,7 +4,7 @@ class Locale
     'en' => 'English (United States)',
     'fr-CA' => 'Français (Canada)',
     'fr-FR' => 'Français (France)',
-    'uk-UA' => 'Українська',
+    'uk' => 'Українська',
     # 'nl' => 'Nederlands',
   }
 

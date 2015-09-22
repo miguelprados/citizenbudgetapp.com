@@ -1,7 +1,7 @@
 # Fragments like %{example} are placeholders and should not be changed. You may,
 # however, move them within the translation text.
 
-uk-UA:
+uk:
   # --- Public section ---------------------------------------------------------
 
   # http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks
@@ -37,8 +37,8 @@ uk-UA:
     other: Контактна інформація
 
   assessment_unit:
-    month: грн/місяць
-    year: грн/рік
+    month: ₴/місяць
+    year: ₴/рік
 
   questionnaires:
     questionnaire:
@@ -53,8 +53,8 @@ uk-UA:
       default_assessment: "(%{number})"
       # If the currency unit should appear before the number, populate
       # +currency_unit_pre+. Otherwise, populate +currency_unit_post+.
-      currency_unit_pre: ""
-      currency_unit_post: грн.
+      currency_unit_pre: "₴"
+      currency_unit_post: ""
       required: обов'язково
       submit: Надіслати
       submit_text: Якщо ви впевнені у своєму виборі, натисніть «Надіслати».
@@ -587,7 +587,7 @@ uk-UA:
       options: "Учасники можуть обрати значення в діапазоні %d%{symbol} — %d%{symbol}, зі стартовим значенням %d%{symbol}."
       unidirectional: "Середнє значення для бюджету %{name} — %.1f%{symbol}, медіана — %.1f%{symbol}, мода — %s%{symbol}."
       bidirectional: "Серед тих, хто змінив бюджет %{name}, %d%%%% зменьшили його, із середнім вибором у %.1f%{symbol}, медіаною %d%{symbol} і модою %s%{symbol}; %d%%%% збільшили бюджет, із середнім вибором у %d%{symbol}, медіаною %d%{symbol} і модою %s%{symbol}."
-      impact: "%s середній вибір — $%s."
+      impact: "%s середній вибір — ₴%s."
       savings: "економія для"
       cost: "вартість"
       central_tendencies: "Середній вибір всіх учаників — %.1f%{symbol}, мадіана — %d%{symbol}, мода — %s%{symbol}."
