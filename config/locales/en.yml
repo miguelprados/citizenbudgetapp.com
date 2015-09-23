@@ -101,7 +101,7 @@ en:
         response_preamble: *response_preamble
     hints:
       response:
-        email: We will not share your e-mail address or other contact information with any third parties.
+        email: We will not share your email address or other contact information with any third parties.
       # The remaining translations in this section are administrative only.
       organization:
         name: e.g. "City of St. Elsewhere"
