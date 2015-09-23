@@ -288,7 +288,7 @@ uk:
           # If your language has more or fewer plural forms than English, you
           # may need to add keys for :zero, :two, :few and/or :many.
           days:
-            one: "%{count} день"
+            one: "один день"
             other: "%{count} днів"
     admin_users:
       form:
@@ -391,22 +391,22 @@ uk:
       dashboard: Панель управління
       admin_user:
         one: Адміністратор
-        other: Адміністратори
+        other: "%{count} Адміністратори"
       organization:
         one: Організація
-        other: Організації
+        other: "%{count} Організації"
       questionnaire:
         one: Консультація
-        other: Консультації
+        other: "%{count} Консультації"
       section:
         one: Секція
-        other: Секції
+        other: "%{count} Секції"
       question:
         one: Питання
-        other: Питання
+        other: "%{count} Питання"
       response:
         one: Відповідь
-        other: Відповіді
+        other: "%{count} Відповіді"
     attributes: &attributes
       admin_user:
         email: Email
