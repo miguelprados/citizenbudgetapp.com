@@ -289,6 +289,8 @@ uk:
           # may need to add keys for :zero, :two, :few and/or :many.
           days:
             one: "один день"
+            few: "%{count} днів"
+            many: "%{count} днів"
             other: "%{count} днів"
     admin_users:
       form:
@@ -391,21 +393,33 @@ uk:
       dashboard: Панель управління
       admin_user:
         one: Адміністратор
+        few: "%{count} Адміністратори"
+        many: "%{count} Адміністратори"
         other: "%{count} Адміністратори"
       organization:
         one: Організація
+        few: "%{count} Організації"
+        many: "%{count} Організації"
         other: "%{count} Організації"
       questionnaire:
         one: Консультація
+        few: "%{count} Консультації"
+        many: "%{count} Консультації"
         other: "%{count} Консультації"
       section:
         one: Секція
+        few: "%{count} Секції"
+        many: "%{count} Секції"
         other: "%{count} Секції"
       question:
         one: Питання
+        few: "%{count} Питання"
+        many: "%{count} Питання"
         other: "%{count} Питання"
       response:
         one: Відповідь
+        few: "%{count} Відповіді"
+        many: "%{count} Відповіді"
         other: "%{count} Відповіді"
     attributes: &attributes
       admin_user:
