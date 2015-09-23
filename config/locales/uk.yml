@@ -168,8 +168,8 @@ uk:
   # https://developers.google.com/chart/interactive/docs/reference#numberformatter
   percentage_format: "###%"
   language: Змінити мову
-  yes: Так
-  no: Ні
+  yes_label: Так
+  no_label: Ні
   untitled: Без назви
   default: За замовчуванням
 
@@ -433,6 +433,7 @@ uk:
         starting_balance: Початковий баланс
         maximum_deviation: Максимальний баланс
         default_assessment: Оцінка вартості майна за замовчуванням
+        assessment_period: Assessment period
         tax_rate: Ставка податку
         tax_revenue: Дохід з податку на майно
         change_required: Респонденти мають змінити бюджет
@@ -446,8 +447,8 @@ uk:
         instructions: Інструкції
         read_more: 'Текст в полі "Дізнатись більше"'
         description: Meta description
-        description_before: Перед консультацією
-        description_after: Після консультації
+        content_before: Перед консультацією
+        content_after: Після консультації
         attribution: Атрибуція
         stylesheet: Параметри CSS
         javascript: Параметри JavaScript

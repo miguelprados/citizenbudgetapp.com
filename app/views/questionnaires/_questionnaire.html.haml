@@ -113,8 +113,8 @@
                         .meta.maximum= number_to_percentage(q.maximum_units * 100)
                         .meta.minimum= number_to_percentage(q.minimum_units * 100)
                     - elsif q.yes_no?
-                      .meta.maximum=t :yes
-                      .meta.minimum=t :no
+                      .meta.maximum=t :yes_label
+                      .meta.minimum=t :no_label
                     - else
                       .meta.maximum=  number_with_precision(q.maximum_units)
                       .meta.minimum= [number_with_precision(q.minimum_units), q.unit_name].compact.join ' '

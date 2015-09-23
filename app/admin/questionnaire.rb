@@ -122,9 +122,9 @@ ActiveAdmin.register Questionnaire do
         end
         row :email_required do |q|
           if q.email_required?
-            t :yes
+            t :yes_label
           else
-            t :no
+            t :no_label
           end
         end
       end
@@ -157,9 +157,9 @@ ActiveAdmin.register Questionnaire do
         end
         row :change_required do |q|
           if q.change_required?
-            t :yes
+            t :yes_label
           else
-            t :no
+            t :no_label
           end
         end
       end

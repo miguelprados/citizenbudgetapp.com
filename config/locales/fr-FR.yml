@@ -402,6 +402,7 @@ fr-FR:
         starting_balance: Solde initial
         maximum_deviation: Écart maximal
         default_assessment: Évaluation foncière par défaut
+        assessment_period: Période d'évaluation
         tax_rate: Taux d'imposition foncière
         tax_revenue: Impôts fonciers
         change_required: Les participants doivent changer le budget
@@ -414,8 +415,8 @@ fr-FR:
         instructions: Instructions
         read_more: 'Texte des liens « En savoir plus »'
         description: Description
-        description_before: Avant la consultation
-        description_after: Après la consultation
+        content_before: Avant la consultation
+        content_after: Après la consultation
         attribution: Attribution
         stylesheet: CSS personnalisé
         javascript: JavaScript personnalisé

@@ -168,8 +168,8 @@ en:
   # https://developers.google.com/chart/interactive/docs/reference#numberformatter
   percentage_format: "###%"
   language: Switch language
-  yes: Yes
-  no: No
+  yes_label: Yes
+  no_label: No
   untitled: Untitled
   default: Default
 
@@ -433,6 +433,7 @@ en:
         starting_balance: Starting balance
         maximum_deviation: Maximum imbalance
         default_assessment: Default property assessment
+        assessment_period: Assessment period
         tax_rate: Property tax rate
         tax_revenue: Property tax revenue
         change_required: Respondents must change the budget
@@ -446,8 +447,8 @@ en:
         instructions: Instructions
         read_more: '"Learn more" link text'
         description: Meta description
-        description_before: Before consultation
-        description_after: After consultation
+        content_before: Before consultation
+        content_after: After consultation
         attribution: Attribution
         stylesheet: Custom CSS
         javascript: Custom JavaScript
