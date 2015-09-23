@@ -7,7 +7,7 @@ module ApplicationHelper
 
   # Facebook uses underscores in locale identifiers (as do Unix systems).
   def system_locale
-    if locale == 'en'
+    if locale.to_s == 'en'
       'en_US'
     else
       locale.to_s.sub('-', '_')
