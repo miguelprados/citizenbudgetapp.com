@@ -133,7 +133,7 @@ class window.Simulator
       gains: 'Прибуток:'
       losses: 'Втрати:'
       savings: 'Економія:'
-      costs: 'Витрати:'
+      costs: 'Додатково:'
 
   messages: ->
     if @scope.find('[data-revenue]').length
