@@ -67,8 +67,10 @@
                               - else
                                 = radio_button_tag q.id, option
                               = option
-                - elsif %w(text textarea).include?(q.widget)
-                  - if q.widget == 'text'
+                - elsif %w(select text textarea).include?(q.widget)
+                  - if q.widget == 'select'
+                    = select_tag q.id, options_for_select(q.options), html_attributes(q)
+                  - elsif q.widget == 'text'
                     = text_field_tag q.id, nil, html_attributes(q)
                   - elsif q.widget == 'textarea'
                     = text_area_tag q.id, nil, html_attributes(q)
