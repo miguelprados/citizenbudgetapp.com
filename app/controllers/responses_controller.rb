@@ -25,6 +25,10 @@ class ResponsesController < ApplicationController
   end
 
   def create
+    if params[:response][:assessment]
+      params[:response][:assessment].gsub!(/[^0-9.-]/, '')
+    end
+
     @response = @questionnaire.responses.build(params[:response])
     @response.answers = params.select{|k,_| k[/\A[a-f0-9]{24}\z/]}
     @response.ip      = request.ip
