@@ -350,6 +350,9 @@ function drawGraph(graph, data, x, y, y_prescale, width, bar_width,
       .tickFormat(""));
 
   // X-axis.
+  if (data.length > 20) {
+    bar_width *= 10;
+  }
   container.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + GRAPH_CONF.height + ")")
