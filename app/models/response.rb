@@ -33,7 +33,7 @@ class Response
   # @param [Question] question a question
   # @return the answer to the question
   def answer(question)
-    if answers.key?(question.id.to_s)
+    if answers.present? && answers.key?(question.id.to_s)
       answers[question.id.to_s]
     elsif ['checkbox', 'onoff', 'option', 'slider', 'scaler'].include?(question.widget)
       question.default_value
