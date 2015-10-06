@@ -1,4 +1,6 @@
 = object.title.html_safe
+- if object.respond_to?(:required?) && object.required?
+  %abbr(title="#{t '.required'}")*
 - if object.extra?
   %span
     %i.icon-info-sign
