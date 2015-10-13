@@ -1,6 +1,6 @@
 # Must be global for `loadAnwers` call.
-window.updateTip = ($slider, value) ->
-  content = main_simulator.tipSlider($slider, value)
+window.updateTip = ($slider, value, simulator = main_simulator) ->
+  content = simulator.tipSlider($slider, value)
   $slider.find('.tip-content').html(content) if content
 
 class window.Simulator
@@ -497,7 +497,7 @@ class window.Simulator
     @scope.find('.slider').each ->
       $this = $(this)
       value = $this.slider('value')
-      updateTip($this, value)
+      updateTip($this, value, self)
       self.updateQuestion($this, value)
 
   track: ->
