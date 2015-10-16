@@ -35,8 +35,9 @@ class Question
 
   attr_accessor :minimum_units, :maximum_units, :step, :options_as_list, :labels_as_list
 
-  validates_presence_of :widget
-  validates_presence_of :title, unless: ->(q){q.widget == 'readonly'}
+  # @todo Somehow, undeletable empty, invalid questions appear in sections.
+  # validates_presence_of :widget
+  # validates_presence_of :title, unless: ->(q){q.widget == 'readonly'}
   validates_inclusion_of :widget, in: WIDGETS, allow_blank: true
   validates_numericality_of :unit_amount, allow_blank: true
 
