@@ -41,67 +41,67 @@ es:
     year: Euros/año
 
   questionnaires:
-    Cuestionarios:
+    questionnaire:
       your_choice: Tú elección
 
   responses:
     new:
-      instructions: &instructions Change an activity to start
-      positive_balance_instructions: "You have %{starting_balance} to spend. Change an activity to start."
-      negative_balance_instructions: "The budget is %{starting_balance} in deficit. Change an activity to start."
-      assessment: Enter your current property value assessment or use the pre-set value
+      instructions: &instructions Cambie un importe para empezar
+      positive_balance_instructions: "Hay un total de %{starting_balance} en el presupuesto. Cambia un importe para empezar."
+      negative_balance_instructions: "El prespuesto tiene un déficit de %{starting_balance}. Cambia un importe para empezar."
+      assessment: Introduce el valor actual de tu propiedad o acepta el valor por defecto.
       default_assessment: "(%{number})"
       # If the currency unit should appear before the number, populate
       # +currency_unit_pre+. Otherwise, populate +currency_unit_post+.
-      currency_unit_pre: $
+      currency_unit_pre: Euros
       currency_unit_post: ""
-      required: required
-      submit: Submit
-      submit_text: If you are satisfied with your choices, click "Submit".
+      required: requerido
+      submit: Enviar
+      submit_text: Si estás de acuerdo con tus elecciones, haz clic en "Enviar".
     show:
       header:
-        default: "%{name} submitted a budget!"
-        taxes: "%{name} submitted a budget!"
-      share: &response_preamble We encourage you to share and discuss your budget choices below with your friends and family.
-      share_link: "Copy this link to share your budget choices:"
-      copy_hint: copy to clipboard
-      tweet: Tweet
-      invitation: Have you already submitted your own budget proposal? If not, <b><a href="%{url}">click here to participate.</a></b>
-      comments: Comments
+        default: "%{name} envió un presupuesto!"
+        taxes: "%{name} envió un presupuesto!"
+      share: &response_preamble Anímate a compartir tus elecciones sobre el prespuesto con tu familia y amigos más abajo.
+      share_link: "Copia este enlace para compartir tus elecciones en el presupuesto:"
+      copy_hint: copiar al portapapeles
+      tweet: Tuitéalo
+      invitation: ¿Ya has enviado tu propuesta de presupuesto? Si no, <b><a href="%{url}">haz clic aquí para participar</a></b>
+      comments: Comentarios
     title:
-      read_more: &read_more Learn more
-      read_more_tip: Click for more info
-      view_media: View media
-      view_media_tip: Click to view media
+      read_more: &read_more Más información
+      read_more_tip: Haz clic para más información
+      view_media: Ver vídeo
+      view_media_tip: Haz clic para ver el vídeo
     nav:
-      sections: Sections
+      sections: Programas
       balance: Balance
     modals:
-      close: Close
+      close: Cerrar
     modal:
-      close: Close
+      close: Cerrar
     footer:
-      attribution: &attribution This online budget consultation is powered by
+      attribution: &attribution Esta consulta online de presupuesto es gracias a 
 
   # --- Both public and administrative sections --------------------------------
 
   formtastic:
-    required: required
+    required: requerido
     placeholders:
       # @todo Placeholders need to be customizable.
       response:
         email: name@example.com
         postal_code: H0H 0H0
       questionnaire:
-        instructions: *instructions
-        read_more: *read_more
-        attribution: *attribution
-        thank_you_subject: *thank_you_subject
-        response_notice: *response_notice
-        response_preamble: *response_preamble
+        instructions: *instrucciones
+        read_more: *leer_mas
+        attribution: *atribucion
+        thank_you_subject: *gracias_a
+        response_notice: *notificacion_respuesta
+        response_preamble: *preambulo_respuesta
     hints:
       response:
-        email: We will not share your email address or other contact information with any third parties.
+        email: No compartimos tu información de email o cualquier otra con terceros.
       # The remaining translations in this section are administrative only.
       organization:
         name: e.g. "City of St. Elsewhere"
