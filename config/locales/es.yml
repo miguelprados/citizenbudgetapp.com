@@ -160,7 +160,7 @@ es:
   new_questionnaire: Add a new consultation
   new_section: Add a section to your consultation
   new_question: Add a question to this section
-  example_name: John Doe
+  example_name: Miguel Prados
   unknown_format: Data are not available in the requested format.
   # Express the date format to be used in graphs in ICU format:
   # http://userguide.icu-project.org/formatparse/datetime
