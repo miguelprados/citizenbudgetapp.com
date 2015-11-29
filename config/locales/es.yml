@@ -1,7 +1,7 @@
 # Fragments like %{example} are placeholders and should not be changed. You may,
 # however, move them within the translation text.
 
-en:
+es:
   # --- Public section ---------------------------------------------------------
 
   # http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks
@@ -10,7 +10,7 @@ en:
   colon: ":"
 
   # Button text to set a variable.
-  set: Set
+  set: Modificar
 
   # The width of the Facebook button in pixels. In English, the button will
   # have the short words "Like" and "Send", whereas in French it will have
@@ -18,31 +18,31 @@ en:
   facebook_width: 155
 
   # This message appears after the participant submits their response.
-  create_response: &response_notice Thank you for your participation! Your opinion is important to us.
+  create_response: &response_notice Gracias por participar, tu opinión es muy importante.
 
   # The subject of the thank-you email that is sent to participants.
-  thank_you_subject: &thank_you_subject "%{organization}: Thank you for participating in our consultation !"
+  thank_you_subject: &thank_you_subject "%{organization}: Gracias por participar en nuestra consulta"
 
   # The message to display if a questionnaire is offline.
-  offline_header: This website is offline.
+  offline_header: Este cuestionario no está disponible.
 
   labels:
     # YAML doesn't like "no" and "yes" keys and values. Lame!
     no_label: "NO"
-    yes_label: "YES"
+    yes_label: "SI"
 
   group:
-    simulator: Simulator (default)
-    custom: Advanced customization
-    other: Contact information
+    simulator: Simulador (por defecto)
+    custom: Configuración avanzada
+    other: Información de contacto
 
   assessment_unit:
-    month: $/month
-    year: $/year
+    month: Euros/mes
+    year: Euros/año
 
   questionnaires:
-    questionnaire:
-      your_choice: Your choice
+    Cuestionarios:
+      your_choice: Tú elección
 
   responses:
     new:
