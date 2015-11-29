@@ -1,7 +1,7 @@
 # Fragments like %{example} are placeholders and should not be changed. You may,
 # however, move them within the translation text.
 
-es:
+en:
   # --- Public section ---------------------------------------------------------
 
   # http://en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks
@@ -18,23 +18,23 @@ es:
   facebook_width: 155
 
   # This message appears after the participant submits their response.
-  create_response: &response_notice Gracias por participar, tu opinión es muy importante.
+  create_response: &response_notice Thank you for your participation! Your opinion is important to us.
 
   # The subject of the thank-you email that is sent to participants.
-  thank_you_subject: &thank_you_subject "%{organization}: Gracias por participar en la consulta"
+  thank_you_subject: &thank_you_subject "%{organization}: Thank you for participating in our consultation !"
 
   # The message to display if a questionnaire is offline.
-  offline_header: Este cuestionario no está disponible.
+  offline_header: This website is offline.
 
   labels:
-  # YAML doesn't like "no" and "yes" keys and values. Lame!
-  no_label: "NO"
-  yes_label: "SI"
+    # YAML doesn't like "no" and "yes" keys and values. Lame!
+    no_label: "NO"
+    yes_label: "YES"
 
   group:
-  simulator: Simulator (default)
-  custom: Advanced customization
-  other: Contact information
+    simulator: Simulator (default)
+    custom: Advanced customization
+    other: Contact information
 
   assessment_unit:
     month: $/month
